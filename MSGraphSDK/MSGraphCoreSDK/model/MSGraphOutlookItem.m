@@ -17,7 +17,7 @@
     NSDate* _createdDateTime;
     NSDate* _lastModifiedDateTime;
     NSString* _changeKey;
-    MSCollection* _categories;
+    NSArray* _categories;
 }
 @end
 
@@ -55,21 +55,13 @@
 {
     self.dictionary[@"changeKey"] = val;
 }
-- (MSCollection*) categories
+- (NSArray*) categories
 {
     return self.dictionary[@"categories"];
 }
-- (void) setCategories: (MSCollection*) val
+- (void) setCategories: (NSArray*) val
 {
     self.dictionary[@"categories"] = val;
-}
-- (NSString*) categories:(NSInteger)index
-{
-   NSString* categories = nil;
-   if (self.categories.value){
-       categories = self.categories.value[index];
-   }
-   return categories;
 }
 
 @end

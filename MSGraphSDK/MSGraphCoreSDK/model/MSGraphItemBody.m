@@ -14,22 +14,24 @@
 
 @interface MSGraphItemBody()
 {
-    MSGraphBodyType _contentType;
+    MSGraphBodyType* _contentType;
     NSString* _content;
 }
 @end
 
 @implementation MSGraphItemBody
 
-- (MSGraphBodyType) contentType
+- (MSGraphBodyType*) contentType
 {
-    _contentType = [self.dictionary[@"contentType"] toMSGraphBodyType];
+    if(!_contentType){
+        _contentType = [self.dictionary[@"contentType"] toMSGraphBodyType];
+    }
     return _contentType;
 }
-- (void) setContentType: (MSGraphBodyType) val
+- (void) setContentType: (MSGraphBodyType*) val
 {
     _contentType = val;
-    self.dictionary[@"contentType"] = [NSString stringWithMSGraphBodyType:val];
+    self.dictionary[@"contentType"] = val;
 }
 - (NSString*) content
 {

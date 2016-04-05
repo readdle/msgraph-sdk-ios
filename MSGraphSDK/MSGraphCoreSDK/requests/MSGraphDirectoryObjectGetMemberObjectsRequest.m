@@ -40,16 +40,6 @@
     return self;
 }
 
-- (MSURLSessionDataTask *)MSGraphStringCollectionTaskWithRequest:(NSMutableURLRequest *)request
-                             odObjectWithDictionary:(MSObject* (^)(NSDictionary *response))castBlock
-                                         completion:(void (^)(MSGraphStringCollection *response, NSError *error))completionHandler
-{
-    return [self collectionTaskWithRequest: request odObjectWithDictionary:castBlock
-    completion:^(MSCollection* collectionResponse, NSError *error){
-        completionHandler([MSGraphStringCollection fromMSCollection:collectionResponse],error);
-    }];
-}
-
 - (NSMutableURLRequest *)mutableRequest
 {
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[MSObject getNSJsonSerializationCompatibleValue:@(_securityEnabledOnly)],@"securityEnabledOnly",nil];
@@ -60,14 +50,14 @@
 }
 
 
-- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSGraphStringCollection *response, MSGraphDirectoryObjectGetMemberObjectsRequest *nextRequest, NSError *error))completionHandler
+- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSCollection *response, MSGraphDirectoryObjectGetMemberObjectsRequest *nextRequest, NSError *error))completionHandler
 {
 
-    MSURLSessionDataTask *task = [self MSGraphStringCollectionTaskWithRequest:self.mutableRequest
-                                                       odObjectWithDictionary:^(id responseObject){
-                                                                                  return [responseObject copy];
-                                                                              }
-                                                                   completion:^(MSGraphStringCollection *collectionResponse, NSError *error){
+    MSURLSessionDataTask *task = [self collectionTaskWithRequest:self.mutableRequest
+                                          odObjectWithDictionary:^(id responseObject){
+                                                                     return [responseObject copy];
+                                                                 }
+                                                      completion:^(MSCollection *collectionResponse, NSError *error){
                                       if(!error && collectionResponse.nextLink && completionHandler){
                                               MSGraphDirectoryObjectGetMemberObjectsRequest *nextRequest = [[MSGraphDirectoryObjectGetMemberObjectsRequest alloc] initWithURL:collectionResponse.nextLink
                                                                                                                   options:nil

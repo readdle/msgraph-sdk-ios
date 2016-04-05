@@ -4,7 +4,7 @@
 
 #include <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, MSGraphSensitivity){
+typedef NS_ENUM(NSInteger, MSGraphSensitivityValue){
 
 	MSGraphSensitivityNormal = 0,
 	MSGraphSensitivityPersonal = 1,
@@ -13,9 +13,25 @@ typedef NS_ENUM(NSInteger, MSGraphSensitivity){
     MSGraphSensitivityEndOfEnum
 };
 
+@interface MSGraphSensitivity : NSObject
+
++(MSGraphSensitivity*) normal;
++(MSGraphSensitivity*) personal;
++(MSGraphSensitivity*) private;
++(MSGraphSensitivity*) confidential;
+
++(MSGraphSensitivity*) UnknownEnumValue;
+
++(MSGraphSensitivity*) sensitivityWithEnumValue:(MSGraphSensitivityValue)val;
+-(NSString*) ms_toString;
+
+@property (nonatomic, readonly) MSGraphSensitivityValue enumValue;
+
+@end
+
+
 @interface NSString (MSGraphSensitivity)
 
-+ (instancetype) stringWithMSGraphSensitivity:(MSGraphSensitivity)val;
-- (MSGraphSensitivity) toMSGraphSensitivity;
+- (MSGraphSensitivity*) toMSGraphSensitivity;
 
 @end

@@ -33,7 +33,7 @@
 - (MSGraphThumbnail*) large
 {
     if(!_large){
-        _large = [[MSGraphThumbnail alloc] initWithDictionary: self.dictionary[@"large"] ];
+        _large = [[MSGraphThumbnail alloc] initWithDictionary: self.dictionary[@"large"]];
     }
     return _large;
 }
@@ -45,7 +45,7 @@
 - (MSGraphThumbnail*) medium
 {
     if(!_medium){
-        _medium = [[MSGraphThumbnail alloc] initWithDictionary: self.dictionary[@"medium"] ];
+        _medium = [[MSGraphThumbnail alloc] initWithDictionary: self.dictionary[@"medium"]];
     }
     return _medium;
 }
@@ -57,7 +57,7 @@
 - (MSGraphThumbnail*) small
 {
     if(!_small){
-        _small = [[MSGraphThumbnail alloc] initWithDictionary: self.dictionary[@"small"] ];
+        _small = [[MSGraphThumbnail alloc] initWithDictionary: self.dictionary[@"small"]];
     }
     return _small;
 }
@@ -69,7 +69,7 @@
 - (MSGraphThumbnail*) source
 {
     if(!_source){
-        _source = [[MSGraphThumbnail alloc] initWithDictionary: self.dictionary[@"source"] ];
+        _source = [[MSGraphThumbnail alloc] initWithDictionary: self.dictionary[@"source"]];
     }
     return _source;
 }

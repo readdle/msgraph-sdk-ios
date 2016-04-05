@@ -15,7 +15,7 @@
 @interface MSGraphDevice()
 {
     BOOL _accountEnabled;
-    MSGraphAlternativeSecurityIdCollection* _alternativeSecurityIds;
+    NSArray* _alternativeSecurityIds;
     NSDate* _approximateLastSignInDateTime;
     NSString* _deviceId;
     NSString* _deviceMetadata;
@@ -27,10 +27,10 @@
     BOOL _onPremisesSyncEnabled;
     NSString* _operatingSystem;
     NSString* _operatingSystemVersion;
-    MSCollection* _physicalIds;
+    NSArray* _physicalIds;
     NSString* _trustType;
-    MSGraphDirectoryObjectCollection* _registeredOwners;
-    MSGraphDirectoryObjectCollection* _registeredUsers;
+    NSArray* _registeredOwners;
+    NSArray* _registeredUsers;
 }
 @end
 
@@ -53,27 +53,25 @@
     _accountEnabled = val;
     self.dictionary[@"accountEnabled"] = @(val);
 }
-- (MSGraphAlternativeSecurityIdCollection*) alternativeSecurityIds
+- (NSArray*) alternativeSecurityIds
 {
     if(!_alternativeSecurityIds){
         
-    NSMutableArray *alternativeSecurityIdsCollection = [NSMutableArray array];
-    NSArray *alternativeSecurityIdss = self.dictionary[@"alternativeSecurityIds"];
+    NSMutableArray *alternativeSecurityIdsResult = [NSMutableArray array];
+    NSArray *alternativeSecurityIds = self.dictionary[@"alternativeSecurityIds"];
 
-    if ([alternativeSecurityIdss isKindOfClass:[NSArray class]]){
-        for (id alternativeSecurityIds in alternativeSecurityIdss){
-            [alternativeSecurityIdsCollection addObject:alternativeSecurityIds];
-         }
+    if ([alternativeSecurityIds isKindOfClass:[NSArray class]]){
+        for (id alternativeSecurityId in alternativeSecurityIds){
+            [alternativeSecurityIdsResult addObject:[[MSGraphAlternativeSecurityId alloc] initWithDictionary: alternativeSecurityId]];
+        }
     }
 
-    if ([alternativeSecurityIdsCollection count] > 0){
-        _alternativeSecurityIds = [[MSGraphAlternativeSecurityIdCollection alloc] initWithArray:alternativeSecurityIdsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _alternativeSecurityIds = alternativeSecurityIdsResult;
         
     }
     return _alternativeSecurityIds;
 }
-- (void) setAlternativeSecurityIds: (MSGraphAlternativeSecurityIdCollection*) val
+- (void) setAlternativeSecurityIds: (NSArray*) val
 {
     _alternativeSecurityIds = val;
     self.dictionary[@"alternativeSecurityIds"] = val;
@@ -182,11 +180,11 @@
 {
     self.dictionary[@"operatingSystemVersion"] = val;
 }
-- (MSCollection*) physicalIds
+- (NSArray*) physicalIds
 {
     return self.dictionary[@"physicalIds"];
 }
-- (void) setPhysicalIds: (MSCollection*) val
+- (void) setPhysicalIds: (NSArray*) val
 {
     self.dictionary[@"physicalIds"] = val;
 }
@@ -198,87 +196,51 @@
 {
     self.dictionary[@"trustType"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) registeredOwners
+- (NSArray*) registeredOwners
 {
     if(!_registeredOwners){
         
-    NSMutableArray *registeredOwnersCollection = [NSMutableArray array];
-    NSArray *registeredOwnerss = self.dictionary[@"registeredOwners"];
+    NSMutableArray *registeredOwnersResult = [NSMutableArray array];
+    NSArray *registeredOwners = self.dictionary[@"registeredOwners"];
 
-    if ([registeredOwnerss isKindOfClass:[NSArray class]]){
-        for (id registeredOwners in registeredOwnerss){
-            [registeredOwnersCollection addObject:registeredOwners];
-         }
+    if ([registeredOwners isKindOfClass:[NSArray class]]){
+        for (id directoryObject in registeredOwners){
+            [registeredOwnersResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([registeredOwnersCollection count] > 0){
-        _registeredOwners = [[MSGraphDirectoryObjectCollection alloc] initWithArray:registeredOwnersCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _registeredOwners = registeredOwnersResult;
         
     }
     return _registeredOwners;
 }
-- (void) setRegisteredOwners: (MSGraphDirectoryObjectCollection*) val
+- (void) setRegisteredOwners: (NSArray*) val
 {
     _registeredOwners = val;
     self.dictionary[@"registeredOwners"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) registeredUsers
+- (NSArray*) registeredUsers
 {
     if(!_registeredUsers){
         
-    NSMutableArray *registeredUsersCollection = [NSMutableArray array];
-    NSArray *registeredUserss = self.dictionary[@"registeredUsers"];
+    NSMutableArray *registeredUsersResult = [NSMutableArray array];
+    NSArray *registeredUsers = self.dictionary[@"registeredUsers"];
 
-    if ([registeredUserss isKindOfClass:[NSArray class]]){
-        for (id registeredUsers in registeredUserss){
-            [registeredUsersCollection addObject:registeredUsers];
-         }
+    if ([registeredUsers isKindOfClass:[NSArray class]]){
+        for (id directoryObject in registeredUsers){
+            [registeredUsersResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([registeredUsersCollection count] > 0){
-        _registeredUsers = [[MSGraphDirectoryObjectCollection alloc] initWithArray:registeredUsersCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _registeredUsers = registeredUsersResult;
         
     }
     return _registeredUsers;
 }
-- (void) setRegisteredUsers: (MSGraphDirectoryObjectCollection*) val
+- (void) setRegisteredUsers: (NSArray*) val
 {
     _registeredUsers = val;
     self.dictionary[@"registeredUsers"] = val;
-}
-- (MSGraphAlternativeSecurityId*) alternativeSecurityIds:(NSInteger)index
-{
-   MSGraphAlternativeSecurityId* alternativeSecurityIds = nil;
-   if (self.alternativeSecurityIds.value){
-       alternativeSecurityIds = self.alternativeSecurityIds.value[index];
-   }
-   return alternativeSecurityIds;
-}
-- (NSString*) physicalIds:(NSInteger)index
-{
-   NSString* physicalIds = nil;
-   if (self.physicalIds.value){
-       physicalIds = self.physicalIds.value[index];
-   }
-   return physicalIds;
-}
-- (MSGraphDirectoryObject*) registeredOwners:(NSInteger)index
-{
-   MSGraphDirectoryObject* registeredOwners = nil;
-   if (self.registeredOwners.value){
-       registeredOwners = self.registeredOwners.value[index];
-   }
-   return registeredOwners;
-}
-- (MSGraphDirectoryObject*) registeredUsers:(NSInteger)index
-{
-   MSGraphDirectoryObject* registeredUsers = nil;
-   if (self.registeredUsers.value){
-       registeredUsers = self.registeredUsers.value[index];
-   }
-   return registeredUsers;
 }
 
 @end

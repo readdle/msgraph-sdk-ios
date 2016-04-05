@@ -14,7 +14,7 @@
 
 @interface MSGraphEventMessage()
 {
-    MSGraphMeetingMessageType _meetingMessageType;
+    MSGraphMeetingMessageType* _meetingMessageType;
     MSGraphEvent* _event;
 }
 @end
@@ -28,20 +28,22 @@
     }
     return self;
 }
-- (MSGraphMeetingMessageType) meetingMessageType
+- (MSGraphMeetingMessageType*) meetingMessageType
 {
-    _meetingMessageType = [self.dictionary[@"meetingMessageType"] toMSGraphMeetingMessageType];
+    if(!_meetingMessageType){
+        _meetingMessageType = [self.dictionary[@"meetingMessageType"] toMSGraphMeetingMessageType];
+    }
     return _meetingMessageType;
 }
-- (void) setMeetingMessageType: (MSGraphMeetingMessageType) val
+- (void) setMeetingMessageType: (MSGraphMeetingMessageType*) val
 {
     _meetingMessageType = val;
-    self.dictionary[@"meetingMessageType"] = [NSString stringWithMSGraphMeetingMessageType:val];
+    self.dictionary[@"meetingMessageType"] = val;
 }
 - (MSGraphEvent*) event
 {
     if(!_event){
-        _event = [[MSGraphEvent alloc] initWithDictionary: self.dictionary[@"event"] ];
+        _event = [[MSGraphEvent alloc] initWithDictionary: self.dictionary[@"event"]];
     }
     return _event;
 }

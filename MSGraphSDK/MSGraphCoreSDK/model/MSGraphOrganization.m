@@ -14,24 +14,24 @@
 
 @interface MSGraphOrganization()
 {
-    MSGraphAssignedPlanCollection* _assignedPlans;
-    MSCollection* _businessPhones;
+    NSArray* _assignedPlans;
+    NSArray* _businessPhones;
     NSString* _city;
     NSString* _country;
     NSString* _countryLetterCode;
     NSString* _displayName;
-    MSCollection* _marketingNotificationEmails;
+    NSArray* _marketingNotificationEmails;
     NSDate* _onPremisesLastSyncDateTime;
     BOOL _onPremisesSyncEnabled;
     NSString* _postalCode;
     NSString* _preferredLanguage;
-    MSGraphProvisionedPlanCollection* _provisionedPlans;
-    MSCollection* _securityComplianceNotificationMails;
-    MSCollection* _securityComplianceNotificationPhones;
+    NSArray* _provisionedPlans;
+    NSArray* _securityComplianceNotificationMails;
+    NSArray* _securityComplianceNotificationPhones;
     NSString* _state;
     NSString* _street;
-    MSCollection* _technicalNotificationMails;
-    MSGraphVerifiedDomainCollection* _verifiedDomains;
+    NSArray* _technicalNotificationMails;
+    NSArray* _verifiedDomains;
 }
 @end
 
@@ -44,36 +44,34 @@
     }
     return self;
 }
-- (MSGraphAssignedPlanCollection*) assignedPlans
+- (NSArray*) assignedPlans
 {
     if(!_assignedPlans){
         
-    NSMutableArray *assignedPlansCollection = [NSMutableArray array];
-    NSArray *assignedPlanss = self.dictionary[@"assignedPlans"];
+    NSMutableArray *assignedPlansResult = [NSMutableArray array];
+    NSArray *assignedPlans = self.dictionary[@"assignedPlans"];
 
-    if ([assignedPlanss isKindOfClass:[NSArray class]]){
-        for (id assignedPlans in assignedPlanss){
-            [assignedPlansCollection addObject:assignedPlans];
-         }
+    if ([assignedPlans isKindOfClass:[NSArray class]]){
+        for (id assignedPlan in assignedPlans){
+            [assignedPlansResult addObject:[[MSGraphAssignedPlan alloc] initWithDictionary: assignedPlan]];
+        }
     }
 
-    if ([assignedPlansCollection count] > 0){
-        _assignedPlans = [[MSGraphAssignedPlanCollection alloc] initWithArray:assignedPlansCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _assignedPlans = assignedPlansResult;
         
     }
     return _assignedPlans;
 }
-- (void) setAssignedPlans: (MSGraphAssignedPlanCollection*) val
+- (void) setAssignedPlans: (NSArray*) val
 {
     _assignedPlans = val;
     self.dictionary[@"assignedPlans"] = val;
 }
-- (MSCollection*) businessPhones
+- (NSArray*) businessPhones
 {
     return self.dictionary[@"businessPhones"];
 }
-- (void) setBusinessPhones: (MSCollection*) val
+- (void) setBusinessPhones: (NSArray*) val
 {
     self.dictionary[@"businessPhones"] = val;
 }
@@ -109,11 +107,11 @@
 {
     self.dictionary[@"displayName"] = val;
 }
-- (MSCollection*) marketingNotificationEmails
+- (NSArray*) marketingNotificationEmails
 {
     return self.dictionary[@"marketingNotificationEmails"];
 }
-- (void) setMarketingNotificationEmails: (MSCollection*) val
+- (void) setMarketingNotificationEmails: (NSArray*) val
 {
     self.dictionary[@"marketingNotificationEmails"] = val;
 }
@@ -155,44 +153,42 @@
 {
     self.dictionary[@"preferredLanguage"] = val;
 }
-- (MSGraphProvisionedPlanCollection*) provisionedPlans
+- (NSArray*) provisionedPlans
 {
     if(!_provisionedPlans){
         
-    NSMutableArray *provisionedPlansCollection = [NSMutableArray array];
-    NSArray *provisionedPlanss = self.dictionary[@"provisionedPlans"];
+    NSMutableArray *provisionedPlansResult = [NSMutableArray array];
+    NSArray *provisionedPlans = self.dictionary[@"provisionedPlans"];
 
-    if ([provisionedPlanss isKindOfClass:[NSArray class]]){
-        for (id provisionedPlans in provisionedPlanss){
-            [provisionedPlansCollection addObject:provisionedPlans];
-         }
+    if ([provisionedPlans isKindOfClass:[NSArray class]]){
+        for (id provisionedPlan in provisionedPlans){
+            [provisionedPlansResult addObject:[[MSGraphProvisionedPlan alloc] initWithDictionary: provisionedPlan]];
+        }
     }
 
-    if ([provisionedPlansCollection count] > 0){
-        _provisionedPlans = [[MSGraphProvisionedPlanCollection alloc] initWithArray:provisionedPlansCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _provisionedPlans = provisionedPlansResult;
         
     }
     return _provisionedPlans;
 }
-- (void) setProvisionedPlans: (MSGraphProvisionedPlanCollection*) val
+- (void) setProvisionedPlans: (NSArray*) val
 {
     _provisionedPlans = val;
     self.dictionary[@"provisionedPlans"] = val;
 }
-- (MSCollection*) securityComplianceNotificationMails
+- (NSArray*) securityComplianceNotificationMails
 {
     return self.dictionary[@"securityComplianceNotificationMails"];
 }
-- (void) setSecurityComplianceNotificationMails: (MSCollection*) val
+- (void) setSecurityComplianceNotificationMails: (NSArray*) val
 {
     self.dictionary[@"securityComplianceNotificationMails"] = val;
 }
-- (MSCollection*) securityComplianceNotificationPhones
+- (NSArray*) securityComplianceNotificationPhones
 {
     return self.dictionary[@"securityComplianceNotificationPhones"];
 }
-- (void) setSecurityComplianceNotificationPhones: (MSCollection*) val
+- (void) setSecurityComplianceNotificationPhones: (NSArray*) val
 {
     self.dictionary[@"securityComplianceNotificationPhones"] = val;
 }
@@ -212,102 +208,36 @@
 {
     self.dictionary[@"street"] = val;
 }
-- (MSCollection*) technicalNotificationMails
+- (NSArray*) technicalNotificationMails
 {
     return self.dictionary[@"technicalNotificationMails"];
 }
-- (void) setTechnicalNotificationMails: (MSCollection*) val
+- (void) setTechnicalNotificationMails: (NSArray*) val
 {
     self.dictionary[@"technicalNotificationMails"] = val;
 }
-- (MSGraphVerifiedDomainCollection*) verifiedDomains
+- (NSArray*) verifiedDomains
 {
     if(!_verifiedDomains){
         
-    NSMutableArray *verifiedDomainsCollection = [NSMutableArray array];
-    NSArray *verifiedDomainss = self.dictionary[@"verifiedDomains"];
+    NSMutableArray *verifiedDomainsResult = [NSMutableArray array];
+    NSArray *verifiedDomains = self.dictionary[@"verifiedDomains"];
 
-    if ([verifiedDomainss isKindOfClass:[NSArray class]]){
-        for (id verifiedDomains in verifiedDomainss){
-            [verifiedDomainsCollection addObject:verifiedDomains];
-         }
+    if ([verifiedDomains isKindOfClass:[NSArray class]]){
+        for (id verifiedDomain in verifiedDomains){
+            [verifiedDomainsResult addObject:[[MSGraphVerifiedDomain alloc] initWithDictionary: verifiedDomain]];
+        }
     }
 
-    if ([verifiedDomainsCollection count] > 0){
-        _verifiedDomains = [[MSGraphVerifiedDomainCollection alloc] initWithArray:verifiedDomainsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _verifiedDomains = verifiedDomainsResult;
         
     }
     return _verifiedDomains;
 }
-- (void) setVerifiedDomains: (MSGraphVerifiedDomainCollection*) val
+- (void) setVerifiedDomains: (NSArray*) val
 {
     _verifiedDomains = val;
     self.dictionary[@"verifiedDomains"] = val;
-}
-- (MSGraphAssignedPlan*) assignedPlans:(NSInteger)index
-{
-   MSGraphAssignedPlan* assignedPlans = nil;
-   if (self.assignedPlans.value){
-       assignedPlans = self.assignedPlans.value[index];
-   }
-   return assignedPlans;
-}
-- (NSString*) businessPhones:(NSInteger)index
-{
-   NSString* businessPhones = nil;
-   if (self.businessPhones.value){
-       businessPhones = self.businessPhones.value[index];
-   }
-   return businessPhones;
-}
-- (NSString*) marketingNotificationEmails:(NSInteger)index
-{
-   NSString* marketingNotificationEmails = nil;
-   if (self.marketingNotificationEmails.value){
-       marketingNotificationEmails = self.marketingNotificationEmails.value[index];
-   }
-   return marketingNotificationEmails;
-}
-- (MSGraphProvisionedPlan*) provisionedPlans:(NSInteger)index
-{
-   MSGraphProvisionedPlan* provisionedPlans = nil;
-   if (self.provisionedPlans.value){
-       provisionedPlans = self.provisionedPlans.value[index];
-   }
-   return provisionedPlans;
-}
-- (NSString*) securityComplianceNotificationMails:(NSInteger)index
-{
-   NSString* securityComplianceNotificationMails = nil;
-   if (self.securityComplianceNotificationMails.value){
-       securityComplianceNotificationMails = self.securityComplianceNotificationMails.value[index];
-   }
-   return securityComplianceNotificationMails;
-}
-- (NSString*) securityComplianceNotificationPhones:(NSInteger)index
-{
-   NSString* securityComplianceNotificationPhones = nil;
-   if (self.securityComplianceNotificationPhones.value){
-       securityComplianceNotificationPhones = self.securityComplianceNotificationPhones.value[index];
-   }
-   return securityComplianceNotificationPhones;
-}
-- (NSString*) technicalNotificationMails:(NSInteger)index
-{
-   NSString* technicalNotificationMails = nil;
-   if (self.technicalNotificationMails.value){
-       technicalNotificationMails = self.technicalNotificationMails.value[index];
-   }
-   return technicalNotificationMails;
-}
-- (MSGraphVerifiedDomain*) verifiedDomains:(NSInteger)index
-{
-   MSGraphVerifiedDomain* verifiedDomains = nil;
-   if (self.verifiedDomains.value){
-       verifiedDomains = self.verifiedDomains.value[index];
-   }
-   return verifiedDomains;
 }
 
 @end

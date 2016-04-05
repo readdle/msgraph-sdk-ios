@@ -4,7 +4,6 @@
 
 
 #import "MSGraphAttachment.h"
-#import "MSCollection.h"
 
 @interface MSGraphFileAttachment : MSGraphAttachment
 

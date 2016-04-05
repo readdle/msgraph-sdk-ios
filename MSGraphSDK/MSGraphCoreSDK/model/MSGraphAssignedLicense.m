@@ -14,18 +14,18 @@
 
 @interface MSGraphAssignedLicense()
 {
-    MSCollection* _disabledPlans;
+    NSArray* _disabledPlans;
     NSString* _skuId;
 }
 @end
 
 @implementation MSGraphAssignedLicense
 
-- (MSCollection*) disabledPlans
+- (NSArray*) disabledPlans
 {
     return self.dictionary[@"disabledPlans"];
 }
-- (void) setDisabledPlans: (MSCollection*) val
+- (void) setDisabledPlans: (NSArray*) val
 {
     self.dictionary[@"disabledPlans"] = val;
 }

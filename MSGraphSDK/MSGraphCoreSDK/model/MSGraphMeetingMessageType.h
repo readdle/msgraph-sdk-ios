@@ -4,7 +4,7 @@
 
 #include <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, MSGraphMeetingMessageType){
+typedef NS_ENUM(NSInteger, MSGraphMeetingMessageTypeValue){
 
 	MSGraphMeetingMessageTypeNone = 0,
 	MSGraphMeetingMessageTypeMeetingRequest = 1,
@@ -15,9 +15,27 @@ typedef NS_ENUM(NSInteger, MSGraphMeetingMessageType){
     MSGraphMeetingMessageTypeEndOfEnum
 };
 
+@interface MSGraphMeetingMessageType : NSObject
+
++(MSGraphMeetingMessageType*) none;
++(MSGraphMeetingMessageType*) meetingRequest;
++(MSGraphMeetingMessageType*) meetingCancelled;
++(MSGraphMeetingMessageType*) meetingAccepted;
++(MSGraphMeetingMessageType*) meetingTenativelyAccepted;
++(MSGraphMeetingMessageType*) meetingDeclined;
+
++(MSGraphMeetingMessageType*) UnknownEnumValue;
+
++(MSGraphMeetingMessageType*) meetingMessageTypeWithEnumValue:(MSGraphMeetingMessageTypeValue)val;
+-(NSString*) ms_toString;
+
+@property (nonatomic, readonly) MSGraphMeetingMessageTypeValue enumValue;
+
+@end
+
+
 @interface NSString (MSGraphMeetingMessageType)
 
-+ (instancetype) stringWithMSGraphMeetingMessageType:(MSGraphMeetingMessageType)val;
-- (MSGraphMeetingMessageType) toMSGraphMeetingMessageType;
+- (MSGraphMeetingMessageType*) toMSGraphMeetingMessageType;
 
 @end

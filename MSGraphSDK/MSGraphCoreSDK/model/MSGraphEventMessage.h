@@ -6,11 +6,10 @@
 
 
 #import "MSGraphMessage.h"
-#import "MSCollection.h"
 
 @interface MSGraphEventMessage : MSGraphMessage
 
-  @property (nonatomic, setter=setMeetingMessageType:, getter=meetingMessageType) MSGraphMeetingMessageType meetingMessageType;
+  @property (nonatomic, setter=setMeetingMessageType:, getter=meetingMessageType) MSGraphMeetingMessageType* meetingMessageType;
     @property (nonatomic, setter=setEvent:, getter=event) MSGraphEvent* event;
   
 @end

@@ -5,7 +5,6 @@
 @class MSURLSessionDataTask;
 
 #import "MSCollectionRequest.h"
-#import "MSGraphStringCollection.h"
 
 @interface MSGraphDirectoryObjectGetMemberObjectsRequest : MSCollectionRequest
 
@@ -13,6 +12,6 @@
 
 - (instancetype)initWithSecurityEnabledOnly:(BOOL)securityEnabledOnly URL:(NSURL *)url options:(NSArray *)options client:(ODataBaseClient*)client;
 
-- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSGraphStringCollection *response, MSGraphDirectoryObjectGetMemberObjectsRequest *nextRequest, NSError *error))completionHandler;
+- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSCollection *response, MSGraphDirectoryObjectGetMemberObjectsRequest *nextRequest, NSError *error))completionHandler;
 
 @end

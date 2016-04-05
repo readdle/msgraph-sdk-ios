@@ -17,8 +17,8 @@
     NSString* _driveType;
     MSGraphIdentitySet* _owner;
     MSGraphQuota* _quota;
-    MSGraphDriveItemCollection* _items;
-    MSGraphDriveItemCollection* _special;
+    NSArray* _items;
+    NSArray* _special;
     MSGraphDriveItem* _root;
 }
 @end
@@ -43,7 +43,7 @@
 - (MSGraphIdentitySet*) owner
 {
     if(!_owner){
-        _owner = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"owner"] ];
+        _owner = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"owner"]];
     }
     return _owner;
 }
@@ -55,7 +55,7 @@
 - (MSGraphQuota*) quota
 {
     if(!_quota){
-        _quota = [[MSGraphQuota alloc] initWithDictionary: self.dictionary[@"quota"] ];
+        _quota = [[MSGraphQuota alloc] initWithDictionary: self.dictionary[@"quota"]];
     }
     return _quota;
 }
@@ -64,52 +64,48 @@
     _quota = val;
     self.dictionary[@"quota"] = val;
 }
-- (MSGraphDriveItemCollection*) items
+- (NSArray*) items
 {
     if(!_items){
         
-    NSMutableArray *itemsCollection = [NSMutableArray array];
-    NSArray *itemss = self.dictionary[@"items"];
+    NSMutableArray *itemsResult = [NSMutableArray array];
+    NSArray *items = self.dictionary[@"items"];
 
-    if ([itemss isKindOfClass:[NSArray class]]){
-        for (id items in itemss){
-            [itemsCollection addObject:items];
-         }
+    if ([items isKindOfClass:[NSArray class]]){
+        for (id driveItem in items){
+            [itemsResult addObject:[[MSGraphDriveItem alloc] initWithDictionary: driveItem]];
+        }
     }
 
-    if ([itemsCollection count] > 0){
-        _items = [[MSGraphDriveItemCollection alloc] initWithArray:itemsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _items = itemsResult;
         
     }
     return _items;
 }
-- (void) setItems: (MSGraphDriveItemCollection*) val
+- (void) setItems: (NSArray*) val
 {
     _items = val;
     self.dictionary[@"items"] = val;
 }
-- (MSGraphDriveItemCollection*) special
+- (NSArray*) special
 {
     if(!_special){
         
-    NSMutableArray *specialCollection = [NSMutableArray array];
-    NSArray *specials = self.dictionary[@"special"];
+    NSMutableArray *specialResult = [NSMutableArray array];
+    NSArray *special = self.dictionary[@"special"];
 
-    if ([specials isKindOfClass:[NSArray class]]){
-        for (id special in specials){
-            [specialCollection addObject:special];
-         }
+    if ([special isKindOfClass:[NSArray class]]){
+        for (id driveItem in special){
+            [specialResult addObject:[[MSGraphDriveItem alloc] initWithDictionary: driveItem]];
+        }
     }
 
-    if ([specialCollection count] > 0){
-        _special = [[MSGraphDriveItemCollection alloc] initWithArray:specialCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _special = specialResult;
         
     }
     return _special;
 }
-- (void) setSpecial: (MSGraphDriveItemCollection*) val
+- (void) setSpecial: (NSArray*) val
 {
     _special = val;
     self.dictionary[@"special"] = val;
@@ -117,7 +113,7 @@
 - (MSGraphDriveItem*) root
 {
     if(!_root){
-        _root = [[MSGraphDriveItem alloc] initWithDictionary: self.dictionary[@"root"] ];
+        _root = [[MSGraphDriveItem alloc] initWithDictionary: self.dictionary[@"root"]];
     }
     return _root;
 }
@@ -125,22 +121,6 @@
 {
     _root = val;
     self.dictionary[@"root"] = val;
-}
-- (MSGraphDriveItem*) items:(NSInteger)index
-{
-   MSGraphDriveItem* items = nil;
-   if (self.items.value){
-       items = self.items.value[index];
-   }
-   return items;
-}
-- (MSGraphDriveItem*) special:(NSInteger)index
-{
-   MSGraphDriveItem* special = nil;
-   if (self.special.value){
-       special = self.special.value[index];
-   }
-   return special;
 }
 
 @end

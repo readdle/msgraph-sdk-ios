@@ -14,7 +14,7 @@
 
 @interface MSGraphRecurrenceRange()
 {
-    MSGraphRecurrenceRangeType _type;
+    MSGraphRecurrenceRangeType* _type;
     NSDate* _startDate;
     NSDate* _endDate;
     NSString* _recurrenceTimeZone;
@@ -24,15 +24,17 @@
 
 @implementation MSGraphRecurrenceRange
 
-- (MSGraphRecurrenceRangeType) type
+- (MSGraphRecurrenceRangeType*) type
 {
-    _type = [self.dictionary[@"type"] toMSGraphRecurrenceRangeType];
+    if(!_type){
+        _type = [self.dictionary[@"type"] toMSGraphRecurrenceRangeType];
+    }
     return _type;
 }
-- (void) setType: (MSGraphRecurrenceRangeType) val
+- (void) setType: (MSGraphRecurrenceRangeType*) val
 {
     _type = val;
-    self.dictionary[@"type"] = [NSString stringWithMSGraphRecurrenceRangeType:val];
+    self.dictionary[@"type"] = val;
 }
 - (NSDate*) startDate
 {

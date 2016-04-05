@@ -20,10 +20,10 @@
     MSGraphRecipient* _from;
     MSGraphRecipient* _sender;
     NSString* _conversationThreadId;
-    MSGraphRecipientCollection* _newParticipants;
+    NSArray* _newParticipants;
     NSString* _conversationId;
     MSGraphPost* _inReplyTo;
-    MSGraphAttachmentCollection* _attachments;
+    NSArray* _attachments;
 }
 @end
 
@@ -39,7 +39,7 @@
 - (MSGraphItemBody*) body
 {
     if(!_body){
-        _body = [[MSGraphItemBody alloc] initWithDictionary: self.dictionary[@"body"] ];
+        _body = [[MSGraphItemBody alloc] initWithDictionary: self.dictionary[@"body"]];
     }
     return _body;
 }
@@ -73,7 +73,7 @@
 - (MSGraphRecipient*) from
 {
     if(!_from){
-        _from = [[MSGraphRecipient alloc] initWithDictionary: self.dictionary[@"from"] ];
+        _from = [[MSGraphRecipient alloc] initWithDictionary: self.dictionary[@"from"]];
     }
     return _from;
 }
@@ -85,7 +85,7 @@
 - (MSGraphRecipient*) sender
 {
     if(!_sender){
-        _sender = [[MSGraphRecipient alloc] initWithDictionary: self.dictionary[@"sender"] ];
+        _sender = [[MSGraphRecipient alloc] initWithDictionary: self.dictionary[@"sender"]];
     }
     return _sender;
 }
@@ -102,27 +102,25 @@
 {
     self.dictionary[@"conversationThreadId"] = val;
 }
-- (MSGraphRecipientCollection*) getNewParticipants
+- (NSArray*) getNewParticipants
 {
     if(!_newParticipants){
         
-    NSMutableArray *newParticipantsCollection = [NSMutableArray array];
-    NSArray *newParticipantss = self.dictionary[@"newParticipants"];
+    NSMutableArray *newParticipantsResult = [NSMutableArray array];
+    NSArray *newParticipants = self.dictionary[@"newParticipants"];
 
-    if ([newParticipantss isKindOfClass:[NSArray class]]){
-        for (id newParticipants in newParticipantss){
-            [newParticipantsCollection addObject:newParticipants];
-         }
+    if ([newParticipants isKindOfClass:[NSArray class]]){
+        for (id recipient in newParticipants){
+            [newParticipantsResult addObject:[[MSGraphRecipient alloc] initWithDictionary: recipient]];
+        }
     }
 
-    if ([newParticipantsCollection count] > 0){
-        _newParticipants = [[MSGraphRecipientCollection alloc] initWithArray:newParticipantsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _newParticipants = newParticipantsResult;
         
     }
     return _newParticipants;
 }
-- (void) setNewParticipants: (MSGraphRecipientCollection*) val
+- (void) setNewParticipants: (NSArray*) val
 {
     _newParticipants = val;
     self.dictionary[@"newParticipants"] = val;
@@ -138,7 +136,7 @@
 - (MSGraphPost*) inReplyTo
 {
     if(!_inReplyTo){
-        _inReplyTo = [[MSGraphPost alloc] initWithDictionary: self.dictionary[@"inReplyTo"] ];
+        _inReplyTo = [[MSGraphPost alloc] initWithDictionary: self.dictionary[@"inReplyTo"]];
     }
     return _inReplyTo;
 }
@@ -147,46 +145,28 @@
     _inReplyTo = val;
     self.dictionary[@"inReplyTo"] = val;
 }
-- (MSGraphAttachmentCollection*) attachments
+- (NSArray*) attachments
 {
     if(!_attachments){
         
-    NSMutableArray *attachmentsCollection = [NSMutableArray array];
-    NSArray *attachmentss = self.dictionary[@"attachments"];
+    NSMutableArray *attachmentsResult = [NSMutableArray array];
+    NSArray *attachments = self.dictionary[@"attachments"];
 
-    if ([attachmentss isKindOfClass:[NSArray class]]){
-        for (id attachments in attachmentss){
-            [attachmentsCollection addObject:attachments];
-         }
+    if ([attachments isKindOfClass:[NSArray class]]){
+        for (id attachment in attachments){
+            [attachmentsResult addObject:[[MSGraphAttachment alloc] initWithDictionary: attachment]];
+        }
     }
 
-    if ([attachmentsCollection count] > 0){
-        _attachments = [[MSGraphAttachmentCollection alloc] initWithArray:attachmentsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _attachments = attachmentsResult;
         
     }
     return _attachments;
 }
-- (void) setAttachments: (MSGraphAttachmentCollection*) val
+- (void) setAttachments: (NSArray*) val
 {
     _attachments = val;
     self.dictionary[@"attachments"] = val;
-}
-- (MSGraphRecipient*) newParticipants:(NSInteger)index
-{
-   MSGraphRecipient* newParticipants = nil;
-   if (self.newParticipants.value){
-       newParticipants = self.newParticipants.value[index];
-   }
-   return newParticipants;
-}
-- (MSGraphAttachment*) attachments:(NSInteger)index
-{
-   MSGraphAttachment* attachments = nil;
-   if (self.attachments.value){
-       attachments = self.attachments.value[index];
-   }
-   return attachments;
 }
 
 @end

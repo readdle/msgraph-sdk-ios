@@ -3,6 +3,7 @@
 
 
 #import "MSGraphODataEntities.h"
+#import "MSCollection.h"
 #import "MSURLSessionDataTask.h"
 
 @interface MSCollectionRequest()
@@ -14,16 +15,6 @@
 
 @implementation MSGraphDriveItemsCollectionRequest
 
-- (MSURLSessionDataTask *)MSGraphDriveItemCollectionTaskWithRequest:(NSMutableURLRequest *)request
-                             odObjectWithDictionary:(MSObject* (^)(NSDictionary *response))castBlock
-                                         completion:(void (^)(MSGraphDriveItemCollection* response, NSError *error))completionHandler
-{
-    return [self collectionTaskWithRequest: request odObjectWithDictionary:castBlock
-    completion:^(MSCollection* collectionResponse, NSError *error){
-        completionHandler([MSGraphDriveItemCollection fromMSCollection:collectionResponse],error);
-    }];
-}
-
 - (NSMutableURLRequest *)get
 {
     return [self requestWithMethod:@"GET"
@@ -34,11 +25,11 @@
 - (MSURLSessionDataTask *)getWithCompletion:(MSGraphDriveItemsCollectionCompletionHandler)completionHandler
 {
 
-    MSURLSessionDataTask * task = [self MSGraphDriveItemCollectionTaskWithRequest:[self get]
+    MSURLSessionDataTask * task = [self collectionTaskWithRequest:[self get]
                                              odObjectWithDictionary:^(id response){
-                                            return [response copy];
+                                            return [[MSGraphDriveItem alloc] initWithDictionary:response];
                                          }
-                                                        completion:^(MSGraphDriveItemCollection* collectionResponse, NSError *error){
+                                                        completion:^(MSCollection *collectionResponse, NSError *error){
                                             if(!error && collectionResponse.nextLink && completionHandler){
                                                 MSGraphDriveItemsCollectionRequest *nextRequest = [[MSGraphDriveItemsCollectionRequest alloc] initWithURL:collectionResponse.nextLink options:nil client:self.client];
                                                 completionHandler(collectionResponse, nextRequest, nil);

@@ -4,7 +4,6 @@
 
 
 #import "MSObject.h"
-#import "MSCollection.h"
 
 @interface MSGraphEntity : MSObject
 

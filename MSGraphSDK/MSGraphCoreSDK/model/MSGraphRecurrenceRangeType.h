@@ -4,7 +4,7 @@
 
 #include <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, MSGraphRecurrenceRangeType){
+typedef NS_ENUM(NSInteger, MSGraphRecurrenceRangeTypeValue){
 
 	MSGraphRecurrenceRangeTypeEndDate = 0,
 	MSGraphRecurrenceRangeTypeNoEnd = 1,
@@ -12,9 +12,24 @@ typedef NS_ENUM(NSInteger, MSGraphRecurrenceRangeType){
     MSGraphRecurrenceRangeTypeEndOfEnum
 };
 
+@interface MSGraphRecurrenceRangeType : NSObject
+
++(MSGraphRecurrenceRangeType*) endDate;
++(MSGraphRecurrenceRangeType*) noEnd;
++(MSGraphRecurrenceRangeType*) numbered;
+
++(MSGraphRecurrenceRangeType*) UnknownEnumValue;
+
++(MSGraphRecurrenceRangeType*) recurrenceRangeTypeWithEnumValue:(MSGraphRecurrenceRangeTypeValue)val;
+-(NSString*) ms_toString;
+
+@property (nonatomic, readonly) MSGraphRecurrenceRangeTypeValue enumValue;
+
+@end
+
+
 @interface NSString (MSGraphRecurrenceRangeType)
 
-+ (instancetype) stringWithMSGraphRecurrenceRangeType:(MSGraphRecurrenceRangeType)val;
-- (MSGraphRecurrenceRangeType) toMSGraphRecurrenceRangeType;
+- (MSGraphRecurrenceRangeType*) toMSGraphRecurrenceRangeType;
 
 @end

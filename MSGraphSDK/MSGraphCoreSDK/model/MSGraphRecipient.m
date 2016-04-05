@@ -23,7 +23,7 @@
 - (MSGraphEmailAddress*) emailAddress
 {
     if(!_emailAddress){
-        _emailAddress = [[MSGraphEmailAddress alloc] initWithDictionary: self.dictionary[@"emailAddress"] ];
+        _emailAddress = [[MSGraphEmailAddress alloc] initWithDictionary: self.dictionary[@"emailAddress"]];
     }
     return _emailAddress;
 }

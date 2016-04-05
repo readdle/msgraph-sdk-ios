@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphConversationThreadCollection.h"
-
 @class MSGraphConversationThreadRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphConversationThreadCompletionHandler)(MSGraphConversationThread *response, NSError *error);
 
-typedef void (^MSGraphConversationThreadsCollectionCompletionHandler)(MSGraphConversationThreadCollection* response, MSGraphConversationThreadsCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphConversationThreadsCollectionCompletionHandler)(MSCollection *response, MSGraphConversationThreadsCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphConversationThreadsCollectionRequest : MSCollectionRequest
 

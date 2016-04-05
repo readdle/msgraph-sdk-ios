@@ -4,7 +4,7 @@
 
 #include <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, MSGraphCalendarColor){
+typedef NS_ENUM(NSInteger, MSGraphCalendarColorValue){
 
 	MSGraphCalendarColorAuto = -1,
 	MSGraphCalendarColorLightBlue = 0,
@@ -20,9 +20,32 @@ typedef NS_ENUM(NSInteger, MSGraphCalendarColor){
     MSGraphCalendarColorEndOfEnum
 };
 
+@interface MSGraphCalendarColor : NSObject
+
++(MSGraphCalendarColor*) auto;
++(MSGraphCalendarColor*) lightBlue;
++(MSGraphCalendarColor*) lightGreen;
++(MSGraphCalendarColor*) lightOrange;
++(MSGraphCalendarColor*) lightGray;
++(MSGraphCalendarColor*) lightYellow;
++(MSGraphCalendarColor*) lightTeal;
++(MSGraphCalendarColor*) lightPink;
++(MSGraphCalendarColor*) lightBrown;
++(MSGraphCalendarColor*) lightRed;
++(MSGraphCalendarColor*) maxColor;
+
++(MSGraphCalendarColor*) UnknownEnumValue;
+
++(MSGraphCalendarColor*) calendarColorWithEnumValue:(MSGraphCalendarColorValue)val;
+-(NSString*) ms_toString;
+
+@property (nonatomic, readonly) MSGraphCalendarColorValue enumValue;
+
+@end
+
+
 @interface NSString (MSGraphCalendarColor)
 
-+ (instancetype) stringWithMSGraphCalendarColor:(MSGraphCalendarColor)val;
-- (MSGraphCalendarColor) toMSGraphCalendarColor;
+- (MSGraphCalendarColor*) toMSGraphCalendarColor;
 
 @end

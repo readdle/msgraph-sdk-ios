@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphOrganizationCollection.h"
-
 @class MSGraphOrganizationRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphOrganizationCompletionHandler)(MSGraphOrganization *response, NSError *error);
 
-typedef void (^MSGraphOrganizationCollectionCollectionCompletionHandler)(MSGraphOrganizationCollection* response, MSGraphOrganizationCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphOrganizationCollectionCollectionCompletionHandler)(MSCollection *response, MSGraphOrganizationCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphOrganizationCollectionRequest : MSCollectionRequest
 

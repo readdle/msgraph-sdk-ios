@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphMailFolderCollection.h"
-
 @class MSGraphMailFolderRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphMailFolderCompletionHandler)(MSGraphMailFolder *response, NSError *error);
 
-typedef void (^MSGraphMailFolderChildFoldersCollectionCompletionHandler)(MSGraphMailFolderCollection* response, MSGraphMailFolderChildFoldersCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphMailFolderChildFoldersCollectionCompletionHandler)(MSCollection *response, MSGraphMailFolderChildFoldersCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphMailFolderChildFoldersCollectionRequest : MSCollectionRequest
 

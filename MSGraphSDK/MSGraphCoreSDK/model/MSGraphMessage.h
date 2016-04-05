@@ -3,12 +3,9 @@
 
 @class MSGraphItemBody, MSGraphRecipient, MSGraphAttachment; 
 #import "MSGraphImportance.h"
-#import "MSGraphRecipientCollection.h"
-#import "MSGraphAttachmentCollection.h"
 
 
 #import "MSGraphOutlookItem.h"
-#import "MSCollection.h"
 
 @interface MSGraphMessage : MSGraphOutlookItem
 
@@ -19,14 +16,14 @@
     @property (nonatomic, setter=setSubject:, getter=subject) NSString* subject;
     @property (nonatomic, setter=setBody:, getter=body) MSGraphItemBody* body;
     @property (nonatomic, setter=setBodyPreview:, getter=bodyPreview) NSString* bodyPreview;
-    @property (nonatomic, setter=setImportance:, getter=importance) MSGraphImportance importance;
+    @property (nonatomic, setter=setImportance:, getter=importance) MSGraphImportance* importance;
     @property (nonatomic, setter=setParentFolderId:, getter=parentFolderId) NSString* parentFolderId;
     @property (nonatomic, setter=setSender:, getter=sender) MSGraphRecipient* sender;
     @property (nonatomic, setter=setFrom:, getter=from) MSGraphRecipient* from;
-    @property (nonatomic, setter=setToRecipients:, getter=toRecipients) MSGraphRecipientCollection* toRecipients;
-    @property (nonatomic, setter=setCcRecipients:, getter=ccRecipients) MSGraphRecipientCollection* ccRecipients;
-    @property (nonatomic, setter=setBccRecipients:, getter=bccRecipients) MSGraphRecipientCollection* bccRecipients;
-    @property (nonatomic, setter=setReplyTo:, getter=replyTo) MSGraphRecipientCollection* replyTo;
+    @property (nonatomic, setter=setToRecipients:, getter=toRecipients) NSArray* toRecipients;
+    @property (nonatomic, setter=setCcRecipients:, getter=ccRecipients) NSArray* ccRecipients;
+    @property (nonatomic, setter=setBccRecipients:, getter=bccRecipients) NSArray* bccRecipients;
+    @property (nonatomic, setter=setReplyTo:, getter=replyTo) NSArray* replyTo;
     @property (nonatomic, setter=setConversationId:, getter=conversationId) NSString* conversationId;
     @property (nonatomic, setter=setUniqueBody:, getter=uniqueBody) MSGraphItemBody* uniqueBody;
     @property (nonatomic, setter=setIsDeliveryReceiptRequested:, getter=isDeliveryReceiptRequested) BOOL isDeliveryReceiptRequested;
@@ -34,11 +31,6 @@
     @property (nonatomic, setter=setIsRead:, getter=isRead) BOOL isRead;
     @property (nonatomic, setter=setIsDraft:, getter=isDraft) BOOL isDraft;
     @property (nonatomic, setter=setWebLink:, getter=webLink) NSString* webLink;
-    @property (nonatomic, setter=setAttachments:, getter=attachments) MSGraphAttachmentCollection* attachments;
-  - (MSGraphRecipient*) toRecipients:(NSInteger)index;
-- (MSGraphRecipient*) ccRecipients:(NSInteger)index;
-- (MSGraphRecipient*) bccRecipients:(NSInteger)index;
-- (MSGraphRecipient*) replyTo:(NSInteger)index;
-- (MSGraphAttachment*) attachments:(NSInteger)index;
-
+    @property (nonatomic, setter=setAttachments:, getter=attachments) NSArray* attachments;
+  
 @end

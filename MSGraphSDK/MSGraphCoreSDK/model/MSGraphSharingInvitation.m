@@ -34,7 +34,7 @@
 - (MSGraphIdentitySet*) invitedBy
 {
     if(!_invitedBy){
-        _invitedBy = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"invitedBy"] ];
+        _invitedBy = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"invitedBy"]];
     }
     return _invitedBy;
 }

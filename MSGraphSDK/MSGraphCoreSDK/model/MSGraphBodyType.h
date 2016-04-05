@@ -4,16 +4,30 @@
 
 #include <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, MSGraphBodyType){
+typedef NS_ENUM(NSInteger, MSGraphBodyTypeValue){
 
 	MSGraphBodyTypeText = 0,
 	MSGraphBodyTypeHtml = 1,
     MSGraphBodyTypeEndOfEnum
 };
 
+@interface MSGraphBodyType : NSObject
+
++(MSGraphBodyType*) text;
++(MSGraphBodyType*) html;
+
++(MSGraphBodyType*) UnknownEnumValue;
+
++(MSGraphBodyType*) bodyTypeWithEnumValue:(MSGraphBodyTypeValue)val;
+-(NSString*) ms_toString;
+
+@property (nonatomic, readonly) MSGraphBodyTypeValue enumValue;
+
+@end
+
+
 @interface NSString (MSGraphBodyType)
 
-+ (instancetype) stringWithMSGraphBodyType:(MSGraphBodyType)val;
-- (MSGraphBodyType) toMSGraphBodyType;
+- (MSGraphBodyType*) toMSGraphBodyType;
 
 @end

@@ -25,7 +25,7 @@
 - (MSGraphIdentity*) application
 {
     if(!_application){
-        _application = [[MSGraphIdentity alloc] initWithDictionary: self.dictionary[@"application"] ];
+        _application = [[MSGraphIdentity alloc] initWithDictionary: self.dictionary[@"application"]];
     }
     return _application;
 }
@@ -37,7 +37,7 @@
 - (MSGraphIdentity*) device
 {
     if(!_device){
-        _device = [[MSGraphIdentity alloc] initWithDictionary: self.dictionary[@"device"] ];
+        _device = [[MSGraphIdentity alloc] initWithDictionary: self.dictionary[@"device"]];
     }
     return _device;
 }
@@ -49,7 +49,7 @@
 - (MSGraphIdentity*) user
 {
     if(!_user){
-        _user = [[MSGraphIdentity alloc] initWithDictionary: self.dictionary[@"user"] ];
+        _user = [[MSGraphIdentity alloc] initWithDictionary: self.dictionary[@"user"]];
     }
     return _user;
 }

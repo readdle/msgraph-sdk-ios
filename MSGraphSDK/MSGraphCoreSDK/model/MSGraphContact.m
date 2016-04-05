@@ -28,8 +28,8 @@
     NSString* _yomiSurname;
     NSString* _yomiCompanyName;
     NSString* _generation;
-    MSGraphEmailAddressCollection* _emailAddresses;
-    MSCollection* _imAddresses;
+    NSArray* _emailAddresses;
+    NSArray* _imAddresses;
     NSString* _jobTitle;
     NSString* _companyName;
     NSString* _department;
@@ -38,15 +38,15 @@
     NSString* _businessHomePage;
     NSString* _assistantName;
     NSString* _manager;
-    MSCollection* _homePhones;
+    NSArray* _homePhones;
     NSString* _mobilePhone;
-    MSCollection* _businessPhones;
+    NSArray* _businessPhones;
     MSGraphPhysicalAddress* _homeAddress;
     MSGraphPhysicalAddress* _businessAddress;
     MSGraphPhysicalAddress* _otherAddress;
     NSString* _spouseName;
     NSString* _personalNotes;
-    MSCollection* _children;
+    NSArray* _children;
     MSGraphProfilePhoto* _photo;
 }
 @end
@@ -176,36 +176,34 @@
 {
     self.dictionary[@"generation"] = val;
 }
-- (MSGraphEmailAddressCollection*) emailAddresses
+- (NSArray*) emailAddresses
 {
     if(!_emailAddresses){
         
-    NSMutableArray *emailAddressesCollection = [NSMutableArray array];
-    NSArray *emailAddressess = self.dictionary[@"emailAddresses"];
+    NSMutableArray *emailAddressesResult = [NSMutableArray array];
+    NSArray *emailAddresses = self.dictionary[@"emailAddresses"];
 
-    if ([emailAddressess isKindOfClass:[NSArray class]]){
-        for (id emailAddresses in emailAddressess){
-            [emailAddressesCollection addObject:emailAddresses];
-         }
+    if ([emailAddresses isKindOfClass:[NSArray class]]){
+        for (id emailAddress in emailAddresses){
+            [emailAddressesResult addObject:[[MSGraphEmailAddress alloc] initWithDictionary: emailAddress]];
+        }
     }
 
-    if ([emailAddressesCollection count] > 0){
-        _emailAddresses = [[MSGraphEmailAddressCollection alloc] initWithArray:emailAddressesCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _emailAddresses = emailAddressesResult;
         
     }
     return _emailAddresses;
 }
-- (void) setEmailAddresses: (MSGraphEmailAddressCollection*) val
+- (void) setEmailAddresses: (NSArray*) val
 {
     _emailAddresses = val;
     self.dictionary[@"emailAddresses"] = val;
 }
-- (MSCollection*) imAddresses
+- (NSArray*) imAddresses
 {
     return self.dictionary[@"imAddresses"];
 }
-- (void) setImAddresses: (MSCollection*) val
+- (void) setImAddresses: (NSArray*) val
 {
     self.dictionary[@"imAddresses"] = val;
 }
@@ -273,11 +271,11 @@
 {
     self.dictionary[@"manager"] = val;
 }
-- (MSCollection*) homePhones
+- (NSArray*) homePhones
 {
     return self.dictionary[@"homePhones"];
 }
-- (void) setHomePhones: (MSCollection*) val
+- (void) setHomePhones: (NSArray*) val
 {
     self.dictionary[@"homePhones"] = val;
 }
@@ -289,18 +287,18 @@
 {
     self.dictionary[@"mobilePhone"] = val;
 }
-- (MSCollection*) businessPhones
+- (NSArray*) businessPhones
 {
     return self.dictionary[@"businessPhones"];
 }
-- (void) setBusinessPhones: (MSCollection*) val
+- (void) setBusinessPhones: (NSArray*) val
 {
     self.dictionary[@"businessPhones"] = val;
 }
 - (MSGraphPhysicalAddress*) homeAddress
 {
     if(!_homeAddress){
-        _homeAddress = [[MSGraphPhysicalAddress alloc] initWithDictionary: self.dictionary[@"homeAddress"] ];
+        _homeAddress = [[MSGraphPhysicalAddress alloc] initWithDictionary: self.dictionary[@"homeAddress"]];
     }
     return _homeAddress;
 }
@@ -312,7 +310,7 @@
 - (MSGraphPhysicalAddress*) businessAddress
 {
     if(!_businessAddress){
-        _businessAddress = [[MSGraphPhysicalAddress alloc] initWithDictionary: self.dictionary[@"businessAddress"] ];
+        _businessAddress = [[MSGraphPhysicalAddress alloc] initWithDictionary: self.dictionary[@"businessAddress"]];
     }
     return _businessAddress;
 }
@@ -324,7 +322,7 @@
 - (MSGraphPhysicalAddress*) otherAddress
 {
     if(!_otherAddress){
-        _otherAddress = [[MSGraphPhysicalAddress alloc] initWithDictionary: self.dictionary[@"otherAddress"] ];
+        _otherAddress = [[MSGraphPhysicalAddress alloc] initWithDictionary: self.dictionary[@"otherAddress"]];
     }
     return _otherAddress;
 }
@@ -349,18 +347,18 @@
 {
     self.dictionary[@"personalNotes"] = val;
 }
-- (MSCollection*) children
+- (NSArray*) children
 {
     return self.dictionary[@"children"];
 }
-- (void) setChildren: (MSCollection*) val
+- (void) setChildren: (NSArray*) val
 {
     self.dictionary[@"children"] = val;
 }
 - (MSGraphProfilePhoto*) photo
 {
     if(!_photo){
-        _photo = [[MSGraphProfilePhoto alloc] initWithDictionary: self.dictionary[@"photo"] ];
+        _photo = [[MSGraphProfilePhoto alloc] initWithDictionary: self.dictionary[@"photo"]];
     }
     return _photo;
 }
@@ -368,46 +366,6 @@
 {
     _photo = val;
     self.dictionary[@"photo"] = val;
-}
-- (MSGraphEmailAddress*) emailAddresses:(NSInteger)index
-{
-   MSGraphEmailAddress* emailAddresses = nil;
-   if (self.emailAddresses.value){
-       emailAddresses = self.emailAddresses.value[index];
-   }
-   return emailAddresses;
-}
-- (NSString*) imAddresses:(NSInteger)index
-{
-   NSString* imAddresses = nil;
-   if (self.imAddresses.value){
-       imAddresses = self.imAddresses.value[index];
-   }
-   return imAddresses;
-}
-- (NSString*) homePhones:(NSInteger)index
-{
-   NSString* homePhones = nil;
-   if (self.homePhones.value){
-       homePhones = self.homePhones.value[index];
-   }
-   return homePhones;
-}
-- (NSString*) businessPhones:(NSInteger)index
-{
-   NSString* businessPhones = nil;
-   if (self.businessPhones.value){
-       businessPhones = self.businessPhones.value[index];
-   }
-   return businessPhones;
-}
-- (NSString*) children:(NSInteger)index
-{
-   NSString* children = nil;
-   if (self.children.value){
-       children = self.children.value[index];
-   }
-   return children;
 }
 
 @end

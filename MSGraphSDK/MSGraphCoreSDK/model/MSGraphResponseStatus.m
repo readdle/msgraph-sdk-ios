@@ -14,22 +14,24 @@
 
 @interface MSGraphResponseStatus()
 {
-    MSGraphResponseType _response;
+    MSGraphResponseType* _response;
     NSDate* _time;
 }
 @end
 
 @implementation MSGraphResponseStatus
 
-- (MSGraphResponseType) response
+- (MSGraphResponseType*) response
 {
-    _response = [self.dictionary[@"response"] toMSGraphResponseType];
+    if(!_response){
+        _response = [self.dictionary[@"response"] toMSGraphResponseType];
+    }
     return _response;
 }
-- (void) setResponse: (MSGraphResponseType) val
+- (void) setResponse: (MSGraphResponseType*) val
 {
     _response = val;
-    self.dictionary[@"response"] = [NSString stringWithMSGraphResponseType:val];
+    self.dictionary[@"response"] = val;
 }
 - (NSDate*) time
 {

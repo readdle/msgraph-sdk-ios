@@ -26,30 +26,20 @@
 @implementation MSGraphDriveItemDeltaRequest
 
 
-- (MSURLSessionDataTask *)MSGraphDriveItemCollectionTaskWithRequest:(NSMutableURLRequest *)request
-                             odObjectWithDictionary:(MSObject* (^)(NSDictionary *response))castBlock
-                                         completion:(void (^)(MSGraphDriveItemCollection *response, NSError *error))completionHandler
-{
-    return [self collectionTaskWithRequest: request odObjectWithDictionary:castBlock
-    completion:^(MSCollection* collectionResponse, NSError *error){
-        completionHandler([MSGraphDriveItemCollection fromMSCollection:collectionResponse],error);
-    }];
-}
-
 - (NSMutableURLRequest *)mutableRequest
 {
     return [self requestWithMethod:@"GET" body:nil headers:nil];
 }
 
 
-- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSGraphDriveItemCollection *response, MSGraphDriveItemDeltaRequest *nextRequest, NSError *error))completionHandler
+- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSCollection *response, MSGraphDriveItemDeltaRequest *nextRequest, NSError *error))completionHandler
 {
 
-    MSURLSessionDataTask *task = [self MSGraphDriveItemCollectionTaskWithRequest:self.mutableRequest
-                                                          odObjectWithDictionary:^(id responseObject){
-                                                                                     return [responseObject copy];
-                                                                                 }
-                                                                      completion:^(MSGraphDriveItemCollection *collectionResponse, NSError *error){
+    MSURLSessionDataTask *task = [self collectionTaskWithRequest:self.mutableRequest
+                                          odObjectWithDictionary:^(id responseObject){
+                                                                     return [[MSGraphDriveItem alloc] initWithDictionary:responseObject];
+                                                                 }
+                                                      completion:^(MSCollection *collectionResponse, NSError *error){
                                       if(!error && collectionResponse.nextLink && completionHandler){
                                               MSGraphDriveItemDeltaRequest *nextRequest = [[MSGraphDriveItemDeltaRequest alloc] initWithURL:collectionResponse.nextLink
                                                                                                                   options:nil

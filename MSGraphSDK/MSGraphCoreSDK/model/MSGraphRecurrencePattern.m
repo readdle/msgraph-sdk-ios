@@ -14,27 +14,29 @@
 
 @interface MSGraphRecurrencePattern()
 {
-    MSGraphRecurrencePatternType _type;
+    MSGraphRecurrencePatternType* _type;
     int32_t _interval;
     int32_t _month;
     int32_t _dayOfMonth;
-    MSGraphDayOfWeekCollection* _daysOfWeek;
-    MSGraphDayOfWeek _firstDayOfWeek;
-    MSGraphWeekIndex _index;
+    NSArray* _daysOfWeek;
+    MSGraphDayOfWeek* _firstDayOfWeek;
+    MSGraphWeekIndex* _index;
 }
 @end
 
 @implementation MSGraphRecurrencePattern
 
-- (MSGraphRecurrencePatternType) type
+- (MSGraphRecurrencePatternType*) type
 {
-    _type = [self.dictionary[@"type"] toMSGraphRecurrencePatternType];
+    if(!_type){
+        _type = [self.dictionary[@"type"] toMSGraphRecurrencePatternType];
+    }
     return _type;
 }
-- (void) setType: (MSGraphRecurrencePatternType) val
+- (void) setType: (MSGraphRecurrencePatternType*) val
 {
     _type = val;
-    self.dictionary[@"type"] = [NSString stringWithMSGraphRecurrencePatternType:val];
+    self.dictionary[@"type"] = val;
 }
 - (int32_t) interval
 {
@@ -66,47 +68,51 @@
     _dayOfMonth = val;
     self.dictionary[@"dayOfMonth"] = @(val);
 }
-- (MSGraphDayOfWeekCollection*) daysOfWeek
+- (NSArray*) daysOfWeek
 {
-    
-    NSMutableArray *daysOfWeekCollection = [NSMutableArray array];
-    NSArray *daysOfWeeks = self.dictionary[@"daysOfWeek"];
-
-    if ([daysOfWeeks isKindOfClass:[NSArray class]]){
-        for (id daysOfWeek in daysOfWeeks){
-            [daysOfWeekCollection addObject:daysOfWeek];
-         }
-    }
-
-    if ([daysOfWeekCollection count] > 0){
-        _daysOfWeek = [[MSGraphDayOfWeekCollection alloc] initWithArray:daysOfWeekCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    if(!_daysOfWeek){
         
+    NSMutableArray *daysOfWeekResult = [NSMutableArray array];
+    NSArray *daysOfWeek = self.dictionary[@"daysOfWeek"];
+
+    if ([daysOfWeek isKindOfClass:[NSArray class]]){
+        for (id dayOfWeek in daysOfWeek){
+            [daysOfWeekResult addObject:[dayOfWeek toMSGraphDayOfWeek]];
+        }
+    }
+
+    _daysOfWeek = daysOfWeekResult;
+        
+    }
     return _daysOfWeek;
 }
-- (void) setDaysOfWeek: (MSGraphDayOfWeekCollection*) val
+- (void) setDaysOfWeek: (NSArray*) val
 {
     _daysOfWeek = val;
     self.dictionary[@"daysOfWeek"] = val;
 }
-- (MSGraphDayOfWeek) firstDayOfWeek
+- (MSGraphDayOfWeek*) firstDayOfWeek
 {
-    _firstDayOfWeek = [self.dictionary[@"firstDayOfWeek"] toMSGraphDayOfWeek];
+    if(!_firstDayOfWeek){
+        _firstDayOfWeek = [self.dictionary[@"firstDayOfWeek"] toMSGraphDayOfWeek];
+    }
     return _firstDayOfWeek;
 }
-- (void) setFirstDayOfWeek: (MSGraphDayOfWeek) val
+- (void) setFirstDayOfWeek: (MSGraphDayOfWeek*) val
 {
     _firstDayOfWeek = val;
-    self.dictionary[@"firstDayOfWeek"] = [NSString stringWithMSGraphDayOfWeek:val];
+    self.dictionary[@"firstDayOfWeek"] = val;
 }
-- (MSGraphWeekIndex) index
+- (MSGraphWeekIndex*) index
 {
-    _index = [self.dictionary[@"index"] toMSGraphWeekIndex];
+    if(!_index){
+        _index = [self.dictionary[@"index"] toMSGraphWeekIndex];
+    }
     return _index;
 }
-- (void) setIndex: (MSGraphWeekIndex) val
+- (void) setIndex: (MSGraphWeekIndex*) val
 {
     _index = val;
-    self.dictionary[@"index"] = [NSString stringWithMSGraphWeekIndex:val];
+    self.dictionary[@"index"] = val;
 }
 @end

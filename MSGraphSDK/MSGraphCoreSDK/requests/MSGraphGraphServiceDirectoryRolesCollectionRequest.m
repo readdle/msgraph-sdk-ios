@@ -3,6 +3,7 @@
 
 
 #import "MSGraphODataEntities.h"
+#import "MSCollection.h"
 #import "MSURLSessionDataTask.h"
 
 @interface MSCollectionRequest()
@@ -14,16 +15,6 @@
 
 @implementation MSGraphDirectoryRolesCollectionRequest
 
-- (MSURLSessionDataTask *)MSGraphDirectoryRoleCollectionTaskWithRequest:(NSMutableURLRequest *)request
-                             odObjectWithDictionary:(MSObject* (^)(NSDictionary *response))castBlock
-                                         completion:(void (^)(MSGraphDirectoryRoleCollection* response, NSError *error))completionHandler
-{
-    return [self collectionTaskWithRequest: request odObjectWithDictionary:castBlock
-    completion:^(MSCollection* collectionResponse, NSError *error){
-        completionHandler([MSGraphDirectoryRoleCollection fromMSCollection:collectionResponse],error);
-    }];
-}
-
 - (NSMutableURLRequest *)get
 {
     return [self requestWithMethod:@"GET"
@@ -34,11 +25,11 @@
 - (MSURLSessionDataTask *)getWithCompletion:(MSGraphDirectoryRolesCollectionCompletionHandler)completionHandler
 {
 
-    MSURLSessionDataTask * task = [self MSGraphDirectoryRoleCollectionTaskWithRequest:[self get]
+    MSURLSessionDataTask * task = [self collectionTaskWithRequest:[self get]
                                              odObjectWithDictionary:^(id response){
-                                            return [response copy];
+                                            return [[MSGraphDirectoryRole alloc] initWithDictionary:response];
                                          }
-                                                        completion:^(MSGraphDirectoryRoleCollection* collectionResponse, NSError *error){
+                                                        completion:^(MSCollection *collectionResponse, NSError *error){
                                             if(!error && collectionResponse.nextLink && completionHandler){
                                                 MSGraphDirectoryRolesCollectionRequest *nextRequest = [[MSGraphDirectoryRolesCollectionRequest alloc] initWithURL:collectionResponse.nextLink options:nil client:self.client];
                                                 completionHandler(collectionResponse, nextRequest, nil);

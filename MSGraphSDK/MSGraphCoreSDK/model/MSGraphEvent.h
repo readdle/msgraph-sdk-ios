@@ -6,13 +6,9 @@
 #import "MSGraphSensitivity.h"
 #import "MSGraphFreeBusyStatus.h"
 #import "MSGraphEventType.h"
-#import "MSGraphAttendeeCollection.h"
-#import "MSGraphEventCollection.h"
-#import "MSGraphAttachmentCollection.h"
 
 
 #import "MSGraphOutlookItem.h"
-#import "MSCollection.h"
 
 @interface MSGraphEvent : MSGraphOutlookItem
 
@@ -26,8 +22,8 @@
     @property (nonatomic, setter=setSubject:, getter=subject) NSString* subject;
     @property (nonatomic, setter=setBody:, getter=body) MSGraphItemBody* body;
     @property (nonatomic, setter=setBodyPreview:, getter=bodyPreview) NSString* bodyPreview;
-    @property (nonatomic, setter=setImportance:, getter=importance) MSGraphImportance importance;
-    @property (nonatomic, setter=setSensitivity:, getter=sensitivity) MSGraphSensitivity sensitivity;
+    @property (nonatomic, setter=setImportance:, getter=importance) MSGraphImportance* importance;
+    @property (nonatomic, setter=setSensitivity:, getter=sensitivity) MSGraphSensitivity* sensitivity;
     @property (nonatomic, setter=setStart:, getter=start) MSGraphDateTimeTimeZone* start;
     @property (nonatomic, setter=setOriginalStart:, getter=originalStart) NSDate* originalStart;
     @property (nonatomic, setter=setEnd:, getter=end) MSGraphDateTimeTimeZone* end;
@@ -38,16 +34,13 @@
     @property (nonatomic, setter=setRecurrence:, getter=recurrence) MSGraphPatternedRecurrence* recurrence;
     @property (nonatomic, setter=setResponseRequested:, getter=responseRequested) BOOL responseRequested;
     @property (nonatomic, setter=setSeriesMasterId:, getter=seriesMasterId) NSString* seriesMasterId;
-    @property (nonatomic, setter=setShowAs:, getter=showAs) MSGraphFreeBusyStatus showAs;
-    @property (nonatomic, setter=setType:, getter=type) MSGraphEventType type;
-    @property (nonatomic, setter=setAttendees:, getter=attendees) MSGraphAttendeeCollection* attendees;
+    @property (nonatomic, setter=setShowAs:, getter=showAs) MSGraphFreeBusyStatus* showAs;
+    @property (nonatomic, setter=setType:, getter=type) MSGraphEventType* type;
+    @property (nonatomic, setter=setAttendees:, getter=attendees) NSArray* attendees;
     @property (nonatomic, setter=setOrganizer:, getter=organizer) MSGraphRecipient* organizer;
     @property (nonatomic, setter=setWebLink:, getter=webLink) NSString* webLink;
     @property (nonatomic, setter=setCalendar:, getter=calendar) MSGraphCalendar* calendar;
-    @property (nonatomic, setter=setInstances:, getter=instances) MSGraphEventCollection* instances;
-    @property (nonatomic, setter=setAttachments:, getter=attachments) MSGraphAttachmentCollection* attachments;
-  - (MSGraphAttendee*) attendees:(NSInteger)index;
-- (MSGraphEvent*) instances:(NSInteger)index;
-- (MSGraphAttachment*) attachments:(NSInteger)index;
-
+    @property (nonatomic, setter=setInstances:, getter=instances) NSArray* instances;
+    @property (nonatomic, setter=setAttachments:, getter=attachments) NSArray* attachments;
+  
 @end

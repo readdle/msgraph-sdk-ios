@@ -19,8 +19,8 @@
     int32_t _childFolderCount;
     int32_t _unreadItemCount;
     int32_t _totalItemCount;
-    MSGraphMessageCollection* _messages;
-    MSGraphMailFolderCollection* _childFolders;
+    NSArray* _messages;
+    NSArray* _childFolders;
 }
 @end
 
@@ -79,52 +79,48 @@
     _totalItemCount = val;
     self.dictionary[@"totalItemCount"] = @(val);
 }
-- (MSGraphMessageCollection*) messages
+- (NSArray*) messages
 {
     if(!_messages){
         
-    NSMutableArray *messagesCollection = [NSMutableArray array];
-    NSArray *messagess = self.dictionary[@"messages"];
+    NSMutableArray *messagesResult = [NSMutableArray array];
+    NSArray *messages = self.dictionary[@"messages"];
 
-    if ([messagess isKindOfClass:[NSArray class]]){
-        for (id messages in messagess){
-            [messagesCollection addObject:messages];
-         }
+    if ([messages isKindOfClass:[NSArray class]]){
+        for (id message in messages){
+            [messagesResult addObject:[[MSGraphMessage alloc] initWithDictionary: message]];
+        }
     }
 
-    if ([messagesCollection count] > 0){
-        _messages = [[MSGraphMessageCollection alloc] initWithArray:messagesCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _messages = messagesResult;
         
     }
     return _messages;
 }
-- (void) setMessages: (MSGraphMessageCollection*) val
+- (void) setMessages: (NSArray*) val
 {
     _messages = val;
     self.dictionary[@"messages"] = val;
 }
-- (MSGraphMailFolderCollection*) childFolders
+- (NSArray*) childFolders
 {
     if(!_childFolders){
         
-    NSMutableArray *childFoldersCollection = [NSMutableArray array];
-    NSArray *childFolderss = self.dictionary[@"childFolders"];
+    NSMutableArray *childFoldersResult = [NSMutableArray array];
+    NSArray *childFolders = self.dictionary[@"childFolders"];
 
-    if ([childFolderss isKindOfClass:[NSArray class]]){
-        for (id childFolders in childFolderss){
-            [childFoldersCollection addObject:childFolders];
-         }
+    if ([childFolders isKindOfClass:[NSArray class]]){
+        for (id mailFolder in childFolders){
+            [childFoldersResult addObject:[[MSGraphMailFolder alloc] initWithDictionary: mailFolder]];
+        }
     }
 
-    if ([childFoldersCollection count] > 0){
-        _childFolders = [[MSGraphMailFolderCollection alloc] initWithArray:childFoldersCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _childFolders = childFoldersResult;
         
     }
     return _childFolders;
 }
-- (void) setChildFolders: (MSGraphMailFolderCollection*) val
+- (void) setChildFolders: (NSArray*) val
 {
     _childFolders = val;
     self.dictionary[@"childFolders"] = val;
@@ -132,18 +128,10 @@
 - (MSGraphMessage*) messages:(NSInteger)index
 {
    MSGraphMessage* messages = nil;
-   if (self.messages.value){
-       messages = self.messages.value[index];
+   if (self.messages) {
+       messages = self.messages[index];
    }
    return messages;
-}
-- (MSGraphMailFolder*) childFolders:(NSInteger)index
-{
-   MSGraphMailFolder* childFolders = nil;
-   if (self.childFolders.value){
-       childFolders = self.childFolders.value[index];
-   }
-   return childFolders;
 }
 
 @end

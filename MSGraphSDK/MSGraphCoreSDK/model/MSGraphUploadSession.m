@@ -16,7 +16,7 @@
 {
     NSString* _uploadUrl;
     NSDate* _expirationDateTime;
-    MSCollection* _nextExpectedRanges;
+    NSArray* _nextExpectedRanges;
 }
 @end
 
@@ -42,11 +42,11 @@
     _expirationDateTime = val;
     self.dictionary[@"expirationDateTime"] = val;
 }
-- (MSCollection*) nextExpectedRanges
+- (NSArray*) nextExpectedRanges
 {
     return self.dictionary[@"nextExpectedRanges"];
 }
-- (void) setNextExpectedRanges: (MSCollection*) val
+- (void) setNextExpectedRanges: (NSArray*) val
 {
     self.dictionary[@"nextExpectedRanges"] = val;
 }

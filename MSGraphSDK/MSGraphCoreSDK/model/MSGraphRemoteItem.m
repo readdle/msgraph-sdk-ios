@@ -29,7 +29,7 @@
 - (MSGraphFile*) file
 {
     if(!_file){
-        _file = [[MSGraphFile alloc] initWithDictionary: self.dictionary[@"file"] ];
+        _file = [[MSGraphFile alloc] initWithDictionary: self.dictionary[@"file"]];
     }
     return _file;
 }
@@ -41,7 +41,7 @@
 - (MSGraphFileSystemInfo*) fileSystemInfo
 {
     if(!_fileSystemInfo){
-        _fileSystemInfo = [[MSGraphFileSystemInfo alloc] initWithDictionary: self.dictionary[@"fileSystemInfo"] ];
+        _fileSystemInfo = [[MSGraphFileSystemInfo alloc] initWithDictionary: self.dictionary[@"fileSystemInfo"]];
     }
     return _fileSystemInfo;
 }
@@ -53,7 +53,7 @@
 - (MSGraphFolder*) folder
 {
     if(!_folder){
-        _folder = [[MSGraphFolder alloc] initWithDictionary: self.dictionary[@"folder"] ];
+        _folder = [[MSGraphFolder alloc] initWithDictionary: self.dictionary[@"folder"]];
     }
     return _folder;
 }
@@ -81,7 +81,7 @@
 - (MSGraphItemReference*) parentReference
 {
     if(!_parentReference){
-        _parentReference = [[MSGraphItemReference alloc] initWithDictionary: self.dictionary[@"parentReference"] ];
+        _parentReference = [[MSGraphItemReference alloc] initWithDictionary: self.dictionary[@"parentReference"]];
     }
     return _parentReference;
 }

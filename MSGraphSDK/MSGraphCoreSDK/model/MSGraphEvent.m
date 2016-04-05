@@ -24,8 +24,8 @@
     NSString* _subject;
     MSGraphItemBody* _body;
     NSString* _bodyPreview;
-    MSGraphImportance _importance;
-    MSGraphSensitivity _sensitivity;
+    MSGraphImportance* _importance;
+    MSGraphSensitivity* _sensitivity;
     MSGraphDateTimeTimeZone* _start;
     NSDate* _originalStart;
     MSGraphDateTimeTimeZone* _end;
@@ -36,14 +36,14 @@
     MSGraphPatternedRecurrence* _recurrence;
     BOOL _responseRequested;
     NSString* _seriesMasterId;
-    MSGraphFreeBusyStatus _showAs;
-    MSGraphEventType _type;
-    MSGraphAttendeeCollection* _attendees;
+    MSGraphFreeBusyStatus* _showAs;
+    MSGraphEventType* _type;
+    NSArray* _attendees;
     MSGraphRecipient* _organizer;
     NSString* _webLink;
     MSGraphCalendar* _calendar;
-    MSGraphEventCollection* _instances;
-    MSGraphAttachmentCollection* _attachments;
+    NSArray* _instances;
+    NSArray* _attachments;
 }
 @end
 
@@ -75,7 +75,7 @@
 - (MSGraphResponseStatus*) responseStatus
 {
     if(!_responseStatus){
-        _responseStatus = [[MSGraphResponseStatus alloc] initWithDictionary: self.dictionary[@"responseStatus"] ];
+        _responseStatus = [[MSGraphResponseStatus alloc] initWithDictionary: self.dictionary[@"responseStatus"]];
     }
     return _responseStatus;
 }
@@ -133,7 +133,7 @@
 - (MSGraphItemBody*) body
 {
     if(!_body){
-        _body = [[MSGraphItemBody alloc] initWithDictionary: self.dictionary[@"body"] ];
+        _body = [[MSGraphItemBody alloc] initWithDictionary: self.dictionary[@"body"]];
     }
     return _body;
 }
@@ -150,30 +150,34 @@
 {
     self.dictionary[@"bodyPreview"] = val;
 }
-- (MSGraphImportance) importance
+- (MSGraphImportance*) importance
 {
-    _importance = [self.dictionary[@"importance"] toMSGraphImportance];
+    if(!_importance){
+        _importance = [self.dictionary[@"importance"] toMSGraphImportance];
+    }
     return _importance;
 }
-- (void) setImportance: (MSGraphImportance) val
+- (void) setImportance: (MSGraphImportance*) val
 {
     _importance = val;
-    self.dictionary[@"importance"] = [NSString stringWithMSGraphImportance:val];
+    self.dictionary[@"importance"] = val;
 }
-- (MSGraphSensitivity) sensitivity
+- (MSGraphSensitivity*) sensitivity
 {
-    _sensitivity = [self.dictionary[@"sensitivity"] toMSGraphSensitivity];
+    if(!_sensitivity){
+        _sensitivity = [self.dictionary[@"sensitivity"] toMSGraphSensitivity];
+    }
     return _sensitivity;
 }
-- (void) setSensitivity: (MSGraphSensitivity) val
+- (void) setSensitivity: (MSGraphSensitivity*) val
 {
     _sensitivity = val;
-    self.dictionary[@"sensitivity"] = [NSString stringWithMSGraphSensitivity:val];
+    self.dictionary[@"sensitivity"] = val;
 }
 - (MSGraphDateTimeTimeZone*) start
 {
     if(!_start){
-        _start = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"start"] ];
+        _start = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"start"]];
     }
     return _start;
 }
@@ -197,7 +201,7 @@
 - (MSGraphDateTimeTimeZone*) end
 {
     if(!_end){
-        _end = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"end"] ];
+        _end = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"end"]];
     }
     return _end;
 }
@@ -209,7 +213,7 @@
 - (MSGraphLocation*) location
 {
     if(!_location){
-        _location = [[MSGraphLocation alloc] initWithDictionary: self.dictionary[@"location"] ];
+        _location = [[MSGraphLocation alloc] initWithDictionary: self.dictionary[@"location"]];
     }
     return _location;
 }
@@ -251,7 +255,7 @@
 - (MSGraphPatternedRecurrence*) recurrence
 {
     if(!_recurrence){
-        _recurrence = [[MSGraphPatternedRecurrence alloc] initWithDictionary: self.dictionary[@"recurrence"] ];
+        _recurrence = [[MSGraphPatternedRecurrence alloc] initWithDictionary: self.dictionary[@"recurrence"]];
     }
     return _recurrence;
 }
@@ -278,47 +282,49 @@
 {
     self.dictionary[@"seriesMasterId"] = val;
 }
-- (MSGraphFreeBusyStatus) showAs
+- (MSGraphFreeBusyStatus*) showAs
 {
-    _showAs = [self.dictionary[@"showAs"] toMSGraphFreeBusyStatus];
+    if(!_showAs){
+        _showAs = [self.dictionary[@"showAs"] toMSGraphFreeBusyStatus];
+    }
     return _showAs;
 }
-- (void) setShowAs: (MSGraphFreeBusyStatus) val
+- (void) setShowAs: (MSGraphFreeBusyStatus*) val
 {
     _showAs = val;
-    self.dictionary[@"showAs"] = [NSString stringWithMSGraphFreeBusyStatus:val];
+    self.dictionary[@"showAs"] = val;
 }
-- (MSGraphEventType) type
+- (MSGraphEventType*) type
 {
-    _type = [self.dictionary[@"type"] toMSGraphEventType];
+    if(!_type){
+        _type = [self.dictionary[@"type"] toMSGraphEventType];
+    }
     return _type;
 }
-- (void) setType: (MSGraphEventType) val
+- (void) setType: (MSGraphEventType*) val
 {
     _type = val;
-    self.dictionary[@"type"] = [NSString stringWithMSGraphEventType:val];
+    self.dictionary[@"type"] = val;
 }
-- (MSGraphAttendeeCollection*) attendees
+- (NSArray*) attendees
 {
     if(!_attendees){
         
-    NSMutableArray *attendeesCollection = [NSMutableArray array];
-    NSArray *attendeess = self.dictionary[@"attendees"];
+    NSMutableArray *attendeesResult = [NSMutableArray array];
+    NSArray *attendees = self.dictionary[@"attendees"];
 
-    if ([attendeess isKindOfClass:[NSArray class]]){
-        for (id attendees in attendeess){
-            [attendeesCollection addObject:attendees];
-         }
+    if ([attendees isKindOfClass:[NSArray class]]){
+        for (id attendee in attendees){
+            [attendeesResult addObject:[[MSGraphAttendee alloc] initWithDictionary: attendee]];
+        }
     }
 
-    if ([attendeesCollection count] > 0){
-        _attendees = [[MSGraphAttendeeCollection alloc] initWithArray:attendeesCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _attendees = attendeesResult;
         
     }
     return _attendees;
 }
-- (void) setAttendees: (MSGraphAttendeeCollection*) val
+- (void) setAttendees: (NSArray*) val
 {
     _attendees = val;
     self.dictionary[@"attendees"] = val;
@@ -326,7 +332,7 @@
 - (MSGraphRecipient*) organizer
 {
     if(!_organizer){
-        _organizer = [[MSGraphRecipient alloc] initWithDictionary: self.dictionary[@"organizer"] ];
+        _organizer = [[MSGraphRecipient alloc] initWithDictionary: self.dictionary[@"organizer"]];
     }
     return _organizer;
 }
@@ -346,7 +352,7 @@
 - (MSGraphCalendar*) calendar
 {
     if(!_calendar){
-        _calendar = [[MSGraphCalendar alloc] initWithDictionary: self.dictionary[@"calendar"] ];
+        _calendar = [[MSGraphCalendar alloc] initWithDictionary: self.dictionary[@"calendar"]];
     }
     return _calendar;
 }
@@ -355,79 +361,51 @@
     _calendar = val;
     self.dictionary[@"calendar"] = val;
 }
-- (MSGraphEventCollection*) instances
+- (NSArray*) instances
 {
     if(!_instances){
         
-    NSMutableArray *instancesCollection = [NSMutableArray array];
-    NSArray *instancess = self.dictionary[@"instances"];
+    NSMutableArray *instancesResult = [NSMutableArray array];
+    NSArray *instances = self.dictionary[@"instances"];
 
-    if ([instancess isKindOfClass:[NSArray class]]){
-        for (id instances in instancess){
-            [instancesCollection addObject:instances];
-         }
+    if ([instances isKindOfClass:[NSArray class]]){
+        for (id event in instances){
+            [instancesResult addObject:[[MSGraphEvent alloc] initWithDictionary: event]];
+        }
     }
 
-    if ([instancesCollection count] > 0){
-        _instances = [[MSGraphEventCollection alloc] initWithArray:instancesCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _instances = instancesResult;
         
     }
     return _instances;
 }
-- (void) setInstances: (MSGraphEventCollection*) val
+- (void) setInstances: (NSArray*) val
 {
     _instances = val;
     self.dictionary[@"instances"] = val;
 }
-- (MSGraphAttachmentCollection*) attachments
+- (NSArray*) attachments
 {
     if(!_attachments){
         
-    NSMutableArray *attachmentsCollection = [NSMutableArray array];
-    NSArray *attachmentss = self.dictionary[@"attachments"];
+    NSMutableArray *attachmentsResult = [NSMutableArray array];
+    NSArray *attachments = self.dictionary[@"attachments"];
 
-    if ([attachmentss isKindOfClass:[NSArray class]]){
-        for (id attachments in attachmentss){
-            [attachmentsCollection addObject:attachments];
-         }
+    if ([attachments isKindOfClass:[NSArray class]]){
+        for (id attachment in attachments){
+            [attachmentsResult addObject:[[MSGraphAttachment alloc] initWithDictionary: attachment]];
+        }
     }
 
-    if ([attachmentsCollection count] > 0){
-        _attachments = [[MSGraphAttachmentCollection alloc] initWithArray:attachmentsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _attachments = attachmentsResult;
         
     }
     return _attachments;
 }
-- (void) setAttachments: (MSGraphAttachmentCollection*) val
+- (void) setAttachments: (NSArray*) val
 {
     _attachments = val;
     self.dictionary[@"attachments"] = val;
-}
-- (MSGraphAttendee*) attendees:(NSInteger)index
-{
-   MSGraphAttendee* attendees = nil;
-   if (self.attendees.value){
-       attendees = self.attendees.value[index];
-   }
-   return attendees;
-}
-- (MSGraphEvent*) instances:(NSInteger)index
-{
-   MSGraphEvent* instances = nil;
-   if (self.instances.value){
-       instances = self.instances.value[index];
-   }
-   return instances;
-}
-- (MSGraphAttachment*) attachments:(NSInteger)index
-{
-   MSGraphAttachment* attachments = nil;
-   if (self.attachments.value){
-       attachments = self.attachments.value[index];
-   }
-   return attachments;
 }
 
 @end

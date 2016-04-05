@@ -4,7 +4,7 @@
 
 #include <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, MSGraphResponseType){
+typedef NS_ENUM(NSInteger, MSGraphResponseTypeValue){
 
 	MSGraphResponseTypeNone = 0,
 	MSGraphResponseTypeOrganizer = 1,
@@ -15,9 +15,27 @@ typedef NS_ENUM(NSInteger, MSGraphResponseType){
     MSGraphResponseTypeEndOfEnum
 };
 
+@interface MSGraphResponseType : NSObject
+
++(MSGraphResponseType*) none;
++(MSGraphResponseType*) organizer;
++(MSGraphResponseType*) tentativelyAccepted;
++(MSGraphResponseType*) accepted;
++(MSGraphResponseType*) declined;
++(MSGraphResponseType*) notResponded;
+
++(MSGraphResponseType*) UnknownEnumValue;
+
++(MSGraphResponseType*) responseTypeWithEnumValue:(MSGraphResponseTypeValue)val;
+-(NSString*) ms_toString;
+
+@property (nonatomic, readonly) MSGraphResponseTypeValue enumValue;
+
+@end
+
+
 @interface NSString (MSGraphResponseType)
 
-+ (instancetype) stringWithMSGraphResponseType:(MSGraphResponseType)val;
-- (MSGraphResponseType) toMSGraphResponseType;
+- (MSGraphResponseType*) toMSGraphResponseType;
 
 @end

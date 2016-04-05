@@ -24,7 +24,7 @@
 - (MSGraphIdentitySet*) owner
 {
     if(!_owner){
-        _owner = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"owner"] ];
+        _owner = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"owner"]];
     }
     return _owner;
 }

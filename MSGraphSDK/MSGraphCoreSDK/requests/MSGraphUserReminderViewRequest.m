@@ -46,16 +46,6 @@
     return self;
 }
 
-- (MSURLSessionDataTask *)MSGraphReminderCollectionTaskWithRequest:(NSMutableURLRequest *)request
-                             odObjectWithDictionary:(MSObject* (^)(NSDictionary *response))castBlock
-                                         completion:(void (^)(MSGraphReminderCollection *response, NSError *error))completionHandler
-{
-    return [self collectionTaskWithRequest: request odObjectWithDictionary:castBlock
-    completion:^(MSCollection* collectionResponse, NSError *error){
-        completionHandler([MSGraphReminderCollection fromMSCollection:collectionResponse],error);
-    }];
-}
-
 - (NSMutableURLRequest *)mutableRequest
 {
     [self.options addObject:[[MSFunctionParameters alloc] initWithKey:@"StartDateTime"
@@ -67,14 +57,14 @@
 }
 
 
-- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSGraphReminderCollection *response, MSGraphUserReminderViewRequest *nextRequest, NSError *error))completionHandler
+- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSCollection *response, MSGraphUserReminderViewRequest *nextRequest, NSError *error))completionHandler
 {
 
-    MSURLSessionDataTask *task = [self MSGraphReminderCollectionTaskWithRequest:self.mutableRequest
-                                                         odObjectWithDictionary:^(id responseObject){
-                                                                                    return [responseObject copy];
-                                                                                }
-                                                                     completion:^(MSGraphReminderCollection *collectionResponse, NSError *error){
+    MSURLSessionDataTask *task = [self collectionTaskWithRequest:self.mutableRequest
+                                          odObjectWithDictionary:^(id responseObject){
+                                                                     return [[MSGraphReminder alloc] initWithDictionary:responseObject];
+                                                                 }
+                                                      completion:^(MSCollection *collectionResponse, NSError *error){
                                       if(!error && collectionResponse.nextLink && completionHandler){
                                               MSGraphUserReminderViewRequest *nextRequest = [[MSGraphUserReminderViewRequest alloc] initWithURL:collectionResponse.nextLink
                                                                                                                   options:nil

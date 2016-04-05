@@ -5,7 +5,6 @@
 @class MSURLSessionDataTask;
 
 #import "MSCollectionRequest.h"
-#import "MSGraphDriveItemCollection.h"
 
 @interface MSGraphDriveItemSearchRequest : MSCollectionRequest
 
@@ -13,6 +12,6 @@
 
 - (instancetype)initWithQ:(NSString *)q URL:(NSURL *)url options:(NSArray *)options client:(ODataBaseClient*)client;
 
-- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSGraphDriveItemCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error))completionHandler;
+- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error))completionHandler;
 
 @end

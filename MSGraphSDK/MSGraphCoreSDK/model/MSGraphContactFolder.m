@@ -16,8 +16,8 @@
 {
     NSString* _parentFolderId;
     NSString* _displayName;
-    MSGraphContactCollection* _contacts;
-    MSGraphContactFolderCollection* _childFolders;
+    NSArray* _contacts;
+    NSArray* _childFolders;
 }
 @end
 
@@ -46,71 +46,51 @@
 {
     self.dictionary[@"displayName"] = val;
 }
-- (MSGraphContactCollection*) contacts
+- (NSArray*) contacts
 {
     if(!_contacts){
         
-    NSMutableArray *contactsCollection = [NSMutableArray array];
-    NSArray *contactss = self.dictionary[@"contacts"];
+    NSMutableArray *contactsResult = [NSMutableArray array];
+    NSArray *contacts = self.dictionary[@"contacts"];
 
-    if ([contactss isKindOfClass:[NSArray class]]){
-        for (id contacts in contactss){
-            [contactsCollection addObject:contacts];
-         }
+    if ([contacts isKindOfClass:[NSArray class]]){
+        for (id contact in contacts){
+            [contactsResult addObject:[[MSGraphContact alloc] initWithDictionary: contact]];
+        }
     }
 
-    if ([contactsCollection count] > 0){
-        _contacts = [[MSGraphContactCollection alloc] initWithArray:contactsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _contacts = contactsResult;
         
     }
     return _contacts;
 }
-- (void) setContacts: (MSGraphContactCollection*) val
+- (void) setContacts: (NSArray*) val
 {
     _contacts = val;
     self.dictionary[@"contacts"] = val;
 }
-- (MSGraphContactFolderCollection*) childFolders
+- (NSArray*) childFolders
 {
     if(!_childFolders){
         
-    NSMutableArray *childFoldersCollection = [NSMutableArray array];
-    NSArray *childFolderss = self.dictionary[@"childFolders"];
+    NSMutableArray *childFoldersResult = [NSMutableArray array];
+    NSArray *childFolders = self.dictionary[@"childFolders"];
 
-    if ([childFolderss isKindOfClass:[NSArray class]]){
-        for (id childFolders in childFolderss){
-            [childFoldersCollection addObject:childFolders];
-         }
+    if ([childFolders isKindOfClass:[NSArray class]]){
+        for (id contactFolder in childFolders){
+            [childFoldersResult addObject:[[MSGraphContactFolder alloc] initWithDictionary: contactFolder]];
+        }
     }
 
-    if ([childFoldersCollection count] > 0){
-        _childFolders = [[MSGraphContactFolderCollection alloc] initWithArray:childFoldersCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _childFolders = childFoldersResult;
         
     }
     return _childFolders;
 }
-- (void) setChildFolders: (MSGraphContactFolderCollection*) val
+- (void) setChildFolders: (NSArray*) val
 {
     _childFolders = val;
     self.dictionary[@"childFolders"] = val;
-}
-- (MSGraphContact*) contacts:(NSInteger)index
-{
-   MSGraphContact* contacts = nil;
-   if (self.contacts.value){
-       contacts = self.contacts.value[index];
-   }
-   return contacts;
-}
-- (MSGraphContactFolder*) childFolders:(NSInteger)index
-{
-   MSGraphContactFolder* childFolders = nil;
-   if (self.childFolders.value){
-       childFolders = self.childFolders.value[index];
-   }
-   return childFolders;
 }
 
 @end

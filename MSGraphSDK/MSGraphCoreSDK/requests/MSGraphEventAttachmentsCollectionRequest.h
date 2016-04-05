@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphAttachmentCollection.h"
-
 @class MSGraphAttachmentRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphAttachmentCompletionHandler)(MSGraphAttachment *response, NSError *error);
 
-typedef void (^MSGraphEventAttachmentsCollectionCompletionHandler)(MSGraphAttachmentCollection* response, MSGraphEventAttachmentsCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphEventAttachmentsCollectionCompletionHandler)(MSCollection *response, MSGraphEventAttachmentsCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphEventAttachmentsCollectionRequest : MSCollectionRequest
 

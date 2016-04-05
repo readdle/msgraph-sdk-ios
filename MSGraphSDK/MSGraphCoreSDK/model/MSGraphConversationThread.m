@@ -14,15 +14,15 @@
 
 @interface MSGraphConversationThread()
 {
-    MSGraphRecipientCollection* _toRecipients;
+    NSArray* _toRecipients;
     NSString* _topic;
     BOOL _hasAttachments;
     NSDate* _lastDeliveredDateTime;
-    MSCollection* _uniqueSenders;
-    MSGraphRecipientCollection* _ccRecipients;
+    NSArray* _uniqueSenders;
+    NSArray* _ccRecipients;
     NSString* _preview;
     BOOL _isLocked;
-    MSGraphPostCollection* _posts;
+    NSArray* _posts;
 }
 @end
 
@@ -35,27 +35,25 @@
     }
     return self;
 }
-- (MSGraphRecipientCollection*) toRecipients
+- (NSArray*) toRecipients
 {
     if(!_toRecipients){
         
-    NSMutableArray *toRecipientsCollection = [NSMutableArray array];
-    NSArray *toRecipientss = self.dictionary[@"toRecipients"];
+    NSMutableArray *toRecipientsResult = [NSMutableArray array];
+    NSArray *toRecipients = self.dictionary[@"toRecipients"];
 
-    if ([toRecipientss isKindOfClass:[NSArray class]]){
-        for (id toRecipients in toRecipientss){
-            [toRecipientsCollection addObject:toRecipients];
-         }
+    if ([toRecipients isKindOfClass:[NSArray class]]){
+        for (id recipient in toRecipients){
+            [toRecipientsResult addObject:[[MSGraphRecipient alloc] initWithDictionary: recipient]];
+        }
     }
 
-    if ([toRecipientsCollection count] > 0){
-        _toRecipients = [[MSGraphRecipientCollection alloc] initWithArray:toRecipientsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _toRecipients = toRecipientsResult;
         
     }
     return _toRecipients;
 }
-- (void) setToRecipients: (MSGraphRecipientCollection*) val
+- (void) setToRecipients: (NSArray*) val
 {
     _toRecipients = val;
     self.dictionary[@"toRecipients"] = val;
@@ -90,35 +88,33 @@
     _lastDeliveredDateTime = val;
     self.dictionary[@"lastDeliveredDateTime"] = val;
 }
-- (MSCollection*) uniqueSenders
+- (NSArray*) uniqueSenders
 {
     return self.dictionary[@"uniqueSenders"];
 }
-- (void) setUniqueSenders: (MSCollection*) val
+- (void) setUniqueSenders: (NSArray*) val
 {
     self.dictionary[@"uniqueSenders"] = val;
 }
-- (MSGraphRecipientCollection*) ccRecipients
+- (NSArray*) ccRecipients
 {
     if(!_ccRecipients){
         
-    NSMutableArray *ccRecipientsCollection = [NSMutableArray array];
-    NSArray *ccRecipientss = self.dictionary[@"ccRecipients"];
+    NSMutableArray *ccRecipientsResult = [NSMutableArray array];
+    NSArray *ccRecipients = self.dictionary[@"ccRecipients"];
 
-    if ([ccRecipientss isKindOfClass:[NSArray class]]){
-        for (id ccRecipients in ccRecipientss){
-            [ccRecipientsCollection addObject:ccRecipients];
-         }
+    if ([ccRecipients isKindOfClass:[NSArray class]]){
+        for (id recipient in ccRecipients){
+            [ccRecipientsResult addObject:[[MSGraphRecipient alloc] initWithDictionary: recipient]];
+        }
     }
 
-    if ([ccRecipientsCollection count] > 0){
-        _ccRecipients = [[MSGraphRecipientCollection alloc] initWithArray:ccRecipientsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _ccRecipients = ccRecipientsResult;
         
     }
     return _ccRecipients;
 }
-- (void) setCcRecipients: (MSGraphRecipientCollection*) val
+- (void) setCcRecipients: (NSArray*) val
 {
     _ccRecipients = val;
     self.dictionary[@"ccRecipients"] = val;
@@ -141,62 +137,28 @@
     _isLocked = val;
     self.dictionary[@"isLocked"] = @(val);
 }
-- (MSGraphPostCollection*) posts
+- (NSArray*) posts
 {
     if(!_posts){
         
-    NSMutableArray *postsCollection = [NSMutableArray array];
-    NSArray *postss = self.dictionary[@"posts"];
+    NSMutableArray *postsResult = [NSMutableArray array];
+    NSArray *posts = self.dictionary[@"posts"];
 
-    if ([postss isKindOfClass:[NSArray class]]){
-        for (id posts in postss){
-            [postsCollection addObject:posts];
-         }
+    if ([posts isKindOfClass:[NSArray class]]){
+        for (id post in posts){
+            [postsResult addObject:[[MSGraphPost alloc] initWithDictionary: post]];
+        }
     }
 
-    if ([postsCollection count] > 0){
-        _posts = [[MSGraphPostCollection alloc] initWithArray:postsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _posts = postsResult;
         
     }
     return _posts;
 }
-- (void) setPosts: (MSGraphPostCollection*) val
+- (void) setPosts: (NSArray*) val
 {
     _posts = val;
     self.dictionary[@"posts"] = val;
-}
-- (MSGraphRecipient*) toRecipients:(NSInteger)index
-{
-   MSGraphRecipient* toRecipients = nil;
-   if (self.toRecipients.value){
-       toRecipients = self.toRecipients.value[index];
-   }
-   return toRecipients;
-}
-- (NSString*) uniqueSenders:(NSInteger)index
-{
-   NSString* uniqueSenders = nil;
-   if (self.uniqueSenders.value){
-       uniqueSenders = self.uniqueSenders.value[index];
-   }
-   return uniqueSenders;
-}
-- (MSGraphRecipient*) ccRecipients:(NSInteger)index
-{
-   MSGraphRecipient* ccRecipients = nil;
-   if (self.ccRecipients.value){
-       ccRecipients = self.ccRecipients.value[index];
-   }
-   return ccRecipients;
-}
-- (MSGraphPost*) posts:(NSInteger)index
-{
-   MSGraphPost* posts = nil;
-   if (self.posts.value){
-       posts = self.posts.value[index];
-   }
-   return posts;
 }
 
 @end
