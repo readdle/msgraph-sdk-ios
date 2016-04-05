@@ -6,22 +6,20 @@ To retrieve a collection, like a folder's children, you call `getWithCompletion`
 
 ```objc
 [[[[[[graphClient me] drive] items:<item_id>] children] request] getWithCompletion:
-    ^(MSGraphDriveItemCollection *children, MSGraphDriveItemChildrenCollectionRequest *nextRequest, NSError *error){
-        // Returns a MSGraphDriveItemCollection, 
+    ^(MSCollection *children, MSGraphDriveItemChildrenCollectionRequest *nextRequest, NSError *error){
+        // Returns a MSCollection, 
         // another children request if there are more children to get, 
         // or an error if one occurred.
 }];
 ```
 
-All subclasses of `MSCollection` have the following: 
+`MSCollection` has the following: 
 
 |Name|Description|
 |----|-----------|
-|**value**|An `NSArray` of dictionaries, strings or other JSON serializable types representing the objects contained in the collection |
+|**value**|An `NSArray` of entity types, e.g. MSGraphDriveItem |
 |**nextLink**| An `NSURL` used to get to the next page of items, if another page exists.|
 |**additionData**| An `NSDictionary` to any additional values returned by the service. In this case, none.|
-|**objectAtIndex:(NSUInteger)index**| Returns a strongly typed object created from value[index], e.g. `MSGraphDriveItem`
-|**count**| Number of objects contained in the collection
 
 The completion handler also supplies a request object called `nextRequest` of the same type as the original request.  If there is another page of items this object can be used to make the next page request on the collection. If there are no pages left this object will be nil.
 
@@ -30,10 +28,10 @@ The completion handler also supplies a request object called `nextRequest` of th
 Some collections, like the children of a folder, can be changed. To add a folder to the children of an item you can call the `addItem` method:
 
 ```objc
-MSGraphDriveItem *newFolder = [[MSGraphDriveIem alloc] init];
+MSGraphDriveItem *newFolder = [[MSGraphDriveItem alloc] init];
 newFolder.name = <new_folder_name>;
 newFolder.folder = [[MSGraphFolder alloc] init];
-[[[[[[[graphClient] me] drive] items:<item_id>] children] request] addItem:newFolder withCompletion:^(MSGraphDriveItem *item, NSError *error){
+[[[[[[graphClient me] drive] items:<item_id>] children] request] addItem:newFolder withCompletion:^(MSGraphDriveItem *item, NSError *error){
     //returns the new item or an error if there was one.
 }];
 ```
@@ -45,7 +43,19 @@ To expand a collection, you call expand on the `CollectionRequest` object with t
 ```objc
 MSGraphDriveItemChildrenCollectionRequest *request = [[[[[[[odClient] me] drive] items:<item_id>] children] request] expand:@"<property to expand>"];
 
-[request getWithCompletion:^(MSGraphDriveItemCollection *children, MSGraphDriveItemChildrenCollectionRequest *nextRequest, NSError *error){
+[request getWithCompletion:^(MSCollection *children, MSGraphDriveItemChildrenCollectionRequest *nextRequest, NSError *error){
     // children will have a collection of MSGraphDriveItems, that will have the relevant property populated
 }];
 ```
+
+## Collections as entity properties
+Collections that are returned as part of an entity, as opposed to requesting the collection directly, are exposed as an `NSArray` of contained types. For example, if a MSGraphDriveItem is requested with children expanded:
+```objc
+[[[[[[graphClient me] drive] root] request] expand:@"children"] getWithCompletion:^(MSGraphDriveItem *item, NSError *error) {
+    // item.children is an NSArray of MSGraphDriveItem
+    for (MSGraphDriveItem *child in item.children) {
+        // Do something with the child item
+    }
+}];
+```
+
