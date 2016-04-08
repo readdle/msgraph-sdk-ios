@@ -15,8 +15,8 @@
 @interface MSGraphRecurrenceRange()
 {
     MSGraphRecurrenceRangeType* _type;
-    NSDate* _startDate;
-    NSDate* _endDate;
+    MSDate* _startDate;
+    MSDate* _endDate;
     NSString* _recurrenceTimeZone;
     int32_t _numberOfOccurrences;
 }
@@ -36,26 +36,26 @@
     _type = val;
     self.dictionary[@"type"] = val;
 }
-- (NSDate*) startDate
+- (MSDate*) startDate
 {
     if(!_startDate){
-        _startDate = [NSDate ms_dateFromString: self.dictionary[@"startDate"]];
+        _startDate = [MSDate ms_dateFromString: self.dictionary[@"startDate"]];
     }
     return _startDate;
 }
-- (void) setStartDate: (NSDate*) val
+- (void) setStartDate: (MSDate*) val
 {
     _startDate = val;
     self.dictionary[@"startDate"] = val;
 }
-- (NSDate*) endDate
+- (MSDate*) endDate
 {
     if(!_endDate){
-        _endDate = [NSDate ms_dateFromString: self.dictionary[@"endDate"]];
+        _endDate = [MSDate ms_dateFromString: self.dictionary[@"endDate"]];
     }
     return _endDate;
 }
-- (void) setEndDate: (NSDate*) val
+- (void) setEndDate: (MSDate*) val
 {
     _endDate = val;
     self.dictionary[@"endDate"] = val;

@@ -2,6 +2,7 @@
 
 
 
+@class MSDate; 
 #import "MSGraphRecurrenceRangeType.h"
 
 
@@ -10,8 +11,8 @@
 @interface MSGraphRecurrenceRange : MSObject
 
 	@property (nonatomic, setter=setType:, getter=type) MSGraphRecurrenceRangeType* type;
-		@property (nonatomic, setter=setStartDate:, getter=startDate) NSDate* startDate;
-		@property (nonatomic, setter=setEndDate:, getter=endDate) NSDate* endDate;
+		@property (nonatomic, setter=setStartDate:, getter=startDate) MSDate* startDate;
+		@property (nonatomic, setter=setEndDate:, getter=endDate) MSDate* endDate;
 		@property (nonatomic, setter=setRecurrenceTimeZone:, getter=recurrenceTimeZone) NSString* recurrenceTimeZone;
 		@property (nonatomic, setter=setNumberOfOccurrences:, getter=numberOfOccurrences) int32_t numberOfOccurrences;
 	

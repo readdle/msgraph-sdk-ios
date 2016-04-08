@@ -766,6 +766,8 @@
 		7C6F5C5D1CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F5A301CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequest.m */; };
 		7C6F5C5E1CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C6F5A311CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequestBuilder.h */; };
 		7C6F5C5F1CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F5A321CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequestBuilder.m */; };
+		7C6F5C631CB7207A00EDF1C9 /* MSDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C6F5C611CB7207A00EDF1C9 /* MSDate.h */; };
+		7C6F5C641CB7207A00EDF1C9 /* MSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F5C621CB7207A00EDF1C9 /* MSDate.m */; };
 		7C70E83E1C8776E5008A0C07 /* MSAuthenticationProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C70E8391C8776E5008A0C07 /* MSAuthenticationProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C70E8411C8776E5008A0C07 /* MSHttpProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C70E83C1C8776E5008A0C07 /* MSHttpProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C70E8421C8776E5008A0C07 /* MSLoggerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C70E83D1C8776E5008A0C07 /* MSLoggerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1600,6 +1602,8 @@
 		7C6F5A301CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserWithReferenceRequest.m; sourceTree = "<group>"; };
 		7C6F5A311CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGraphUserWithReferenceRequestBuilder.h; sourceTree = "<group>"; };
 		7C6F5A321CB33B8B00EDF1C9 /* MSGraphUserWithReferenceRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserWithReferenceRequestBuilder.m; sourceTree = "<group>"; };
+		7C6F5C611CB7207A00EDF1C9 /* MSDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSDate.h; sourceTree = "<group>"; };
+		7C6F5C621CB7207A00EDF1C9 /* MSDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDate.m; sourceTree = "<group>"; };
 		7C70E8391C8776E5008A0C07 /* MSAuthenticationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAuthenticationProvider.h; sourceTree = "<group>"; };
 		7C70E83C1C8776E5008A0C07 /* MSHttpProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSHttpProvider.h; sourceTree = "<group>"; };
 		7C70E83D1C8776E5008A0C07 /* MSLoggerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSLoggerProtocol.h; sourceTree = "<group>"; };
@@ -1827,6 +1831,8 @@
 				7C70E8711C877855008A0C07 /* ODataBaseClient.m */,
 				7C4C19911CAAF77B00FBDFFD /* MSURLSession */,
 				7C70E8801C877855008A0C07 /* Options */,
+				7C6F5C611CB7207A00EDF1C9 /* MSDate.h */,
+				7C6F5C621CB7207A00EDF1C9 /* MSDate.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -3013,6 +3019,7 @@
 				7C6F5BA91CB33B8B00EDF1C9 /* MSGraphMessageForwardRequestBuilder.h in Headers */,
 				7C6F5ABF1CB33B8B00EDF1C9 /* MSGraphDriveItemPermissionsCollectionRequest.h in Headers */,
 				7C6F5A8D1CB33B8B00EDF1C9 /* MSGraphDirectoryObjectGetMemberObjectsRequest.h in Headers */,
+				7C6F5C631CB7207A00EDF1C9 /* MSDate.h in Headers */,
 				7C6F5C0E1CB33B8B00EDF1C9 /* MSGraphUserContactsCollectionRequestBuilder.h in Headers */,
 				7C6F576D1CB33B8100EDF1C9 /* MSGraphContact.h in Headers */,
 				7C6F5A5B1CB33B8B00EDF1C9 /* MSGraphContactRequestBuilder.h in Headers */,
@@ -3503,6 +3510,7 @@
 				7C6F57DF1CB33B8100EDF1C9 /* MSGraphReferenceAttachment.m in Sources */,
 				7C6F5A561CB33B8B00EDF1C9 /* MSGraphContactFolderRequest.m in Sources */,
 				7C6F5AB41CB33B8B00EDF1C9 /* MSGraphDriveItemCopyRequest.m in Sources */,
+				7C6F5C641CB7207A00EDF1C9 /* MSDate.m in Sources */,
 				7C6F57721CB33B8100EDF1C9 /* MSGraphConversation.m in Sources */,
 				7C6F5A401CB33B8B00EDF1C9 /* MSGraphCalendarGroupCalendarsCollectionRequest.m in Sources */,
 				7C6F5BB81CB33B8B00EDF1C9 /* MSGraphMessageRequest.m in Sources */,
