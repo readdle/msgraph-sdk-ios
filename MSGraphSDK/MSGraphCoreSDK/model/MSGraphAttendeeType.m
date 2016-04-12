@@ -4,11 +4,74 @@
 
 #include <MSGraphAttendeeType.h>
 
-@implementation NSString (MSGraphAttendeeType)
+@interface MSGraphAttendeeType () {
+    MSGraphAttendeeTypeValue _enumValue;
+}
+@property (nonatomic, readwrite) MSGraphAttendeeTypeValue enumValue;
+@end
 
-+ (instancetype) stringWithMSGraphAttendeeType:(MSGraphAttendeeType)val {
+@implementation MSGraphAttendeeType
+
++ (MSGraphAttendeeType*) required {
+    static MSGraphAttendeeType *_required;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _required = [[MSGraphAttendeeType alloc] init];
+        _required.enumValue = MSGraphAttendeeTypeRequired;
+    });
+    return _required;
+}
++ (MSGraphAttendeeType*) optional {
+    static MSGraphAttendeeType *_optional;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _optional = [[MSGraphAttendeeType alloc] init];
+        _optional.enumValue = MSGraphAttendeeTypeOptional;
+    });
+    return _optional;
+}
++ (MSGraphAttendeeType*) resource {
+    static MSGraphAttendeeType *_resource;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _resource = [[MSGraphAttendeeType alloc] init];
+        _resource.enumValue = MSGraphAttendeeTypeResource;
+    });
+    return _resource;
+}
+
++ (MSGraphAttendeeType*) UnknownEnumValue {
+    static MSGraphAttendeeType *_unknownValue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _unknownValue = [[MSGraphAttendeeType alloc] init];
+        _unknownValue.enumValue = MSGraphAttendeeTypeEndOfEnum;
+    });
+    return _unknownValue;
+}
+
+
++ (MSGraphAttendeeType*) attendeeTypeWithEnumValue:(MSGraphAttendeeTypeValue)val {
 
     switch(val)
+    {
+        case MSGraphAttendeeTypeRequired:
+            return [MSGraphAttendeeType required];
+        case MSGraphAttendeeTypeOptional:
+            return [MSGraphAttendeeType optional];
+        case MSGraphAttendeeTypeResource:
+            return [MSGraphAttendeeType resource];
+        case MSGraphAttendeeTypeEndOfEnum:
+        default:
+            return [MSGraphAttendeeType UnknownEnumValue];
+    }
+
+    return nil;
+}
+
+- (NSString*) ms_toString {
+
+    switch(self.enumValue)
     {
         case MSGraphAttendeeTypeRequired:
             return @"required";
@@ -24,22 +87,30 @@
     return nil;
 }
 
-- (MSGraphAttendeeType) toMSGraphAttendeeType{
+- (MSGraphAttendeeTypeValue) enumValue {
+    return _enumValue;
+}
+
+@end
+
+@implementation NSString (MSGraphAttendeeType)
+
+- (MSGraphAttendeeType*) toMSGraphAttendeeType{
 
     if([self isEqualToString:@"required"])
-      {
-            return MSGraphAttendeeTypeRequired;
-      }
-      else if([self isEqualToString:@"optional"])
-      {
-            return MSGraphAttendeeTypeOptional;
-      }
-      else if([self isEqualToString:@"resource"])
-      {
-            return MSGraphAttendeeTypeResource;
-      }
-      else     {
-        return MSGraphAttendeeTypeEndOfEnum;
+    {
+          return [MSGraphAttendeeType required];
+    }
+    else if([self isEqualToString:@"optional"])
+    {
+          return [MSGraphAttendeeType optional];
+    }
+    else if([self isEqualToString:@"resource"])
+    {
+          return [MSGraphAttendeeType resource];
+    }
+    else {
+        return [MSGraphAttendeeType UnknownEnumValue];
     }
 }
 

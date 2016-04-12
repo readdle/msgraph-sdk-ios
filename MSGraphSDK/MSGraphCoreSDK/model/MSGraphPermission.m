@@ -18,7 +18,7 @@
     MSGraphSharingInvitation* _invitation;
     MSGraphItemReference* _inheritedFrom;
     MSGraphSharingLink* _link;
-    MSCollection* _roles;
+    NSArray* _roles;
     NSString* _shareId;
 }
 @end
@@ -35,7 +35,7 @@
 - (MSGraphIdentitySet*) grantedTo
 {
     if(!_grantedTo){
-        _grantedTo = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"grantedTo"] ];
+        _grantedTo = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"grantedTo"]];
     }
     return _grantedTo;
 }
@@ -47,7 +47,7 @@
 - (MSGraphSharingInvitation*) invitation
 {
     if(!_invitation){
-        _invitation = [[MSGraphSharingInvitation alloc] initWithDictionary: self.dictionary[@"invitation"] ];
+        _invitation = [[MSGraphSharingInvitation alloc] initWithDictionary: self.dictionary[@"invitation"]];
     }
     return _invitation;
 }
@@ -59,7 +59,7 @@
 - (MSGraphItemReference*) inheritedFrom
 {
     if(!_inheritedFrom){
-        _inheritedFrom = [[MSGraphItemReference alloc] initWithDictionary: self.dictionary[@"inheritedFrom"] ];
+        _inheritedFrom = [[MSGraphItemReference alloc] initWithDictionary: self.dictionary[@"inheritedFrom"]];
     }
     return _inheritedFrom;
 }
@@ -71,7 +71,7 @@
 - (MSGraphSharingLink*) link
 {
     if(!_link){
-        _link = [[MSGraphSharingLink alloc] initWithDictionary: self.dictionary[@"link"] ];
+        _link = [[MSGraphSharingLink alloc] initWithDictionary: self.dictionary[@"link"]];
     }
     return _link;
 }
@@ -80,11 +80,11 @@
     _link = val;
     self.dictionary[@"link"] = val;
 }
-- (MSCollection*) roles
+- (NSArray*) roles
 {
     return self.dictionary[@"roles"];
 }
-- (void) setRoles: (MSCollection*) val
+- (void) setRoles: (NSArray*) val
 {
     self.dictionary[@"roles"] = val;
 }
@@ -95,14 +95,6 @@
 - (void) setShareId: (NSString*) val
 {
     self.dictionary[@"shareId"] = val;
-}
-- (NSString*) roles:(NSInteger)index
-{
-   NSString* roles = nil;
-   if (self.roles.value){
-       roles = self.roles.value[index];
-   }
-   return roles;
 }
 
 @end

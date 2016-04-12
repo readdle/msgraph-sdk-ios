@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphSubscribedSkuCollection.h"
-
 @class MSGraphSubscribedSkuRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphSubscribedSkuCompletionHandler)(MSGraphSubscribedSku *response, NSError *error);
 
-typedef void (^MSGraphSubscribedSkusCollectionCompletionHandler)(MSGraphSubscribedSkuCollection* response, MSGraphSubscribedSkusCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphSubscribedSkusCollectionCompletionHandler)(MSCollection *response, MSGraphSubscribedSkusCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphSubscribedSkusCollectionRequest : MSCollectionRequest
 

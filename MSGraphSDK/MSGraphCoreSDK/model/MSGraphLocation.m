@@ -32,7 +32,7 @@
 - (MSGraphPhysicalAddress*) address
 {
     if(!_address){
-        _address = [[MSGraphPhysicalAddress alloc] initWithDictionary: self.dictionary[@"address"] ];
+        _address = [[MSGraphPhysicalAddress alloc] initWithDictionary: self.dictionary[@"address"]];
     }
     return _address;
 }

@@ -25,7 +25,7 @@
 - (MSGraphIdentity*) application
 {
     if(!_application){
-        _application = [[MSGraphIdentity alloc] initWithDictionary: self.dictionary[@"application"] ];
+        _application = [[MSGraphIdentity alloc] initWithDictionary: self.dictionary[@"application"]];
     }
     return _application;
 }

@@ -4,7 +4,7 @@
 
 #include <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, MSGraphRecurrencePatternType){
+typedef NS_ENUM(NSInteger, MSGraphRecurrencePatternTypeValue){
 
 	MSGraphRecurrencePatternTypeDaily = 0,
 	MSGraphRecurrencePatternTypeWeekly = 1,
@@ -15,9 +15,27 @@ typedef NS_ENUM(NSInteger, MSGraphRecurrencePatternType){
     MSGraphRecurrencePatternTypeEndOfEnum
 };
 
+@interface MSGraphRecurrencePatternType : NSObject
+
++(MSGraphRecurrencePatternType*) daily;
++(MSGraphRecurrencePatternType*) weekly;
++(MSGraphRecurrencePatternType*) absoluteMonthly;
++(MSGraphRecurrencePatternType*) relativeMonthly;
++(MSGraphRecurrencePatternType*) absoluteYearly;
++(MSGraphRecurrencePatternType*) relativeYearly;
+
++(MSGraphRecurrencePatternType*) UnknownEnumValue;
+
++(MSGraphRecurrencePatternType*) recurrencePatternTypeWithEnumValue:(MSGraphRecurrencePatternTypeValue)val;
+-(NSString*) ms_toString;
+
+@property (nonatomic, readonly) MSGraphRecurrencePatternTypeValue enumValue;
+
+@end
+
+
 @interface NSString (MSGraphRecurrencePatternType)
 
-+ (instancetype) stringWithMSGraphRecurrencePatternType:(MSGraphRecurrencePatternType)val;
-- (MSGraphRecurrencePatternType) toMSGraphRecurrencePatternType;
+- (MSGraphRecurrencePatternType*) toMSGraphRecurrencePatternType;
 
 @end

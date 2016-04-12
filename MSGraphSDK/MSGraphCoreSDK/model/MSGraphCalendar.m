@@ -15,10 +15,10 @@
 @interface MSGraphCalendar()
 {
     NSString* _name;
-    MSGraphCalendarColor _color;
+    MSGraphCalendarColor* _color;
     NSString* _changeKey;
-    MSGraphEventCollection* _events;
-    MSGraphEventCollection* _calendarView;
+    NSArray* _events;
+    NSArray* _calendarView;
 }
 @end
 
@@ -39,15 +39,17 @@
 {
     self.dictionary[@"name"] = val;
 }
-- (MSGraphCalendarColor) color
+- (MSGraphCalendarColor*) color
 {
-    _color = [self.dictionary[@"color"] toMSGraphCalendarColor];
+    if(!_color){
+        _color = [self.dictionary[@"color"] toMSGraphCalendarColor];
+    }
     return _color;
 }
-- (void) setColor: (MSGraphCalendarColor) val
+- (void) setColor: (MSGraphCalendarColor*) val
 {
     _color = val;
-    self.dictionary[@"color"] = [NSString stringWithMSGraphCalendarColor:val];
+    self.dictionary[@"color"] = val;
 }
 - (NSString*) changeKey
 {
@@ -57,52 +59,48 @@
 {
     self.dictionary[@"changeKey"] = val;
 }
-- (MSGraphEventCollection*) events
+- (NSArray*) events
 {
     if(!_events){
         
-    NSMutableArray *eventsCollection = [NSMutableArray array];
-    NSArray *eventss = self.dictionary[@"events"];
+    NSMutableArray *eventsResult = [NSMutableArray array];
+    NSArray *events = self.dictionary[@"events"];
 
-    if ([eventss isKindOfClass:[NSArray class]]){
-        for (id events in eventss){
-            [eventsCollection addObject:events];
-         }
+    if ([events isKindOfClass:[NSArray class]]){
+        for (id event in events){
+            [eventsResult addObject:[[MSGraphEvent alloc] initWithDictionary: event]];
+        }
     }
 
-    if ([eventsCollection count] > 0){
-        _events = [[MSGraphEventCollection alloc] initWithArray:eventsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _events = eventsResult;
         
     }
     return _events;
 }
-- (void) setEvents: (MSGraphEventCollection*) val
+- (void) setEvents: (NSArray*) val
 {
     _events = val;
     self.dictionary[@"events"] = val;
 }
-- (MSGraphEventCollection*) calendarView
+- (NSArray*) calendarView
 {
     if(!_calendarView){
         
-    NSMutableArray *calendarViewCollection = [NSMutableArray array];
-    NSArray *calendarViews = self.dictionary[@"calendarView"];
+    NSMutableArray *calendarViewResult = [NSMutableArray array];
+    NSArray *calendarView = self.dictionary[@"calendarView"];
 
-    if ([calendarViews isKindOfClass:[NSArray class]]){
-        for (id calendarView in calendarViews){
-            [calendarViewCollection addObject:calendarView];
-         }
+    if ([calendarView isKindOfClass:[NSArray class]]){
+        for (id event in calendarView){
+            [calendarViewResult addObject:[[MSGraphEvent alloc] initWithDictionary: event]];
+        }
     }
 
-    if ([calendarViewCollection count] > 0){
-        _calendarView = [[MSGraphEventCollection alloc] initWithArray:calendarViewCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _calendarView = calendarViewResult;
         
     }
     return _calendarView;
 }
-- (void) setCalendarView: (MSGraphEventCollection*) val
+- (void) setCalendarView: (NSArray*) val
 {
     _calendarView = val;
     self.dictionary[@"calendarView"] = val;
@@ -110,18 +108,10 @@
 - (MSGraphEvent*) events:(NSInteger)index
 {
    MSGraphEvent* events = nil;
-   if (self.events.value){
-       events = self.events.value[index];
+   if (self.events) {
+       events = self.events[index];
    }
    return events;
-}
-- (MSGraphEvent*) calendarView:(NSInteger)index
-{
-   MSGraphEvent* calendarView = nil;
-   if (self.calendarView.value){
-       calendarView = self.calendarView.value[index];
-   }
-   return calendarView;
 }
 
 @end

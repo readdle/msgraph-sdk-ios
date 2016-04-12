@@ -5,13 +5,12 @@
 @class MSURLSessionDataTask;
 
 #import "MSCollectionRequest.h"
-#import "MSGraphDriveItemCollection.h"
 
 @interface MSGraphDriveRecentRequest : MSCollectionRequest
 
 @property (readonly) NSMutableURLRequest *mutableRequest;
 
 
-- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSGraphDriveItemCollection *response, MSGraphDriveRecentRequest *nextRequest, NSError *error))completionHandler;
+- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSCollection *response, MSGraphDriveRecentRequest *nextRequest, NSError *error))completionHandler;
 
 @end

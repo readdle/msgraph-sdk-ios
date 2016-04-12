@@ -64,6 +64,7 @@ For a more detailed documentation see:
 * [Auth] (docs/auth.md)
 * [Items](docs/items.md)
 * [Collections](docs/collections.md)
+* [Enumerations](docs/enums.md)
 * [Errors](docs/errors.md)
 
 ## 4. Issues

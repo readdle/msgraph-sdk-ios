@@ -24,7 +24,7 @@
 - (MSGraphHashes*) hashes
 {
     if(!_hashes){
-        _hashes = [[MSGraphHashes alloc] initWithDictionary: self.dictionary[@"hashes"] ];
+        _hashes = [[MSGraphHashes alloc] initWithDictionary: self.dictionary[@"hashes"]];
     }
     return _hashes;
 }

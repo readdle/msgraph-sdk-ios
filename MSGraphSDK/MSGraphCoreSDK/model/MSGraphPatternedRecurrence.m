@@ -24,7 +24,7 @@
 - (MSGraphRecurrencePattern*) pattern
 {
     if(!_pattern){
-        _pattern = [[MSGraphRecurrencePattern alloc] initWithDictionary: self.dictionary[@"pattern"] ];
+        _pattern = [[MSGraphRecurrencePattern alloc] initWithDictionary: self.dictionary[@"pattern"]];
     }
     return _pattern;
 }
@@ -36,7 +36,7 @@
 - (MSGraphRecurrenceRange*) range
 {
     if(!_range){
-        _range = [[MSGraphRecurrenceRange alloc] initWithDictionary: self.dictionary[@"range"] ];
+        _range = [[MSGraphRecurrenceRange alloc] initWithDictionary: self.dictionary[@"range"]];
     }
     return _range;
 }

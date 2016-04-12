@@ -2,42 +2,29 @@
 
 
 @class MSGraphAssignedPlan, MSGraphProvisionedPlan, MSGraphVerifiedDomain; 
-#import "MSGraphAssignedPlanCollection.h"
-#import "MSCollection.h"
-#import "MSGraphProvisionedPlanCollection.h"
-#import "MSGraphVerifiedDomainCollection.h"
 
 
 #import "MSGraphDirectoryObject.h"
-#import "MSCollection.h"
 
 @interface MSGraphOrganization : MSGraphDirectoryObject
 
-  @property (nonatomic, setter=setAssignedPlans:, getter=assignedPlans) MSGraphAssignedPlanCollection* assignedPlans;
-    @property (nonatomic, setter=setBusinessPhones:, getter=businessPhones) MSCollection* businessPhones;
+  @property (nonatomic, setter=setAssignedPlans:, getter=assignedPlans) NSArray* assignedPlans;
+    @property (nonatomic, setter=setBusinessPhones:, getter=businessPhones) NSArray* businessPhones;
     @property (nonatomic, setter=setCity:, getter=city) NSString* city;
     @property (nonatomic, setter=setCountry:, getter=country) NSString* country;
     @property (nonatomic, setter=setCountryLetterCode:, getter=countryLetterCode) NSString* countryLetterCode;
     @property (nonatomic, setter=setDisplayName:, getter=displayName) NSString* displayName;
-    @property (nonatomic, setter=setMarketingNotificationEmails:, getter=marketingNotificationEmails) MSCollection* marketingNotificationEmails;
+    @property (nonatomic, setter=setMarketingNotificationEmails:, getter=marketingNotificationEmails) NSArray* marketingNotificationEmails;
     @property (nonatomic, setter=setOnPremisesLastSyncDateTime:, getter=onPremisesLastSyncDateTime) NSDate* onPremisesLastSyncDateTime;
     @property (nonatomic, setter=setOnPremisesSyncEnabled:, getter=onPremisesSyncEnabled) BOOL onPremisesSyncEnabled;
     @property (nonatomic, setter=setPostalCode:, getter=postalCode) NSString* postalCode;
     @property (nonatomic, setter=setPreferredLanguage:, getter=preferredLanguage) NSString* preferredLanguage;
-    @property (nonatomic, setter=setProvisionedPlans:, getter=provisionedPlans) MSGraphProvisionedPlanCollection* provisionedPlans;
-    @property (nonatomic, setter=setSecurityComplianceNotificationMails:, getter=securityComplianceNotificationMails) MSCollection* securityComplianceNotificationMails;
-    @property (nonatomic, setter=setSecurityComplianceNotificationPhones:, getter=securityComplianceNotificationPhones) MSCollection* securityComplianceNotificationPhones;
+    @property (nonatomic, setter=setProvisionedPlans:, getter=provisionedPlans) NSArray* provisionedPlans;
+    @property (nonatomic, setter=setSecurityComplianceNotificationMails:, getter=securityComplianceNotificationMails) NSArray* securityComplianceNotificationMails;
+    @property (nonatomic, setter=setSecurityComplianceNotificationPhones:, getter=securityComplianceNotificationPhones) NSArray* securityComplianceNotificationPhones;
     @property (nonatomic, setter=setState:, getter=state) NSString* state;
     @property (nonatomic, setter=setStreet:, getter=street) NSString* street;
-    @property (nonatomic, setter=setTechnicalNotificationMails:, getter=technicalNotificationMails) MSCollection* technicalNotificationMails;
-    @property (nonatomic, setter=setVerifiedDomains:, getter=verifiedDomains) MSGraphVerifiedDomainCollection* verifiedDomains;
-  - (MSGraphAssignedPlan*) assignedPlans:(NSInteger)index;
-- (NSString*) businessPhones:(NSInteger)index;
-- (NSString*) marketingNotificationEmails:(NSInteger)index;
-- (MSGraphProvisionedPlan*) provisionedPlans:(NSInteger)index;
-- (NSString*) securityComplianceNotificationMails:(NSInteger)index;
-- (NSString*) securityComplianceNotificationPhones:(NSInteger)index;
-- (NSString*) technicalNotificationMails:(NSInteger)index;
-- (MSGraphVerifiedDomain*) verifiedDomains:(NSInteger)index;
-
+    @property (nonatomic, setter=setTechnicalNotificationMails:, getter=technicalNotificationMails) NSArray* technicalNotificationMails;
+    @property (nonatomic, setter=setVerifiedDomains:, getter=verifiedDomains) NSArray* verifiedDomains;
+  
 @end

@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphCalendarCollection.h"
-
 @class MSGraphCalendarRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphCalendarCompletionHandler)(MSGraphCalendar *response, NSError *error);
 
-typedef void (^MSGraphCalendarGroupCalendarsCollectionCompletionHandler)(MSGraphCalendarCollection* response, MSGraphCalendarGroupCalendarsCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphCalendarGroupCalendarsCollectionCompletionHandler)(MSCollection *response, MSGraphCalendarGroupCalendarsCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphCalendarGroupCalendarsCollectionRequest : MSCollectionRequest
 

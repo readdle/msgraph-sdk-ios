@@ -4,7 +4,6 @@
 
 
 #import "MSGraphDirectoryObject.h"
-#import "MSCollection.h"
 
 @interface MSGraphDirectoryRoleTemplate : MSGraphDirectoryObject
 

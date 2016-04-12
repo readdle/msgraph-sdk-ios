@@ -2,12 +2,9 @@
 
 
 @class MSGraphItemBody, MSGraphRecipient, MSGraphAttachment; 
-#import "MSGraphRecipientCollection.h"
-#import "MSGraphAttachmentCollection.h"
 
 
 #import "MSGraphOutlookItem.h"
-#import "MSCollection.h"
 
 @interface MSGraphPost : MSGraphOutlookItem
 
@@ -17,11 +14,9 @@
     @property (nonatomic, setter=setFrom:, getter=from) MSGraphRecipient* from;
     @property (nonatomic, setter=setSender:, getter=sender) MSGraphRecipient* sender;
     @property (nonatomic, setter=setConversationThreadId:, getter=conversationThreadId) NSString* conversationThreadId;
-    @property (nonatomic, setter=setNewParticipants:, getter=getNewParticipants) MSGraphRecipientCollection* newParticipants;
+    @property (nonatomic, setter=setNewParticipants:, getter=getNewParticipants) NSArray* newParticipants;
     @property (nonatomic, setter=setConversationId:, getter=conversationId) NSString* conversationId;
     @property (nonatomic, setter=setInReplyTo:, getter=inReplyTo) MSGraphPost* inReplyTo;
-    @property (nonatomic, setter=setAttachments:, getter=attachments) MSGraphAttachmentCollection* attachments;
-  - (MSGraphRecipient*) newParticipants:(NSInteger)index;
-- (MSGraphAttachment*) attachments:(NSInteger)index;
-
+    @property (nonatomic, setter=setAttachments:, getter=attachments) NSArray* attachments;
+  
 @end

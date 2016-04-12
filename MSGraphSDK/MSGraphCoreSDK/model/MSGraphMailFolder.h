@@ -2,12 +2,9 @@
 
 
 @class MSGraphMessage; 
-#import "MSGraphMessageCollection.h"
-#import "MSGraphMailFolderCollection.h"
 
 
 #import "MSGraphEntity.h"
-#import "MSCollection.h"
 
 @interface MSGraphMailFolder : MSGraphEntity
 
@@ -16,9 +13,8 @@
     @property (nonatomic, setter=setChildFolderCount:, getter=childFolderCount) int32_t childFolderCount;
     @property (nonatomic, setter=setUnreadItemCount:, getter=unreadItemCount) int32_t unreadItemCount;
     @property (nonatomic, setter=setTotalItemCount:, getter=totalItemCount) int32_t totalItemCount;
-    @property (nonatomic, setter=setMessages:, getter=messages) MSGraphMessageCollection* messages;
-    @property (nonatomic, setter=setChildFolders:, getter=childFolders) MSGraphMailFolderCollection* childFolders;
+    @property (nonatomic, setter=setMessages:, getter=messages) NSArray* messages;
+    @property (nonatomic, setter=setChildFolders:, getter=childFolders) NSArray* childFolders;
   - (MSGraphMessage*) messages:(NSInteger)index;
-- (MSGraphMailFolder*) childFolders:(NSInteger)index;
 
 @end

@@ -3,8 +3,8 @@
 
 
 
+
 #import "MSObject.h"
-#import "MSCollection.h"
 
 @interface MSGraphFolder : MSObject
 

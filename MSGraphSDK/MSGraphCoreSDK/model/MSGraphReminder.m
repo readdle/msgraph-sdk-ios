@@ -38,7 +38,7 @@
 - (MSGraphDateTimeTimeZone*) eventStartTime
 {
     if(!_eventStartTime){
-        _eventStartTime = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"eventStartTime"] ];
+        _eventStartTime = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"eventStartTime"]];
     }
     return _eventStartTime;
 }
@@ -50,7 +50,7 @@
 - (MSGraphDateTimeTimeZone*) eventEndTime
 {
     if(!_eventEndTime){
-        _eventEndTime = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"eventEndTime"] ];
+        _eventEndTime = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"eventEndTime"]];
     }
     return _eventEndTime;
 }
@@ -78,7 +78,7 @@
 - (MSGraphLocation*) eventLocation
 {
     if(!_eventLocation){
-        _eventLocation = [[MSGraphLocation alloc] initWithDictionary: self.dictionary[@"eventLocation"] ];
+        _eventLocation = [[MSGraphLocation alloc] initWithDictionary: self.dictionary[@"eventLocation"]];
     }
     return _eventLocation;
 }
@@ -98,7 +98,7 @@
 - (MSGraphDateTimeTimeZone*) reminderFireTime
 {
     if(!_reminderFireTime){
-        _reminderFireTime = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"reminderFireTime"] ];
+        _reminderFireTime = [[MSGraphDateTimeTimeZone alloc] initWithDictionary: self.dictionary[@"reminderFireTime"]];
     }
     return _reminderFireTime;
 }

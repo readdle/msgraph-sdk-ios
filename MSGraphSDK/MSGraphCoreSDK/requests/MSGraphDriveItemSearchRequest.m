@@ -41,16 +41,6 @@
     return self;
 }
 
-- (MSURLSessionDataTask *)MSGraphDriveItemCollectionTaskWithRequest:(NSMutableURLRequest *)request
-                             odObjectWithDictionary:(MSObject* (^)(NSDictionary *response))castBlock
-                                         completion:(void (^)(MSGraphDriveItemCollection *response, NSError *error))completionHandler
-{
-    return [self collectionTaskWithRequest: request odObjectWithDictionary:castBlock
-    completion:^(MSCollection* collectionResponse, NSError *error){
-        completionHandler([MSGraphDriveItemCollection fromMSCollection:collectionResponse],error);
-    }];
-}
-
 - (NSMutableURLRequest *)mutableRequest
 {
     [self.options addObject:[[MSFunctionParameters alloc] initWithKey:@"q"
@@ -60,14 +50,14 @@
 }
 
 
-- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSGraphDriveItemCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error))completionHandler
+- (MSURLSessionDataTask *)executeWithCompletion:(void (^)(MSCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error))completionHandler
 {
 
-    MSURLSessionDataTask *task = [self MSGraphDriveItemCollectionTaskWithRequest:self.mutableRequest
-                                                          odObjectWithDictionary:^(id responseObject){
-                                                                                     return [responseObject copy];
-                                                                                 }
-                                                                      completion:^(MSGraphDriveItemCollection *collectionResponse, NSError *error){
+    MSURLSessionDataTask *task = [self collectionTaskWithRequest:self.mutableRequest
+                                          odObjectWithDictionary:^(id responseObject){
+                                                                     return [[MSGraphDriveItem alloc] initWithDictionary:responseObject];
+                                                                 }
+                                                      completion:^(MSCollection *collectionResponse, NSError *error){
                                       if(!error && collectionResponse.nextLink && completionHandler){
                                               MSGraphDriveItemSearchRequest *nextRequest = [[MSGraphDriveItemSearchRequest alloc] initWithURL:collectionResponse.nextLink
                                                                                                                   options:nil

@@ -2,12 +2,9 @@
 
 
 @class MSGraphEmailAddress, MSGraphPhysicalAddress, MSGraphProfilePhoto; 
-#import "MSGraphEmailAddressCollection.h"
-#import "MSCollection.h"
 
 
 #import "MSGraphOutlookItem.h"
-#import "MSCollection.h"
 
 @interface MSGraphContact : MSGraphOutlookItem
 
@@ -25,8 +22,8 @@
     @property (nonatomic, setter=setYomiSurname:, getter=yomiSurname) NSString* yomiSurname;
     @property (nonatomic, setter=setYomiCompanyName:, getter=yomiCompanyName) NSString* yomiCompanyName;
     @property (nonatomic, setter=setGeneration:, getter=generation) NSString* generation;
-    @property (nonatomic, setter=setEmailAddresses:, getter=emailAddresses) MSGraphEmailAddressCollection* emailAddresses;
-    @property (nonatomic, setter=setImAddresses:, getter=imAddresses) MSCollection* imAddresses;
+    @property (nonatomic, setter=setEmailAddresses:, getter=emailAddresses) NSArray* emailAddresses;
+    @property (nonatomic, setter=setImAddresses:, getter=imAddresses) NSArray* imAddresses;
     @property (nonatomic, setter=setJobTitle:, getter=jobTitle) NSString* jobTitle;
     @property (nonatomic, setter=setCompanyName:, getter=companyName) NSString* companyName;
     @property (nonatomic, setter=setDepartment:, getter=department) NSString* department;
@@ -35,20 +32,15 @@
     @property (nonatomic, setter=setBusinessHomePage:, getter=businessHomePage) NSString* businessHomePage;
     @property (nonatomic, setter=setAssistantName:, getter=assistantName) NSString* assistantName;
     @property (nonatomic, setter=setManager:, getter=manager) NSString* manager;
-    @property (nonatomic, setter=setHomePhones:, getter=homePhones) MSCollection* homePhones;
+    @property (nonatomic, setter=setHomePhones:, getter=homePhones) NSArray* homePhones;
     @property (nonatomic, setter=setMobilePhone:, getter=mobilePhone) NSString* mobilePhone;
-    @property (nonatomic, setter=setBusinessPhones:, getter=businessPhones) MSCollection* businessPhones;
+    @property (nonatomic, setter=setBusinessPhones:, getter=businessPhones) NSArray* businessPhones;
     @property (nonatomic, setter=setHomeAddress:, getter=homeAddress) MSGraphPhysicalAddress* homeAddress;
     @property (nonatomic, setter=setBusinessAddress:, getter=businessAddress) MSGraphPhysicalAddress* businessAddress;
     @property (nonatomic, setter=setOtherAddress:, getter=otherAddress) MSGraphPhysicalAddress* otherAddress;
     @property (nonatomic, setter=setSpouseName:, getter=spouseName) NSString* spouseName;
     @property (nonatomic, setter=setPersonalNotes:, getter=personalNotes) NSString* personalNotes;
-    @property (nonatomic, setter=setChildren:, getter=children) MSCollection* children;
+    @property (nonatomic, setter=setChildren:, getter=children) NSArray* children;
     @property (nonatomic, setter=setPhoto:, getter=photo) MSGraphProfilePhoto* photo;
-  - (MSGraphEmailAddress*) emailAddresses:(NSInteger)index;
-- (NSString*) imAddresses:(NSInteger)index;
-- (NSString*) homePhones:(NSInteger)index;
-- (NSString*) businessPhones:(NSInteger)index;
-- (NSString*) children:(NSInteger)index;
-
+  
 @end

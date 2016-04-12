@@ -22,18 +22,7 @@
 {
     NSMutableArray *retArray = [NSMutableArray arrayWithCapacity:[self.value count]];
     [self.value enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
-        if ([obj respondsToSelector:@selector(dictionaryFromItem)]){
-            retArray[idx] = [obj dictionaryFromItem];
-        }
-        else if ([obj respondsToSelector:@selector(arrayFromItem)]){
-            retArray[idx] = [obj arrayFromItem];
-        }
-        else if ([obj respondsToSelector:@selector(ms_toString)]){
-            retArray[idx] = [obj ms_toString];
-        }
-        else{
-            retArray[idx] = obj;
-        }
+        retArray[idx] = [MSObject getNSJsonSerializationCompatibleValue:obj];
     }];
     return retArray;
 }

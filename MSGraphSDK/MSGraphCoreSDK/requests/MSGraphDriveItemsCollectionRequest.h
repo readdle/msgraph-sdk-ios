@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphDriveItemCollection.h"
-
 @class MSGraphDriveItemRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphDriveItemCompletionHandler)(MSGraphDriveItem *response, NSError *error);
 
-typedef void (^MSGraphDriveItemsCollectionCompletionHandler)(MSGraphDriveItemCollection* response, MSGraphDriveItemsCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphDriveItemsCollectionCompletionHandler)(MSCollection *response, MSGraphDriveItemsCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphDriveItemsCollectionRequest : MSCollectionRequest
 

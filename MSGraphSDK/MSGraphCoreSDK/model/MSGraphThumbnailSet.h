@@ -5,7 +5,6 @@
 
 
 #import "MSGraphEntity.h"
-#import "MSCollection.h"
 
 @interface MSGraphThumbnailSet : MSGraphEntity
 

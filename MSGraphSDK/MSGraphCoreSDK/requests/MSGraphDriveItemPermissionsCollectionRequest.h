@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphPermissionCollection.h"
-
 @class MSGraphPermissionRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphPermissionCompletionHandler)(MSGraphPermission *response, NSError *error);
 
-typedef void (^MSGraphDriveItemPermissionsCollectionCompletionHandler)(MSGraphPermissionCollection* response, MSGraphDriveItemPermissionsCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphDriveItemPermissionsCollectionCompletionHandler)(MSCollection *response, MSGraphDriveItemPermissionsCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphDriveItemPermissionsCollectionRequest : MSCollectionRequest
 

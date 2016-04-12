@@ -2,21 +2,17 @@
 
 
 @class MSGraphIdentitySet, MSGraphQuota, MSGraphDriveItem; 
-#import "MSGraphDriveItemCollection.h"
 
 
 #import "MSGraphEntity.h"
-#import "MSCollection.h"
 
 @interface MSGraphDrive : MSGraphEntity
 
   @property (nonatomic, setter=setDriveType:, getter=driveType) NSString* driveType;
     @property (nonatomic, setter=setOwner:, getter=owner) MSGraphIdentitySet* owner;
     @property (nonatomic, setter=setQuota:, getter=quota) MSGraphQuota* quota;
-    @property (nonatomic, setter=setItems:, getter=items) MSGraphDriveItemCollection* items;
-    @property (nonatomic, setter=setSpecial:, getter=special) MSGraphDriveItemCollection* special;
+    @property (nonatomic, setter=setItems:, getter=items) NSArray* items;
+    @property (nonatomic, setter=setSpecial:, getter=special) NSArray* special;
     @property (nonatomic, setter=setRoot:, getter=root) MSGraphDriveItem* root;
-  - (MSGraphDriveItem*) items:(NSInteger)index;
-- (MSGraphDriveItem*) special:(NSInteger)index;
-
+  
 @end

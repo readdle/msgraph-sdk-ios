@@ -17,7 +17,7 @@
     NSString* _directoryRoleDescription;
     NSString* _displayName;
     NSString* _roleTemplateId;
-    MSGraphDirectoryObjectCollection* _members;
+    NSArray* _members;
 }
 @end
 
@@ -54,38 +54,28 @@
 {
     self.dictionary[@"roleTemplateId"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) members
+- (NSArray*) members
 {
     if(!_members){
         
-    NSMutableArray *membersCollection = [NSMutableArray array];
-    NSArray *memberss = self.dictionary[@"members"];
+    NSMutableArray *membersResult = [NSMutableArray array];
+    NSArray *members = self.dictionary[@"members"];
 
-    if ([memberss isKindOfClass:[NSArray class]]){
-        for (id members in memberss){
-            [membersCollection addObject:members];
-         }
+    if ([members isKindOfClass:[NSArray class]]){
+        for (id directoryObject in members){
+            [membersResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([membersCollection count] > 0){
-        _members = [[MSGraphDirectoryObjectCollection alloc] initWithArray:membersCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _members = membersResult;
         
     }
     return _members;
 }
-- (void) setMembers: (MSGraphDirectoryObjectCollection*) val
+- (void) setMembers: (NSArray*) val
 {
     _members = val;
     self.dictionary[@"members"] = val;
-}
-- (MSGraphDirectoryObject*) members:(NSInteger)index
-{
-   MSGraphDirectoryObject* members = nil;
-   if (self.members.value){
-       members = self.members.value[index];
-   }
-   return members;
 }
 
 @end

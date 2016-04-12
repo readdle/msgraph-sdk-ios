@@ -2,13 +2,9 @@
 
 
 @class MSGraphIdentitySet, MSGraphItemReference, MSGraphAudio, MSGraphDeleted, MSGraphFile, MSGraphFileSystemInfo, MSGraphFolder, MSGraphImage, MSGraphGeoCoordinates, MSGraphPhoto, MSGraphRemoteItem, MSGraphSearchResult, MSGraphShared, MSGraphSpecialFolder, MSGraphVideo, MSGraphPackage, MSGraphUser, MSGraphPermission, MSGraphThumbnailSet; 
-#import "MSGraphPermissionCollection.h"
-#import "MSGraphDriveItemCollection.h"
-#import "MSGraphThumbnailSetCollection.h"
 
 
 #import "MSGraphEntity.h"
-#import "MSCollection.h"
 
 @interface MSGraphDriveItem : MSGraphEntity
 
@@ -40,11 +36,8 @@
     @property (nonatomic, setter=setPackage:, getter=package) MSGraphPackage* package;
     @property (nonatomic, setter=setCreatedByUser:, getter=createdByUser) MSGraphUser* createdByUser;
     @property (nonatomic, setter=setLastModifiedByUser:, getter=lastModifiedByUser) MSGraphUser* lastModifiedByUser;
-    @property (nonatomic, setter=setPermissions:, getter=permissions) MSGraphPermissionCollection* permissions;
-    @property (nonatomic, setter=setChildren:, getter=children) MSGraphDriveItemCollection* children;
-    @property (nonatomic, setter=setThumbnails:, getter=thumbnails) MSGraphThumbnailSetCollection* thumbnails;
-  - (MSGraphPermission*) permissions:(NSInteger)index;
-- (MSGraphDriveItem*) children:(NSInteger)index;
-- (MSGraphThumbnailSet*) thumbnails:(NSInteger)index;
-
+    @property (nonatomic, setter=setPermissions:, getter=permissions) NSArray* permissions;
+    @property (nonatomic, setter=setChildren:, getter=children) NSArray* children;
+    @property (nonatomic, setter=setThumbnails:, getter=thumbnails) NSArray* thumbnails;
+  
 @end

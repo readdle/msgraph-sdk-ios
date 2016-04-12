@@ -15,9 +15,9 @@
 @interface MSGraphUser()
 {
     BOOL _accountEnabled;
-    MSGraphAssignedLicenseCollection* _assignedLicenses;
-    MSGraphAssignedPlanCollection* _assignedPlans;
-    MSCollection* _businessPhones;
+    NSArray* _assignedLicenses;
+    NSArray* _assignedPlans;
+    NSArray* _businessPhones;
     NSString* _city;
     NSString* _companyName;
     NSString* _country;
@@ -37,8 +37,8 @@
     NSString* _officeLocation;
     NSString* _postalCode;
     NSString* _preferredLanguage;
-    MSGraphProvisionedPlanCollection* _provisionedPlans;
-    MSCollection* _proxyAddresses;
+    NSArray* _provisionedPlans;
+    NSArray* _proxyAddresses;
     NSString* _state;
     NSString* _streetAddress;
     NSString* _surname;
@@ -48,29 +48,29 @@
     NSString* _aboutMe;
     NSDate* _birthday;
     NSDate* _hireDate;
-    MSCollection* _interests;
+    NSArray* _interests;
     NSString* _mySite;
-    MSCollection* _pastProjects;
+    NSArray* _pastProjects;
     NSString* _preferredName;
-    MSCollection* _responsibilities;
-    MSCollection* _schools;
-    MSCollection* _skills;
-    MSGraphDirectoryObjectCollection* _ownedDevices;
-    MSGraphDirectoryObjectCollection* _registeredDevices;
+    NSArray* _responsibilities;
+    NSArray* _schools;
+    NSArray* _skills;
+    NSArray* _ownedDevices;
+    NSArray* _registeredDevices;
     MSGraphDirectoryObject* _manager;
-    MSGraphDirectoryObjectCollection* _directReports;
-    MSGraphDirectoryObjectCollection* _memberOf;
-    MSGraphDirectoryObjectCollection* _createdObjects;
-    MSGraphDirectoryObjectCollection* _ownedObjects;
-    MSGraphMessageCollection* _messages;
-    MSGraphMailFolderCollection* _mailFolders;
+    NSArray* _directReports;
+    NSArray* _memberOf;
+    NSArray* _createdObjects;
+    NSArray* _ownedObjects;
+    NSArray* _messages;
+    NSArray* _mailFolders;
     MSGraphCalendar* _calendar;
-    MSGraphCalendarCollection* _calendars;
-    MSGraphCalendarGroupCollection* _calendarGroups;
-    MSGraphEventCollection* _calendarView;
-    MSGraphEventCollection* _events;
-    MSGraphContactCollection* _contacts;
-    MSGraphContactFolderCollection* _contactFolders;
+    NSArray* _calendars;
+    NSArray* _calendarGroups;
+    NSArray* _calendarView;
+    NSArray* _events;
+    NSArray* _contacts;
+    NSArray* _contactFolders;
     MSGraphProfilePhoto* _photo;
     MSGraphDrive* _drive;
 }
@@ -95,61 +95,57 @@
     _accountEnabled = val;
     self.dictionary[@"accountEnabled"] = @(val);
 }
-- (MSGraphAssignedLicenseCollection*) assignedLicenses
+- (NSArray*) assignedLicenses
 {
     if(!_assignedLicenses){
         
-    NSMutableArray *assignedLicensesCollection = [NSMutableArray array];
-    NSArray *assignedLicensess = self.dictionary[@"assignedLicenses"];
+    NSMutableArray *assignedLicensesResult = [NSMutableArray array];
+    NSArray *assignedLicenses = self.dictionary[@"assignedLicenses"];
 
-    if ([assignedLicensess isKindOfClass:[NSArray class]]){
-        for (id assignedLicenses in assignedLicensess){
-            [assignedLicensesCollection addObject:assignedLicenses];
-         }
+    if ([assignedLicenses isKindOfClass:[NSArray class]]){
+        for (id assignedLicense in assignedLicenses){
+            [assignedLicensesResult addObject:[[MSGraphAssignedLicense alloc] initWithDictionary: assignedLicense]];
+        }
     }
 
-    if ([assignedLicensesCollection count] > 0){
-        _assignedLicenses = [[MSGraphAssignedLicenseCollection alloc] initWithArray:assignedLicensesCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _assignedLicenses = assignedLicensesResult;
         
     }
     return _assignedLicenses;
 }
-- (void) setAssignedLicenses: (MSGraphAssignedLicenseCollection*) val
+- (void) setAssignedLicenses: (NSArray*) val
 {
     _assignedLicenses = val;
     self.dictionary[@"assignedLicenses"] = val;
 }
-- (MSGraphAssignedPlanCollection*) assignedPlans
+- (NSArray*) assignedPlans
 {
     if(!_assignedPlans){
         
-    NSMutableArray *assignedPlansCollection = [NSMutableArray array];
-    NSArray *assignedPlanss = self.dictionary[@"assignedPlans"];
+    NSMutableArray *assignedPlansResult = [NSMutableArray array];
+    NSArray *assignedPlans = self.dictionary[@"assignedPlans"];
 
-    if ([assignedPlanss isKindOfClass:[NSArray class]]){
-        for (id assignedPlans in assignedPlanss){
-            [assignedPlansCollection addObject:assignedPlans];
-         }
+    if ([assignedPlans isKindOfClass:[NSArray class]]){
+        for (id assignedPlan in assignedPlans){
+            [assignedPlansResult addObject:[[MSGraphAssignedPlan alloc] initWithDictionary: assignedPlan]];
+        }
     }
 
-    if ([assignedPlansCollection count] > 0){
-        _assignedPlans = [[MSGraphAssignedPlanCollection alloc] initWithArray:assignedPlansCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _assignedPlans = assignedPlansResult;
         
     }
     return _assignedPlans;
 }
-- (void) setAssignedPlans: (MSGraphAssignedPlanCollection*) val
+- (void) setAssignedPlans: (NSArray*) val
 {
     _assignedPlans = val;
     self.dictionary[@"assignedPlans"] = val;
 }
-- (MSCollection*) businessPhones
+- (NSArray*) businessPhones
 {
     return self.dictionary[@"businessPhones"];
 }
-- (void) setBusinessPhones: (MSCollection*) val
+- (void) setBusinessPhones: (NSArray*) val
 {
     self.dictionary[@"businessPhones"] = val;
 }
@@ -282,7 +278,7 @@
 - (MSGraphPasswordProfile*) passwordProfile
 {
     if(!_passwordProfile){
-        _passwordProfile = [[MSGraphPasswordProfile alloc] initWithDictionary: self.dictionary[@"passwordProfile"] ];
+        _passwordProfile = [[MSGraphPasswordProfile alloc] initWithDictionary: self.dictionary[@"passwordProfile"]];
     }
     return _passwordProfile;
 }
@@ -315,36 +311,34 @@
 {
     self.dictionary[@"preferredLanguage"] = val;
 }
-- (MSGraphProvisionedPlanCollection*) provisionedPlans
+- (NSArray*) provisionedPlans
 {
     if(!_provisionedPlans){
         
-    NSMutableArray *provisionedPlansCollection = [NSMutableArray array];
-    NSArray *provisionedPlanss = self.dictionary[@"provisionedPlans"];
+    NSMutableArray *provisionedPlansResult = [NSMutableArray array];
+    NSArray *provisionedPlans = self.dictionary[@"provisionedPlans"];
 
-    if ([provisionedPlanss isKindOfClass:[NSArray class]]){
-        for (id provisionedPlans in provisionedPlanss){
-            [provisionedPlansCollection addObject:provisionedPlans];
-         }
+    if ([provisionedPlans isKindOfClass:[NSArray class]]){
+        for (id provisionedPlan in provisionedPlans){
+            [provisionedPlansResult addObject:[[MSGraphProvisionedPlan alloc] initWithDictionary: provisionedPlan]];
+        }
     }
 
-    if ([provisionedPlansCollection count] > 0){
-        _provisionedPlans = [[MSGraphProvisionedPlanCollection alloc] initWithArray:provisionedPlansCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _provisionedPlans = provisionedPlansResult;
         
     }
     return _provisionedPlans;
 }
-- (void) setProvisionedPlans: (MSGraphProvisionedPlanCollection*) val
+- (void) setProvisionedPlans: (NSArray*) val
 {
     _provisionedPlans = val;
     self.dictionary[@"provisionedPlans"] = val;
 }
-- (MSCollection*) proxyAddresses
+- (NSArray*) proxyAddresses
 {
     return self.dictionary[@"proxyAddresses"];
 }
-- (void) setProxyAddresses: (MSCollection*) val
+- (void) setProxyAddresses: (NSArray*) val
 {
     self.dictionary[@"proxyAddresses"] = val;
 }
@@ -428,11 +422,11 @@
     _hireDate = val;
     self.dictionary[@"hireDate"] = val;
 }
-- (MSCollection*) interests
+- (NSArray*) interests
 {
     return self.dictionary[@"interests"];
 }
-- (void) setInterests: (MSCollection*) val
+- (void) setInterests: (NSArray*) val
 {
     self.dictionary[@"interests"] = val;
 }
@@ -444,11 +438,11 @@
 {
     self.dictionary[@"mySite"] = val;
 }
-- (MSCollection*) pastProjects
+- (NSArray*) pastProjects
 {
     return self.dictionary[@"pastProjects"];
 }
-- (void) setPastProjects: (MSCollection*) val
+- (void) setPastProjects: (NSArray*) val
 {
     self.dictionary[@"pastProjects"] = val;
 }
@@ -460,76 +454,72 @@
 {
     self.dictionary[@"preferredName"] = val;
 }
-- (MSCollection*) responsibilities
+- (NSArray*) responsibilities
 {
     return self.dictionary[@"responsibilities"];
 }
-- (void) setResponsibilities: (MSCollection*) val
+- (void) setResponsibilities: (NSArray*) val
 {
     self.dictionary[@"responsibilities"] = val;
 }
-- (MSCollection*) schools
+- (NSArray*) schools
 {
     return self.dictionary[@"schools"];
 }
-- (void) setSchools: (MSCollection*) val
+- (void) setSchools: (NSArray*) val
 {
     self.dictionary[@"schools"] = val;
 }
-- (MSCollection*) skills
+- (NSArray*) skills
 {
     return self.dictionary[@"skills"];
 }
-- (void) setSkills: (MSCollection*) val
+- (void) setSkills: (NSArray*) val
 {
     self.dictionary[@"skills"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) ownedDevices
+- (NSArray*) ownedDevices
 {
     if(!_ownedDevices){
         
-    NSMutableArray *ownedDevicesCollection = [NSMutableArray array];
-    NSArray *ownedDevicess = self.dictionary[@"ownedDevices"];
+    NSMutableArray *ownedDevicesResult = [NSMutableArray array];
+    NSArray *ownedDevices = self.dictionary[@"ownedDevices"];
 
-    if ([ownedDevicess isKindOfClass:[NSArray class]]){
-        for (id ownedDevices in ownedDevicess){
-            [ownedDevicesCollection addObject:ownedDevices];
-         }
+    if ([ownedDevices isKindOfClass:[NSArray class]]){
+        for (id directoryObject in ownedDevices){
+            [ownedDevicesResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([ownedDevicesCollection count] > 0){
-        _ownedDevices = [[MSGraphDirectoryObjectCollection alloc] initWithArray:ownedDevicesCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _ownedDevices = ownedDevicesResult;
         
     }
     return _ownedDevices;
 }
-- (void) setOwnedDevices: (MSGraphDirectoryObjectCollection*) val
+- (void) setOwnedDevices: (NSArray*) val
 {
     _ownedDevices = val;
     self.dictionary[@"ownedDevices"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) registeredDevices
+- (NSArray*) registeredDevices
 {
     if(!_registeredDevices){
         
-    NSMutableArray *registeredDevicesCollection = [NSMutableArray array];
-    NSArray *registeredDevicess = self.dictionary[@"registeredDevices"];
+    NSMutableArray *registeredDevicesResult = [NSMutableArray array];
+    NSArray *registeredDevices = self.dictionary[@"registeredDevices"];
 
-    if ([registeredDevicess isKindOfClass:[NSArray class]]){
-        for (id registeredDevices in registeredDevicess){
-            [registeredDevicesCollection addObject:registeredDevices];
-         }
+    if ([registeredDevices isKindOfClass:[NSArray class]]){
+        for (id directoryObject in registeredDevices){
+            [registeredDevicesResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([registeredDevicesCollection count] > 0){
-        _registeredDevices = [[MSGraphDirectoryObjectCollection alloc] initWithArray:registeredDevicesCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _registeredDevices = registeredDevicesResult;
         
     }
     return _registeredDevices;
 }
-- (void) setRegisteredDevices: (MSGraphDirectoryObjectCollection*) val
+- (void) setRegisteredDevices: (NSArray*) val
 {
     _registeredDevices = val;
     self.dictionary[@"registeredDevices"] = val;
@@ -537,7 +527,7 @@
 - (MSGraphDirectoryObject*) manager
 {
     if(!_manager){
-        _manager = [[MSGraphDirectoryObject alloc] initWithDictionary: self.dictionary[@"manager"] ];
+        _manager = [[MSGraphDirectoryObject alloc] initWithDictionary: self.dictionary[@"manager"]];
     }
     return _manager;
 }
@@ -546,152 +536,140 @@
     _manager = val;
     self.dictionary[@"manager"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) directReports
+- (NSArray*) directReports
 {
     if(!_directReports){
         
-    NSMutableArray *directReportsCollection = [NSMutableArray array];
-    NSArray *directReportss = self.dictionary[@"directReports"];
+    NSMutableArray *directReportsResult = [NSMutableArray array];
+    NSArray *directReports = self.dictionary[@"directReports"];
 
-    if ([directReportss isKindOfClass:[NSArray class]]){
-        for (id directReports in directReportss){
-            [directReportsCollection addObject:directReports];
-         }
+    if ([directReports isKindOfClass:[NSArray class]]){
+        for (id directoryObject in directReports){
+            [directReportsResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([directReportsCollection count] > 0){
-        _directReports = [[MSGraphDirectoryObjectCollection alloc] initWithArray:directReportsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _directReports = directReportsResult;
         
     }
     return _directReports;
 }
-- (void) setDirectReports: (MSGraphDirectoryObjectCollection*) val
+- (void) setDirectReports: (NSArray*) val
 {
     _directReports = val;
     self.dictionary[@"directReports"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) memberOf
+- (NSArray*) memberOf
 {
     if(!_memberOf){
         
-    NSMutableArray *memberOfCollection = [NSMutableArray array];
-    NSArray *memberOfs = self.dictionary[@"memberOf"];
+    NSMutableArray *memberOfResult = [NSMutableArray array];
+    NSArray *memberOf = self.dictionary[@"memberOf"];
 
-    if ([memberOfs isKindOfClass:[NSArray class]]){
-        for (id memberOf in memberOfs){
-            [memberOfCollection addObject:memberOf];
-         }
+    if ([memberOf isKindOfClass:[NSArray class]]){
+        for (id directoryObject in memberOf){
+            [memberOfResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([memberOfCollection count] > 0){
-        _memberOf = [[MSGraphDirectoryObjectCollection alloc] initWithArray:memberOfCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _memberOf = memberOfResult;
         
     }
     return _memberOf;
 }
-- (void) setMemberOf: (MSGraphDirectoryObjectCollection*) val
+- (void) setMemberOf: (NSArray*) val
 {
     _memberOf = val;
     self.dictionary[@"memberOf"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) createdObjects
+- (NSArray*) createdObjects
 {
     if(!_createdObjects){
         
-    NSMutableArray *createdObjectsCollection = [NSMutableArray array];
-    NSArray *createdObjectss = self.dictionary[@"createdObjects"];
+    NSMutableArray *createdObjectsResult = [NSMutableArray array];
+    NSArray *createdObjects = self.dictionary[@"createdObjects"];
 
-    if ([createdObjectss isKindOfClass:[NSArray class]]){
-        for (id createdObjects in createdObjectss){
-            [createdObjectsCollection addObject:createdObjects];
-         }
+    if ([createdObjects isKindOfClass:[NSArray class]]){
+        for (id directoryObject in createdObjects){
+            [createdObjectsResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([createdObjectsCollection count] > 0){
-        _createdObjects = [[MSGraphDirectoryObjectCollection alloc] initWithArray:createdObjectsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _createdObjects = createdObjectsResult;
         
     }
     return _createdObjects;
 }
-- (void) setCreatedObjects: (MSGraphDirectoryObjectCollection*) val
+- (void) setCreatedObjects: (NSArray*) val
 {
     _createdObjects = val;
     self.dictionary[@"createdObjects"] = val;
 }
-- (MSGraphDirectoryObjectCollection*) ownedObjects
+- (NSArray*) ownedObjects
 {
     if(!_ownedObjects){
         
-    NSMutableArray *ownedObjectsCollection = [NSMutableArray array];
-    NSArray *ownedObjectss = self.dictionary[@"ownedObjects"];
+    NSMutableArray *ownedObjectsResult = [NSMutableArray array];
+    NSArray *ownedObjects = self.dictionary[@"ownedObjects"];
 
-    if ([ownedObjectss isKindOfClass:[NSArray class]]){
-        for (id ownedObjects in ownedObjectss){
-            [ownedObjectsCollection addObject:ownedObjects];
-         }
+    if ([ownedObjects isKindOfClass:[NSArray class]]){
+        for (id directoryObject in ownedObjects){
+            [ownedObjectsResult addObject:[[MSGraphDirectoryObject alloc] initWithDictionary: directoryObject]];
+        }
     }
 
-    if ([ownedObjectsCollection count] > 0){
-        _ownedObjects = [[MSGraphDirectoryObjectCollection alloc] initWithArray:ownedObjectsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _ownedObjects = ownedObjectsResult;
         
     }
     return _ownedObjects;
 }
-- (void) setOwnedObjects: (MSGraphDirectoryObjectCollection*) val
+- (void) setOwnedObjects: (NSArray*) val
 {
     _ownedObjects = val;
     self.dictionary[@"ownedObjects"] = val;
 }
-- (MSGraphMessageCollection*) messages
+- (NSArray*) messages
 {
     if(!_messages){
         
-    NSMutableArray *messagesCollection = [NSMutableArray array];
-    NSArray *messagess = self.dictionary[@"messages"];
+    NSMutableArray *messagesResult = [NSMutableArray array];
+    NSArray *messages = self.dictionary[@"messages"];
 
-    if ([messagess isKindOfClass:[NSArray class]]){
-        for (id messages in messagess){
-            [messagesCollection addObject:messages];
-         }
+    if ([messages isKindOfClass:[NSArray class]]){
+        for (id message in messages){
+            [messagesResult addObject:[[MSGraphMessage alloc] initWithDictionary: message]];
+        }
     }
 
-    if ([messagesCollection count] > 0){
-        _messages = [[MSGraphMessageCollection alloc] initWithArray:messagesCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _messages = messagesResult;
         
     }
     return _messages;
 }
-- (void) setMessages: (MSGraphMessageCollection*) val
+- (void) setMessages: (NSArray*) val
 {
     _messages = val;
     self.dictionary[@"messages"] = val;
 }
-- (MSGraphMailFolderCollection*) mailFolders
+- (NSArray*) mailFolders
 {
     if(!_mailFolders){
         
-    NSMutableArray *mailFoldersCollection = [NSMutableArray array];
-    NSArray *mailFolderss = self.dictionary[@"mailFolders"];
+    NSMutableArray *mailFoldersResult = [NSMutableArray array];
+    NSArray *mailFolders = self.dictionary[@"mailFolders"];
 
-    if ([mailFolderss isKindOfClass:[NSArray class]]){
-        for (id mailFolders in mailFolderss){
-            [mailFoldersCollection addObject:mailFolders];
-         }
+    if ([mailFolders isKindOfClass:[NSArray class]]){
+        for (id mailFolder in mailFolders){
+            [mailFoldersResult addObject:[[MSGraphMailFolder alloc] initWithDictionary: mailFolder]];
+        }
     }
 
-    if ([mailFoldersCollection count] > 0){
-        _mailFolders = [[MSGraphMailFolderCollection alloc] initWithArray:mailFoldersCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _mailFolders = mailFoldersResult;
         
     }
     return _mailFolders;
 }
-- (void) setMailFolders: (MSGraphMailFolderCollection*) val
+- (void) setMailFolders: (NSArray*) val
 {
     _mailFolders = val;
     self.dictionary[@"mailFolders"] = val;
@@ -699,7 +677,7 @@
 - (MSGraphCalendar*) calendar
 {
     if(!_calendar){
-        _calendar = [[MSGraphCalendar alloc] initWithDictionary: self.dictionary[@"calendar"] ];
+        _calendar = [[MSGraphCalendar alloc] initWithDictionary: self.dictionary[@"calendar"]];
     }
     return _calendar;
 }
@@ -708,152 +686,140 @@
     _calendar = val;
     self.dictionary[@"calendar"] = val;
 }
-- (MSGraphCalendarCollection*) calendars
+- (NSArray*) calendars
 {
     if(!_calendars){
         
-    NSMutableArray *calendarsCollection = [NSMutableArray array];
-    NSArray *calendarss = self.dictionary[@"calendars"];
+    NSMutableArray *calendarsResult = [NSMutableArray array];
+    NSArray *calendars = self.dictionary[@"calendars"];
 
-    if ([calendarss isKindOfClass:[NSArray class]]){
-        for (id calendars in calendarss){
-            [calendarsCollection addObject:calendars];
-         }
+    if ([calendars isKindOfClass:[NSArray class]]){
+        for (id calendar in calendars){
+            [calendarsResult addObject:[[MSGraphCalendar alloc] initWithDictionary: calendar]];
+        }
     }
 
-    if ([calendarsCollection count] > 0){
-        _calendars = [[MSGraphCalendarCollection alloc] initWithArray:calendarsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _calendars = calendarsResult;
         
     }
     return _calendars;
 }
-- (void) setCalendars: (MSGraphCalendarCollection*) val
+- (void) setCalendars: (NSArray*) val
 {
     _calendars = val;
     self.dictionary[@"calendars"] = val;
 }
-- (MSGraphCalendarGroupCollection*) calendarGroups
+- (NSArray*) calendarGroups
 {
     if(!_calendarGroups){
         
-    NSMutableArray *calendarGroupsCollection = [NSMutableArray array];
-    NSArray *calendarGroupss = self.dictionary[@"calendarGroups"];
+    NSMutableArray *calendarGroupsResult = [NSMutableArray array];
+    NSArray *calendarGroups = self.dictionary[@"calendarGroups"];
 
-    if ([calendarGroupss isKindOfClass:[NSArray class]]){
-        for (id calendarGroups in calendarGroupss){
-            [calendarGroupsCollection addObject:calendarGroups];
-         }
+    if ([calendarGroups isKindOfClass:[NSArray class]]){
+        for (id calendarGroup in calendarGroups){
+            [calendarGroupsResult addObject:[[MSGraphCalendarGroup alloc] initWithDictionary: calendarGroup]];
+        }
     }
 
-    if ([calendarGroupsCollection count] > 0){
-        _calendarGroups = [[MSGraphCalendarGroupCollection alloc] initWithArray:calendarGroupsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _calendarGroups = calendarGroupsResult;
         
     }
     return _calendarGroups;
 }
-- (void) setCalendarGroups: (MSGraphCalendarGroupCollection*) val
+- (void) setCalendarGroups: (NSArray*) val
 {
     _calendarGroups = val;
     self.dictionary[@"calendarGroups"] = val;
 }
-- (MSGraphEventCollection*) calendarView
+- (NSArray*) calendarView
 {
     if(!_calendarView){
         
-    NSMutableArray *calendarViewCollection = [NSMutableArray array];
-    NSArray *calendarViews = self.dictionary[@"calendarView"];
+    NSMutableArray *calendarViewResult = [NSMutableArray array];
+    NSArray *calendarView = self.dictionary[@"calendarView"];
 
-    if ([calendarViews isKindOfClass:[NSArray class]]){
-        for (id calendarView in calendarViews){
-            [calendarViewCollection addObject:calendarView];
-         }
+    if ([calendarView isKindOfClass:[NSArray class]]){
+        for (id event in calendarView){
+            [calendarViewResult addObject:[[MSGraphEvent alloc] initWithDictionary: event]];
+        }
     }
 
-    if ([calendarViewCollection count] > 0){
-        _calendarView = [[MSGraphEventCollection alloc] initWithArray:calendarViewCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _calendarView = calendarViewResult;
         
     }
     return _calendarView;
 }
-- (void) setCalendarView: (MSGraphEventCollection*) val
+- (void) setCalendarView: (NSArray*) val
 {
     _calendarView = val;
     self.dictionary[@"calendarView"] = val;
 }
-- (MSGraphEventCollection*) events
+- (NSArray*) events
 {
     if(!_events){
         
-    NSMutableArray *eventsCollection = [NSMutableArray array];
-    NSArray *eventss = self.dictionary[@"events"];
+    NSMutableArray *eventsResult = [NSMutableArray array];
+    NSArray *events = self.dictionary[@"events"];
 
-    if ([eventss isKindOfClass:[NSArray class]]){
-        for (id events in eventss){
-            [eventsCollection addObject:events];
-         }
+    if ([events isKindOfClass:[NSArray class]]){
+        for (id event in events){
+            [eventsResult addObject:[[MSGraphEvent alloc] initWithDictionary: event]];
+        }
     }
 
-    if ([eventsCollection count] > 0){
-        _events = [[MSGraphEventCollection alloc] initWithArray:eventsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _events = eventsResult;
         
     }
     return _events;
 }
-- (void) setEvents: (MSGraphEventCollection*) val
+- (void) setEvents: (NSArray*) val
 {
     _events = val;
     self.dictionary[@"events"] = val;
 }
-- (MSGraphContactCollection*) contacts
+- (NSArray*) contacts
 {
     if(!_contacts){
         
-    NSMutableArray *contactsCollection = [NSMutableArray array];
-    NSArray *contactss = self.dictionary[@"contacts"];
+    NSMutableArray *contactsResult = [NSMutableArray array];
+    NSArray *contacts = self.dictionary[@"contacts"];
 
-    if ([contactss isKindOfClass:[NSArray class]]){
-        for (id contacts in contactss){
-            [contactsCollection addObject:contacts];
-         }
+    if ([contacts isKindOfClass:[NSArray class]]){
+        for (id contact in contacts){
+            [contactsResult addObject:[[MSGraphContact alloc] initWithDictionary: contact]];
+        }
     }
 
-    if ([contactsCollection count] > 0){
-        _contacts = [[MSGraphContactCollection alloc] initWithArray:contactsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _contacts = contactsResult;
         
     }
     return _contacts;
 }
-- (void) setContacts: (MSGraphContactCollection*) val
+- (void) setContacts: (NSArray*) val
 {
     _contacts = val;
     self.dictionary[@"contacts"] = val;
 }
-- (MSGraphContactFolderCollection*) contactFolders
+- (NSArray*) contactFolders
 {
     if(!_contactFolders){
         
-    NSMutableArray *contactFoldersCollection = [NSMutableArray array];
-    NSArray *contactFolderss = self.dictionary[@"contactFolders"];
+    NSMutableArray *contactFoldersResult = [NSMutableArray array];
+    NSArray *contactFolders = self.dictionary[@"contactFolders"];
 
-    if ([contactFolderss isKindOfClass:[NSArray class]]){
-        for (id contactFolders in contactFolderss){
-            [contactFoldersCollection addObject:contactFolders];
-         }
+    if ([contactFolders isKindOfClass:[NSArray class]]){
+        for (id contactFolder in contactFolders){
+            [contactFoldersResult addObject:[[MSGraphContactFolder alloc] initWithDictionary: contactFolder]];
+        }
     }
 
-    if ([contactFoldersCollection count] > 0){
-        _contactFolders = [[MSGraphContactFolderCollection alloc] initWithArray:contactFoldersCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _contactFolders = contactFoldersResult;
         
     }
     return _contactFolders;
 }
-- (void) setContactFolders: (MSGraphContactFolderCollection*) val
+- (void) setContactFolders: (NSArray*) val
 {
     _contactFolders = val;
     self.dictionary[@"contactFolders"] = val;
@@ -861,7 +827,7 @@
 - (MSGraphProfilePhoto*) photo
 {
     if(!_photo){
-        _photo = [[MSGraphProfilePhoto alloc] initWithDictionary: self.dictionary[@"photo"] ];
+        _photo = [[MSGraphProfilePhoto alloc] initWithDictionary: self.dictionary[@"photo"]];
     }
     return _photo;
 }
@@ -873,7 +839,7 @@
 - (MSGraphDrive*) drive
 {
     if(!_drive){
-        _drive = [[MSGraphDrive alloc] initWithDictionary: self.dictionary[@"drive"] ];
+        _drive = [[MSGraphDrive alloc] initWithDictionary: self.dictionary[@"drive"]];
     }
     return _drive;
 }
@@ -882,197 +848,21 @@
     _drive = val;
     self.dictionary[@"drive"] = val;
 }
-- (MSGraphAssignedLicense*) assignedLicenses:(NSInteger)index
-{
-   MSGraphAssignedLicense* assignedLicenses = nil;
-   if (self.assignedLicenses.value){
-       assignedLicenses = self.assignedLicenses.value[index];
-   }
-   return assignedLicenses;
-}
-- (MSGraphAssignedPlan*) assignedPlans:(NSInteger)index
-{
-   MSGraphAssignedPlan* assignedPlans = nil;
-   if (self.assignedPlans.value){
-       assignedPlans = self.assignedPlans.value[index];
-   }
-   return assignedPlans;
-}
-- (NSString*) businessPhones:(NSInteger)index
-{
-   NSString* businessPhones = nil;
-   if (self.businessPhones.value){
-       businessPhones = self.businessPhones.value[index];
-   }
-   return businessPhones;
-}
-- (MSGraphProvisionedPlan*) provisionedPlans:(NSInteger)index
-{
-   MSGraphProvisionedPlan* provisionedPlans = nil;
-   if (self.provisionedPlans.value){
-       provisionedPlans = self.provisionedPlans.value[index];
-   }
-   return provisionedPlans;
-}
-- (NSString*) proxyAddresses:(NSInteger)index
-{
-   NSString* proxyAddresses = nil;
-   if (self.proxyAddresses.value){
-       proxyAddresses = self.proxyAddresses.value[index];
-   }
-   return proxyAddresses;
-}
-- (NSString*) interests:(NSInteger)index
-{
-   NSString* interests = nil;
-   if (self.interests.value){
-       interests = self.interests.value[index];
-   }
-   return interests;
-}
-- (NSString*) pastProjects:(NSInteger)index
-{
-   NSString* pastProjects = nil;
-   if (self.pastProjects.value){
-       pastProjects = self.pastProjects.value[index];
-   }
-   return pastProjects;
-}
-- (NSString*) responsibilities:(NSInteger)index
-{
-   NSString* responsibilities = nil;
-   if (self.responsibilities.value){
-       responsibilities = self.responsibilities.value[index];
-   }
-   return responsibilities;
-}
-- (NSString*) schools:(NSInteger)index
-{
-   NSString* schools = nil;
-   if (self.schools.value){
-       schools = self.schools.value[index];
-   }
-   return schools;
-}
-- (NSString*) skills:(NSInteger)index
-{
-   NSString* skills = nil;
-   if (self.skills.value){
-       skills = self.skills.value[index];
-   }
-   return skills;
-}
-- (MSGraphDirectoryObject*) ownedDevices:(NSInteger)index
-{
-   MSGraphDirectoryObject* ownedDevices = nil;
-   if (self.ownedDevices.value){
-       ownedDevices = self.ownedDevices.value[index];
-   }
-   return ownedDevices;
-}
-- (MSGraphDirectoryObject*) registeredDevices:(NSInteger)index
-{
-   MSGraphDirectoryObject* registeredDevices = nil;
-   if (self.registeredDevices.value){
-       registeredDevices = self.registeredDevices.value[index];
-   }
-   return registeredDevices;
-}
-- (MSGraphDirectoryObject*) directReports:(NSInteger)index
-{
-   MSGraphDirectoryObject* directReports = nil;
-   if (self.directReports.value){
-       directReports = self.directReports.value[index];
-   }
-   return directReports;
-}
-- (MSGraphDirectoryObject*) memberOf:(NSInteger)index
-{
-   MSGraphDirectoryObject* memberOf = nil;
-   if (self.memberOf.value){
-       memberOf = self.memberOf.value[index];
-   }
-   return memberOf;
-}
-- (MSGraphDirectoryObject*) createdObjects:(NSInteger)index
-{
-   MSGraphDirectoryObject* createdObjects = nil;
-   if (self.createdObjects.value){
-       createdObjects = self.createdObjects.value[index];
-   }
-   return createdObjects;
-}
-- (MSGraphDirectoryObject*) ownedObjects:(NSInteger)index
-{
-   MSGraphDirectoryObject* ownedObjects = nil;
-   if (self.ownedObjects.value){
-       ownedObjects = self.ownedObjects.value[index];
-   }
-   return ownedObjects;
-}
 - (MSGraphMessage*) messages:(NSInteger)index
 {
    MSGraphMessage* messages = nil;
-   if (self.messages.value){
-       messages = self.messages.value[index];
+   if (self.messages) {
+       messages = self.messages[index];
    }
    return messages;
-}
-- (MSGraphMailFolder*) mailFolders:(NSInteger)index
-{
-   MSGraphMailFolder* mailFolders = nil;
-   if (self.mailFolders.value){
-       mailFolders = self.mailFolders.value[index];
-   }
-   return mailFolders;
-}
-- (MSGraphCalendar*) calendars:(NSInteger)index
-{
-   MSGraphCalendar* calendars = nil;
-   if (self.calendars.value){
-       calendars = self.calendars.value[index];
-   }
-   return calendars;
-}
-- (MSGraphCalendarGroup*) calendarGroups:(NSInteger)index
-{
-   MSGraphCalendarGroup* calendarGroups = nil;
-   if (self.calendarGroups.value){
-       calendarGroups = self.calendarGroups.value[index];
-   }
-   return calendarGroups;
-}
-- (MSGraphEvent*) calendarView:(NSInteger)index
-{
-   MSGraphEvent* calendarView = nil;
-   if (self.calendarView.value){
-       calendarView = self.calendarView.value[index];
-   }
-   return calendarView;
 }
 - (MSGraphEvent*) events:(NSInteger)index
 {
    MSGraphEvent* events = nil;
-   if (self.events.value){
-       events = self.events.value[index];
+   if (self.events) {
+       events = self.events[index];
    }
    return events;
-}
-- (MSGraphContact*) contacts:(NSInteger)index
-{
-   MSGraphContact* contacts = nil;
-   if (self.contacts.value){
-       contacts = self.contacts.value[index];
-   }
-   return contacts;
-}
-- (MSGraphContactFolder*) contactFolders:(NSInteger)index
-{
-   MSGraphContactFolder* contactFolders = nil;
-   if (self.contactFolders.value){
-       contactFolders = self.contactFolders.value[index];
-   }
-   return contactFolders;
 }
 
 @end

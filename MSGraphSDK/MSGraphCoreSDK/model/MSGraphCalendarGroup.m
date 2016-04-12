@@ -17,7 +17,7 @@
     NSString* _name;
     NSString* _classId;
     NSString* _changeKey;
-    MSGraphCalendarCollection* _calendars;
+    NSArray* _calendars;
 }
 @end
 
@@ -54,38 +54,28 @@
 {
     self.dictionary[@"changeKey"] = val;
 }
-- (MSGraphCalendarCollection*) calendars
+- (NSArray*) calendars
 {
     if(!_calendars){
         
-    NSMutableArray *calendarsCollection = [NSMutableArray array];
-    NSArray *calendarss = self.dictionary[@"calendars"];
+    NSMutableArray *calendarsResult = [NSMutableArray array];
+    NSArray *calendars = self.dictionary[@"calendars"];
 
-    if ([calendarss isKindOfClass:[NSArray class]]){
-        for (id calendars in calendarss){
-            [calendarsCollection addObject:calendars];
-         }
+    if ([calendars isKindOfClass:[NSArray class]]){
+        for (id calendar in calendars){
+            [calendarsResult addObject:[[MSGraphCalendar alloc] initWithDictionary: calendar]];
+        }
     }
 
-    if ([calendarsCollection count] > 0){
-        _calendars = [[MSGraphCalendarCollection alloc] initWithArray:calendarsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _calendars = calendarsResult;
         
     }
     return _calendars;
 }
-- (void) setCalendars: (MSGraphCalendarCollection*) val
+- (void) setCalendars: (NSArray*) val
 {
     _calendars = val;
     self.dictionary[@"calendars"] = val;
-}
-- (MSGraphCalendar*) calendars:(NSInteger)index
-{
-   MSGraphCalendar* calendars = nil;
-   if (self.calendars.value){
-       calendars = self.calendars.value[index];
-   }
-   return calendars;
 }
 
 @end

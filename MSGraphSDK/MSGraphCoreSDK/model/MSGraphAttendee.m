@@ -15,7 +15,7 @@
 @interface MSGraphAttendee()
 {
     MSGraphResponseStatus* _status;
-    MSGraphAttendeeType _type;
+    MSGraphAttendeeType* _type;
 }
 @end
 
@@ -24,7 +24,7 @@
 - (MSGraphResponseStatus*) status
 {
     if(!_status){
-        _status = [[MSGraphResponseStatus alloc] initWithDictionary: self.dictionary[@"status"] ];
+        _status = [[MSGraphResponseStatus alloc] initWithDictionary: self.dictionary[@"status"]];
     }
     return _status;
 }
@@ -33,14 +33,16 @@
     _status = val;
     self.dictionary[@"status"] = val;
 }
-- (MSGraphAttendeeType) type
+- (MSGraphAttendeeType*) type
 {
-    _type = [self.dictionary[@"type"] toMSGraphAttendeeType];
+    if(!_type){
+        _type = [self.dictionary[@"type"] toMSGraphAttendeeType];
+    }
     return _type;
 }
-- (void) setType: (MSGraphAttendeeType) val
+- (void) setType: (MSGraphAttendeeType*) val
 {
     _type = val;
-    self.dictionary[@"type"] = [NSString stringWithMSGraphAttendeeType:val];
+    self.dictionary[@"type"] = val;
 }
 @end

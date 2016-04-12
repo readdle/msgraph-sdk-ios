@@ -42,9 +42,9 @@
     MSGraphPackage* _package;
     MSGraphUser* _createdByUser;
     MSGraphUser* _lastModifiedByUser;
-    MSGraphPermissionCollection* _permissions;
-    MSGraphDriveItemCollection* _children;
-    MSGraphThumbnailSetCollection* _thumbnails;
+    NSArray* _permissions;
+    NSArray* _children;
+    NSArray* _thumbnails;
 }
 @end
 
@@ -60,7 +60,7 @@
 - (MSGraphIdentitySet*) createdBy
 {
     if(!_createdBy){
-        _createdBy = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"createdBy"] ];
+        _createdBy = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"createdBy"]];
     }
     return _createdBy;
 }
@@ -108,7 +108,7 @@
 - (MSGraphIdentitySet*) lastModifiedBy
 {
     if(!_lastModifiedBy){
-        _lastModifiedBy = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"lastModifiedBy"] ];
+        _lastModifiedBy = [[MSGraphIdentitySet alloc] initWithDictionary: self.dictionary[@"lastModifiedBy"]];
     }
     return _lastModifiedBy;
 }
@@ -140,7 +140,7 @@
 - (MSGraphItemReference*) parentReference
 {
     if(!_parentReference){
-        _parentReference = [[MSGraphItemReference alloc] initWithDictionary: self.dictionary[@"parentReference"] ];
+        _parentReference = [[MSGraphItemReference alloc] initWithDictionary: self.dictionary[@"parentReference"]];
     }
     return _parentReference;
 }
@@ -178,7 +178,7 @@
 - (MSGraphAudio*) audio
 {
     if(!_audio){
-        _audio = [[MSGraphAudio alloc] initWithDictionary: self.dictionary[@"audio"] ];
+        _audio = [[MSGraphAudio alloc] initWithDictionary: self.dictionary[@"audio"]];
     }
     return _audio;
 }
@@ -190,7 +190,7 @@
 - (MSGraphDeleted*) deleted
 {
     if(!_deleted){
-        _deleted = [[MSGraphDeleted alloc] initWithDictionary: self.dictionary[@"deleted"] ];
+        _deleted = [[MSGraphDeleted alloc] initWithDictionary: self.dictionary[@"deleted"]];
     }
     return _deleted;
 }
@@ -202,7 +202,7 @@
 - (MSGraphFile*) file
 {
     if(!_file){
-        _file = [[MSGraphFile alloc] initWithDictionary: self.dictionary[@"file"] ];
+        _file = [[MSGraphFile alloc] initWithDictionary: self.dictionary[@"file"]];
     }
     return _file;
 }
@@ -214,7 +214,7 @@
 - (MSGraphFileSystemInfo*) fileSystemInfo
 {
     if(!_fileSystemInfo){
-        _fileSystemInfo = [[MSGraphFileSystemInfo alloc] initWithDictionary: self.dictionary[@"fileSystemInfo"] ];
+        _fileSystemInfo = [[MSGraphFileSystemInfo alloc] initWithDictionary: self.dictionary[@"fileSystemInfo"]];
     }
     return _fileSystemInfo;
 }
@@ -226,7 +226,7 @@
 - (MSGraphFolder*) folder
 {
     if(!_folder){
-        _folder = [[MSGraphFolder alloc] initWithDictionary: self.dictionary[@"folder"] ];
+        _folder = [[MSGraphFolder alloc] initWithDictionary: self.dictionary[@"folder"]];
     }
     return _folder;
 }
@@ -238,7 +238,7 @@
 - (MSGraphImage*) image
 {
     if(!_image){
-        _image = [[MSGraphImage alloc] initWithDictionary: self.dictionary[@"image"] ];
+        _image = [[MSGraphImage alloc] initWithDictionary: self.dictionary[@"image"]];
     }
     return _image;
 }
@@ -250,7 +250,7 @@
 - (MSGraphGeoCoordinates*) location
 {
     if(!_location){
-        _location = [[MSGraphGeoCoordinates alloc] initWithDictionary: self.dictionary[@"location"] ];
+        _location = [[MSGraphGeoCoordinates alloc] initWithDictionary: self.dictionary[@"location"]];
     }
     return _location;
 }
@@ -262,7 +262,7 @@
 - (MSGraphPhoto*) photo
 {
     if(!_photo){
-        _photo = [[MSGraphPhoto alloc] initWithDictionary: self.dictionary[@"photo"] ];
+        _photo = [[MSGraphPhoto alloc] initWithDictionary: self.dictionary[@"photo"]];
     }
     return _photo;
 }
@@ -274,7 +274,7 @@
 - (MSGraphRemoteItem*) remoteItem
 {
     if(!_remoteItem){
-        _remoteItem = [[MSGraphRemoteItem alloc] initWithDictionary: self.dictionary[@"remoteItem"] ];
+        _remoteItem = [[MSGraphRemoteItem alloc] initWithDictionary: self.dictionary[@"remoteItem"]];
     }
     return _remoteItem;
 }
@@ -286,7 +286,7 @@
 - (MSGraphSearchResult*) searchResult
 {
     if(!_searchResult){
-        _searchResult = [[MSGraphSearchResult alloc] initWithDictionary: self.dictionary[@"searchResult"] ];
+        _searchResult = [[MSGraphSearchResult alloc] initWithDictionary: self.dictionary[@"searchResult"]];
     }
     return _searchResult;
 }
@@ -298,7 +298,7 @@
 - (MSGraphShared*) shared
 {
     if(!_shared){
-        _shared = [[MSGraphShared alloc] initWithDictionary: self.dictionary[@"shared"] ];
+        _shared = [[MSGraphShared alloc] initWithDictionary: self.dictionary[@"shared"]];
     }
     return _shared;
 }
@@ -310,7 +310,7 @@
 - (MSGraphSpecialFolder*) specialFolder
 {
     if(!_specialFolder){
-        _specialFolder = [[MSGraphSpecialFolder alloc] initWithDictionary: self.dictionary[@"specialFolder"] ];
+        _specialFolder = [[MSGraphSpecialFolder alloc] initWithDictionary: self.dictionary[@"specialFolder"]];
     }
     return _specialFolder;
 }
@@ -322,7 +322,7 @@
 - (MSGraphVideo*) video
 {
     if(!_video){
-        _video = [[MSGraphVideo alloc] initWithDictionary: self.dictionary[@"video"] ];
+        _video = [[MSGraphVideo alloc] initWithDictionary: self.dictionary[@"video"]];
     }
     return _video;
 }
@@ -334,7 +334,7 @@
 - (MSGraphPackage*) package
 {
     if(!_package){
-        _package = [[MSGraphPackage alloc] initWithDictionary: self.dictionary[@"package"] ];
+        _package = [[MSGraphPackage alloc] initWithDictionary: self.dictionary[@"package"]];
     }
     return _package;
 }
@@ -346,7 +346,7 @@
 - (MSGraphUser*) createdByUser
 {
     if(!_createdByUser){
-        _createdByUser = [[MSGraphUser alloc] initWithDictionary: self.dictionary[@"createdByUser"] ];
+        _createdByUser = [[MSGraphUser alloc] initWithDictionary: self.dictionary[@"createdByUser"]];
     }
     return _createdByUser;
 }
@@ -358,7 +358,7 @@
 - (MSGraphUser*) lastModifiedByUser
 {
     if(!_lastModifiedByUser){
-        _lastModifiedByUser = [[MSGraphUser alloc] initWithDictionary: self.dictionary[@"lastModifiedByUser"] ];
+        _lastModifiedByUser = [[MSGraphUser alloc] initWithDictionary: self.dictionary[@"lastModifiedByUser"]];
     }
     return _lastModifiedByUser;
 }
@@ -367,104 +367,74 @@
     _lastModifiedByUser = val;
     self.dictionary[@"lastModifiedByUser"] = val;
 }
-- (MSGraphPermissionCollection*) permissions
+- (NSArray*) permissions
 {
     if(!_permissions){
         
-    NSMutableArray *permissionsCollection = [NSMutableArray array];
-    NSArray *permissionss = self.dictionary[@"permissions"];
+    NSMutableArray *permissionsResult = [NSMutableArray array];
+    NSArray *permissions = self.dictionary[@"permissions"];
 
-    if ([permissionss isKindOfClass:[NSArray class]]){
-        for (id permissions in permissionss){
-            [permissionsCollection addObject:permissions];
-         }
+    if ([permissions isKindOfClass:[NSArray class]]){
+        for (id permission in permissions){
+            [permissionsResult addObject:[[MSGraphPermission alloc] initWithDictionary: permission]];
+        }
     }
 
-    if ([permissionsCollection count] > 0){
-        _permissions = [[MSGraphPermissionCollection alloc] initWithArray:permissionsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _permissions = permissionsResult;
         
     }
     return _permissions;
 }
-- (void) setPermissions: (MSGraphPermissionCollection*) val
+- (void) setPermissions: (NSArray*) val
 {
     _permissions = val;
     self.dictionary[@"permissions"] = val;
 }
-- (MSGraphDriveItemCollection*) children
+- (NSArray*) children
 {
     if(!_children){
         
-    NSMutableArray *childrenCollection = [NSMutableArray array];
-    NSArray *childrens = self.dictionary[@"children"];
+    NSMutableArray *childrenResult = [NSMutableArray array];
+    NSArray *children = self.dictionary[@"children"];
 
-    if ([childrens isKindOfClass:[NSArray class]]){
-        for (id children in childrens){
-            [childrenCollection addObject:children];
-         }
+    if ([children isKindOfClass:[NSArray class]]){
+        for (id driveItem in children){
+            [childrenResult addObject:[[MSGraphDriveItem alloc] initWithDictionary: driveItem]];
+        }
     }
 
-    if ([childrenCollection count] > 0){
-        _children = [[MSGraphDriveItemCollection alloc] initWithArray:childrenCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _children = childrenResult;
         
     }
     return _children;
 }
-- (void) setChildren: (MSGraphDriveItemCollection*) val
+- (void) setChildren: (NSArray*) val
 {
     _children = val;
     self.dictionary[@"children"] = val;
 }
-- (MSGraphThumbnailSetCollection*) thumbnails
+- (NSArray*) thumbnails
 {
     if(!_thumbnails){
         
-    NSMutableArray *thumbnailsCollection = [NSMutableArray array];
-    NSArray *thumbnailss = self.dictionary[@"thumbnails"];
+    NSMutableArray *thumbnailsResult = [NSMutableArray array];
+    NSArray *thumbnails = self.dictionary[@"thumbnails"];
 
-    if ([thumbnailss isKindOfClass:[NSArray class]]){
-        for (id thumbnails in thumbnailss){
-            [thumbnailsCollection addObject:thumbnails];
-         }
+    if ([thumbnails isKindOfClass:[NSArray class]]){
+        for (id thumbnailSet in thumbnails){
+            [thumbnailsResult addObject:[[MSGraphThumbnailSet alloc] initWithDictionary: thumbnailSet]];
+        }
     }
 
-    if ([thumbnailsCollection count] > 0){
-        _thumbnails = [[MSGraphThumbnailSetCollection alloc] initWithArray:thumbnailsCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _thumbnails = thumbnailsResult;
         
     }
     return _thumbnails;
 }
-- (void) setThumbnails: (MSGraphThumbnailSetCollection*) val
+- (void) setThumbnails: (NSArray*) val
 {
     _thumbnails = val;
     self.dictionary[@"thumbnails"] = val;
-}
-- (MSGraphPermission*) permissions:(NSInteger)index
-{
-   MSGraphPermission* permissions = nil;
-   if (self.permissions.value){
-       permissions = self.permissions.value[index];
-   }
-   return permissions;
-}
-- (MSGraphDriveItem*) children:(NSInteger)index
-{
-   MSGraphDriveItem* children = nil;
-   if (self.children.value){
-       children = self.children.value[index];
-   }
-   return children;
-}
-- (MSGraphThumbnailSet*) thumbnails:(NSInteger)index
-{
-   MSGraphThumbnailSet* thumbnails = nil;
-   if (self.thumbnails.value){
-       thumbnails = self.thumbnails.value[index];
-   }
-   return thumbnails;
 }
 
 @end

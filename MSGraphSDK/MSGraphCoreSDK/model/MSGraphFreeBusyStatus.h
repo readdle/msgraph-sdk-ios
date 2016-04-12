@@ -4,7 +4,7 @@
 
 #include <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, MSGraphFreeBusyStatus){
+typedef NS_ENUM(NSInteger, MSGraphFreeBusyStatusValue){
 
 	MSGraphFreeBusyStatusUnknown = -1,
 	MSGraphFreeBusyStatusFree = 0,
@@ -15,9 +15,27 @@ typedef NS_ENUM(NSInteger, MSGraphFreeBusyStatus){
     MSGraphFreeBusyStatusEndOfEnum
 };
 
+@interface MSGraphFreeBusyStatus : NSObject
+
++(MSGraphFreeBusyStatus*) unknown;
++(MSGraphFreeBusyStatus*) free;
++(MSGraphFreeBusyStatus*) tentative;
++(MSGraphFreeBusyStatus*) busy;
++(MSGraphFreeBusyStatus*) oof;
++(MSGraphFreeBusyStatus*) workingElsewhere;
+
++(MSGraphFreeBusyStatus*) UnknownEnumValue;
+
++(MSGraphFreeBusyStatus*) freeBusyStatusWithEnumValue:(MSGraphFreeBusyStatusValue)val;
+-(NSString*) ms_toString;
+
+@property (nonatomic, readonly) MSGraphFreeBusyStatusValue enumValue;
+
+@end
+
+
 @interface NSString (MSGraphFreeBusyStatus)
 
-+ (instancetype) stringWithMSGraphFreeBusyStatus:(MSGraphFreeBusyStatus)val;
-- (MSGraphFreeBusyStatus) toMSGraphFreeBusyStatus;
+- (MSGraphFreeBusyStatus*) toMSGraphFreeBusyStatus;
 
 @end

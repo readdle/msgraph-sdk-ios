@@ -30,7 +30,7 @@
 - (MSGraphOutlookItem*) item
 {
     if(!_item){
-        _item = [[MSGraphOutlookItem alloc] initWithDictionary: self.dictionary[@"item"] ];
+        _item = [[MSGraphOutlookItem alloc] initWithDictionary: self.dictionary[@"item"]];
     }
     return _item;
 }

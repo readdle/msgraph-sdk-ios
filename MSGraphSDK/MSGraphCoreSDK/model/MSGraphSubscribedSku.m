@@ -17,7 +17,7 @@
     NSString* _capabilityStatus;
     int32_t _consumedUnits;
     MSGraphLicenseUnitsDetail* _prepaidUnits;
-    MSGraphServicePlanInfoCollection* _servicePlans;
+    NSArray* _servicePlans;
     NSString* _skuId;
     NSString* _skuPartNumber;
     NSString* _appliesTo;
@@ -54,7 +54,7 @@
 - (MSGraphLicenseUnitsDetail*) prepaidUnits
 {
     if(!_prepaidUnits){
-        _prepaidUnits = [[MSGraphLicenseUnitsDetail alloc] initWithDictionary: self.dictionary[@"prepaidUnits"] ];
+        _prepaidUnits = [[MSGraphLicenseUnitsDetail alloc] initWithDictionary: self.dictionary[@"prepaidUnits"]];
     }
     return _prepaidUnits;
 }
@@ -63,27 +63,25 @@
     _prepaidUnits = val;
     self.dictionary[@"prepaidUnits"] = val;
 }
-- (MSGraphServicePlanInfoCollection*) servicePlans
+- (NSArray*) servicePlans
 {
     if(!_servicePlans){
         
-    NSMutableArray *servicePlansCollection = [NSMutableArray array];
-    NSArray *servicePlanss = self.dictionary[@"servicePlans"];
+    NSMutableArray *servicePlansResult = [NSMutableArray array];
+    NSArray *servicePlans = self.dictionary[@"servicePlans"];
 
-    if ([servicePlanss isKindOfClass:[NSArray class]]){
-        for (id servicePlans in servicePlanss){
-            [servicePlansCollection addObject:servicePlans];
-         }
+    if ([servicePlans isKindOfClass:[NSArray class]]){
+        for (id servicePlanInfo in servicePlans){
+            [servicePlansResult addObject:[[MSGraphServicePlanInfo alloc] initWithDictionary: servicePlanInfo]];
+        }
     }
 
-    if ([servicePlansCollection count] > 0){
-        _servicePlans = [[MSGraphServicePlanInfoCollection alloc] initWithArray:servicePlansCollection nextLink:self.dictionary[@"@nextLink"] additionalData:self.dictionary];
-    }
+    _servicePlans = servicePlansResult;
         
     }
     return _servicePlans;
 }
-- (void) setServicePlans: (MSGraphServicePlanInfoCollection*) val
+- (void) setServicePlans: (NSArray*) val
 {
     _servicePlans = val;
     self.dictionary[@"servicePlans"] = val;
@@ -111,14 +109,6 @@
 - (void) setAppliesTo: (NSString*) val
 {
     self.dictionary[@"appliesTo"] = val;
-}
-- (MSGraphServicePlanInfo*) servicePlans:(NSInteger)index
-{
-   MSGraphServicePlanInfo* servicePlans = nil;
-   if (self.servicePlans.value){
-       servicePlans = self.servicePlans.value[index];
-   }
-   return servicePlans;
 }
 
 @end

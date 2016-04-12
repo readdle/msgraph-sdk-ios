@@ -2,8 +2,6 @@
 
 
 
-#import "MSGraphThumbnailSetCollection.h"
-
 @class MSGraphThumbnailSetRequest, MSURLSessionDataTask;
 
 #import "MSGraphModels.h"
@@ -11,7 +9,7 @@
 
 typedef void (^MSGraphThumbnailSetCompletionHandler)(MSGraphThumbnailSet *response, NSError *error);
 
-typedef void (^MSGraphDriveItemThumbnailsCollectionCompletionHandler)(MSGraphThumbnailSetCollection* response, MSGraphDriveItemThumbnailsCollectionRequest *nextRequest, NSError *error);
+typedef void (^MSGraphDriveItemThumbnailsCollectionCompletionHandler)(MSCollection *response, MSGraphDriveItemThumbnailsCollectionRequest *nextRequest, NSError *error);
 
 @interface MSGraphDriveItemThumbnailsCollectionRequest : MSCollectionRequest
 

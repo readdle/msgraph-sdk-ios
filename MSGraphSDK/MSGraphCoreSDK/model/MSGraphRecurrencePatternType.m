@@ -4,11 +4,107 @@
 
 #include <MSGraphRecurrencePatternType.h>
 
-@implementation NSString (MSGraphRecurrencePatternType)
+@interface MSGraphRecurrencePatternType () {
+    MSGraphRecurrencePatternTypeValue _enumValue;
+}
+@property (nonatomic, readwrite) MSGraphRecurrencePatternTypeValue enumValue;
+@end
 
-+ (instancetype) stringWithMSGraphRecurrencePatternType:(MSGraphRecurrencePatternType)val {
+@implementation MSGraphRecurrencePatternType
+
++ (MSGraphRecurrencePatternType*) daily {
+    static MSGraphRecurrencePatternType *_daily;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _daily = [[MSGraphRecurrencePatternType alloc] init];
+        _daily.enumValue = MSGraphRecurrencePatternTypeDaily;
+    });
+    return _daily;
+}
++ (MSGraphRecurrencePatternType*) weekly {
+    static MSGraphRecurrencePatternType *_weekly;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _weekly = [[MSGraphRecurrencePatternType alloc] init];
+        _weekly.enumValue = MSGraphRecurrencePatternTypeWeekly;
+    });
+    return _weekly;
+}
++ (MSGraphRecurrencePatternType*) absoluteMonthly {
+    static MSGraphRecurrencePatternType *_absoluteMonthly;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _absoluteMonthly = [[MSGraphRecurrencePatternType alloc] init];
+        _absoluteMonthly.enumValue = MSGraphRecurrencePatternTypeAbsoluteMonthly;
+    });
+    return _absoluteMonthly;
+}
++ (MSGraphRecurrencePatternType*) relativeMonthly {
+    static MSGraphRecurrencePatternType *_relativeMonthly;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _relativeMonthly = [[MSGraphRecurrencePatternType alloc] init];
+        _relativeMonthly.enumValue = MSGraphRecurrencePatternTypeRelativeMonthly;
+    });
+    return _relativeMonthly;
+}
++ (MSGraphRecurrencePatternType*) absoluteYearly {
+    static MSGraphRecurrencePatternType *_absoluteYearly;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _absoluteYearly = [[MSGraphRecurrencePatternType alloc] init];
+        _absoluteYearly.enumValue = MSGraphRecurrencePatternTypeAbsoluteYearly;
+    });
+    return _absoluteYearly;
+}
++ (MSGraphRecurrencePatternType*) relativeYearly {
+    static MSGraphRecurrencePatternType *_relativeYearly;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _relativeYearly = [[MSGraphRecurrencePatternType alloc] init];
+        _relativeYearly.enumValue = MSGraphRecurrencePatternTypeRelativeYearly;
+    });
+    return _relativeYearly;
+}
+
++ (MSGraphRecurrencePatternType*) UnknownEnumValue {
+    static MSGraphRecurrencePatternType *_unknownValue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _unknownValue = [[MSGraphRecurrencePatternType alloc] init];
+        _unknownValue.enumValue = MSGraphRecurrencePatternTypeEndOfEnum;
+    });
+    return _unknownValue;
+}
+
+
++ (MSGraphRecurrencePatternType*) recurrencePatternTypeWithEnumValue:(MSGraphRecurrencePatternTypeValue)val {
 
     switch(val)
+    {
+        case MSGraphRecurrencePatternTypeDaily:
+            return [MSGraphRecurrencePatternType daily];
+        case MSGraphRecurrencePatternTypeWeekly:
+            return [MSGraphRecurrencePatternType weekly];
+        case MSGraphRecurrencePatternTypeAbsoluteMonthly:
+            return [MSGraphRecurrencePatternType absoluteMonthly];
+        case MSGraphRecurrencePatternTypeRelativeMonthly:
+            return [MSGraphRecurrencePatternType relativeMonthly];
+        case MSGraphRecurrencePatternTypeAbsoluteYearly:
+            return [MSGraphRecurrencePatternType absoluteYearly];
+        case MSGraphRecurrencePatternTypeRelativeYearly:
+            return [MSGraphRecurrencePatternType relativeYearly];
+        case MSGraphRecurrencePatternTypeEndOfEnum:
+        default:
+            return [MSGraphRecurrencePatternType UnknownEnumValue];
+    }
+
+    return nil;
+}
+
+- (NSString*) ms_toString {
+
+    switch(self.enumValue)
     {
         case MSGraphRecurrencePatternTypeDaily:
             return @"daily";
@@ -30,34 +126,42 @@
     return nil;
 }
 
-- (MSGraphRecurrencePatternType) toMSGraphRecurrencePatternType{
+- (MSGraphRecurrencePatternTypeValue) enumValue {
+    return _enumValue;
+}
+
+@end
+
+@implementation NSString (MSGraphRecurrencePatternType)
+
+- (MSGraphRecurrencePatternType*) toMSGraphRecurrencePatternType{
 
     if([self isEqualToString:@"daily"])
-      {
-            return MSGraphRecurrencePatternTypeDaily;
-      }
-      else if([self isEqualToString:@"weekly"])
-      {
-            return MSGraphRecurrencePatternTypeWeekly;
-      }
-      else if([self isEqualToString:@"absoluteMonthly"])
-      {
-            return MSGraphRecurrencePatternTypeAbsoluteMonthly;
-      }
-      else if([self isEqualToString:@"relativeMonthly"])
-      {
-            return MSGraphRecurrencePatternTypeRelativeMonthly;
-      }
-      else if([self isEqualToString:@"absoluteYearly"])
-      {
-            return MSGraphRecurrencePatternTypeAbsoluteYearly;
-      }
-      else if([self isEqualToString:@"relativeYearly"])
-      {
-            return MSGraphRecurrencePatternTypeRelativeYearly;
-      }
-      else     {
-        return MSGraphRecurrencePatternTypeEndOfEnum;
+    {
+          return [MSGraphRecurrencePatternType daily];
+    }
+    else if([self isEqualToString:@"weekly"])
+    {
+          return [MSGraphRecurrencePatternType weekly];
+    }
+    else if([self isEqualToString:@"absoluteMonthly"])
+    {
+          return [MSGraphRecurrencePatternType absoluteMonthly];
+    }
+    else if([self isEqualToString:@"relativeMonthly"])
+    {
+          return [MSGraphRecurrencePatternType relativeMonthly];
+    }
+    else if([self isEqualToString:@"absoluteYearly"])
+    {
+          return [MSGraphRecurrencePatternType absoluteYearly];
+    }
+    else if([self isEqualToString:@"relativeYearly"])
+    {
+          return [MSGraphRecurrencePatternType relativeYearly];
+    }
+    else {
+        return [MSGraphRecurrencePatternType UnknownEnumValue];
     }
 }
 
