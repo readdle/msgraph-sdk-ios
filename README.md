@@ -6,7 +6,7 @@ This client library is a release candidate and is still in preview status - plea
 
 ### Install via Cocoapods
 * [Install Cocoapods](http://guides.cocoapods.org/using/getting-started.html) - Follow the getting started guide to install Cocoapods.
-* Add the following to your Podfile : `pod 'MSGraphSDK'`
+* Add the following to your Podfile : `pod 'MSGraphSDK', '~> 0.10''`
 * Run the command `pod install` to install the latest MSGraphSDK pod.
 * Add `#import <MSGraphSDK/MSGraphSDK.h>` to all files that need to reference the SDK.
 
