@@ -28,7 +28,6 @@
     __block MSRequestOptionsBuilder *optionsBuilder = [[MSRequestOptionsBuilder alloc] init];
     
     [options enumerateObjectsUsingBlock:^(MSRequestOptions *option, NSUInteger index, BOOL *stop){
-
         [option appendOptionToHeaders:optionsBuilder.mutableHeaders];
         [option appendOptionToQueryString:optionsBuilder.mutableQueryParams];
         [option appendOptionToFunctionParams:optionsBuilder.mutableFunctionParams];

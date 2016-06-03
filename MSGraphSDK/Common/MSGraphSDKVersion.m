@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.  All Rights Reserved.  Licensed under the MIT License.  See License in the project root for license information.
 
-#define MS_GRAPH_SDK_VERSION @"0.10.1"
+#define MS_GRAPH_SDK_VERSION @"0.10.0"
 
 #import "MSGraphSDKVersion.h"
 
