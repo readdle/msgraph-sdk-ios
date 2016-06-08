@@ -9,28 +9,10 @@
 #import "MSGraphSDK.h"
 #import "OCMock.h"
 
+
 @interface MSURLSessionTask()
 - (NSURLSessionTask *)taskWithRequest:(NSMutableURLRequest*)request;
 @end
-
-@interface MSAsyncURLSessionDataTask()
-
-@property NSMutableURLRequest *monitorRequest;
-
-@property (strong) MSAsyncActionCompletion asyncActionCompletion;
-
-- (void)onRequestStarted:(NSURLResponse *)response
-                   error:(NSError *)error;
-
-- (void)sendMonitorRequest:(NSMutableURLRequest *)request;
-
-- (void)onMonitorRequestResponse:(NSDictionary *)response
-                    httpResponse:(NSHTTPURLResponse *)httpResponse
-                           error:(NSError *)error;
-
-@end
-
-
 
 @interface MSGraphTestCase : XCTestCase
 @property NSMutableURLRequest *testRequest;

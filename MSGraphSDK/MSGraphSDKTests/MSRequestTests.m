@@ -167,40 +167,6 @@
     }];
     [dataTask taskWithRequest:testURLRequest];
 }
--(void)testAsyncTaskWithRequest{
-    NSDictionary *responseObject = @{@"baz" : @"qux"};
-    NSDictionary *odObject = @{@"foo" : @"bar"};
-    
-    NSMutableURLRequest *testURLRequest = [self.msRequest requestWithMethod:@"GET" body:nil headers:nil];
-    MSAsyncURLSessionDataTask *ayncDataTask = [self.msRequest asyncTaskWithRequest:testURLRequest odObjectWithDictionary:^id(NSDictionary *response) {
-        XCTAssertNotNil(response);
-        XCTAssertEqual(response.count, 1);
-        XCTAssertEqualObjects([response objectForKey:@"barz"], [responseObject objectForKey:@"barz"]);
-        return odObject;
-        
-    } completion:^(id response, MSAsyncOperationStatus *status, NSError *error) {
-        XCTAssertNotNil(response);
-        XCTAssertNil(error);
-        XCTAssertEqual(response, odObject);
-    }];
-    
-    [ayncDataTask onMonitorRequestResponse:responseObject httpResponse:self.OKresponse error:nil];
-}
-
--(void)testAsyncTaskWithRequestWithErrorResponse{
-    NSMutableURLRequest *testURLRequest = [self.msRequest requestWithMethod:@"GET" body:nil headers:@{@"extraKey":@"extraValue"}];
-    MSAsyncURLSessionDataTask *ayncDataTask = [self.msRequest asyncTaskWithRequest:testURLRequest odObjectWithDictionary:^id(NSDictionary *response) {
-        XCTAssert(NO);
-        return nil;
-        
-    } completion:^(id response, MSAsyncOperationStatus *status, NSError *error) {
-        XCTAssertNil(response);
-        XCTAssertNil(status);
-        XCTAssertEqual(error, self.testError);
-    }];
-    
-    [ayncDataTask onMonitorRequestResponse:nil httpResponse:nil error:self.testError];
-}
 
 -(void)testUploadTaskWithRequestFromFile{
     NSDictionary *odObject = @{@"foo" : @"bar"};

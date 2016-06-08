@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
-#import "MSGraphSDK.h"
+#import "MSDate.h"
 
 @interface MSDate (Test)
 

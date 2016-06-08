@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "MSGraphSDK.h"
+#import "MSObject.h"
 #import "OCMock.h"
 
 

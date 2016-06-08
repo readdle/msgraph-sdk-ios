@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "MSGraphSDK.h"
+#import "MSCollection.h"
 @interface MSCollectionTests : XCTestCase
 //@property (nonatomic) MSCollection *msCollection;
 @end
