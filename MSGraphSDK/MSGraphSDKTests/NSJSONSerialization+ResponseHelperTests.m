@@ -18,7 +18,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.testurl = [NSURL URLWithString:@"https://graph.microsoft.com/v1.0/"];
+    self.testurl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",MSGraphApiEndpoint,MSGraphApiVersion]];
     self.mockData = [NSJSONSerialization dataWithJSONObject:@{@"initKey":@"initData"} options:0 error:nil];
    // self.testError = [NSError errorWithDomain:@"testError" code:123 userInfo:@{}];
 }
@@ -27,12 +27,12 @@
     [super tearDown];
 }
 - (void)testDictionaryWithOKResponse {
-    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:self.testurl
+    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:_testurl
                                                                  statusCode:MSExpectedResponseCodesOK
                                                                 HTTPVersion:@"foo" headerFields:nil];
     NSError *parseError = nil;
     NSDictionary *retDic = [NSJSONSerialization dictionaryWithResponse:urlResponse
-                                                          responseData:self.mockData error:&parseError];
+                                                          responseData:_mockData error:&parseError];
     
     XCTAssertNotNil(retDic);
     XCTAssertNil(parseError);
@@ -40,7 +40,7 @@
     
 }
 - (void)testDictionaryNilWithOKResponse {
-    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:self.testurl
+    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:_testurl
                                                                  statusCode:MSExpectedResponseCodesOK
                                                                 HTTPVersion:@"foo" headerFields:nil];
     NSError *parseError = nil;
@@ -52,7 +52,7 @@
 }
 
 - (void)testDictionaryWith401Response {
-    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:self.testurl
+    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:_testurl
                                                                  statusCode:MSClientErrorCodeUnauthorized
                                                                 HTTPVersion:@"foo" headerFields:nil];
     NSData *errorData = [NSJSONSerialization dataWithJSONObject:@{@"error":@{@"code":@"Unauthorized", @"message": @"401 error"}} options:0 error:nil];
@@ -73,7 +73,7 @@
     XCTAssertEqualObjects(userInfoError.message, @"401 error");
 }
 - (void)testDictionaryNilDataWith401 {
-    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:self.testurl
+    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:_testurl
                                                                  statusCode:MSClientErrorCodeUnauthorized
                                                                 HTTPVersion:@"foo" headerFields:nil];
     NSError *parseError = nil;
@@ -113,7 +113,7 @@
     
     XCTAssertThrows([NSJSONSerialization errorFromResponse:nil responseObject:nil]);
     
-    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:self.testurl
+    NSHTTPURLResponse *urlResponse = [[NSHTTPURLResponse alloc] initWithURL:_testurl
                                                                  statusCode:MSClientErrorCodeInternalServerError
                                                                 HTTPVersion:@"foo" headerFields:nil];
     NSError *error1 = [NSJSONSerialization errorFromResponse:urlResponse responseObject:nil];

@@ -29,9 +29,9 @@
     [super setUp];
     self.testYear = 2016, self.testMonth = 6, self.testDay = 11;
     self.dateComponents = [[NSDateComponents alloc] init];
-    self.dateComponents.year = self.testYear;
-    self.dateComponents.month = self.testMonth;
-    self.dateComponents.day = self.testDay;
+    self.dateComponents.year = _testYear;
+    self.dateComponents.month = _testMonth;
+    self.dateComponents.day = _testDay;
     self.dateComponents.calendar = [NSCalendar currentCalendar];
 }
 
@@ -43,7 +43,7 @@
     MSDate *msdate = [MSDate date];
     XCTAssertNotNil(msdate);
     
-    msdate = [MSDate dateWithYear:self.testYear month:self.testMonth day:self.testDay];
+    msdate = [MSDate dateWithYear:_testYear month:_testMonth day:_testDay];
     XCTAssertNotNil(msdate);
     
     XCTAssertNoThrow([MSDate dateWithYear:0 month:0 day:0]);
@@ -61,15 +61,15 @@
     XCTAssertNil(msdate.date);
 }
 -(void)testInitWithYear{
-    MSDate *msdate = [[MSDate alloc] initWithYear:self.testYear month:self.testMonth day:self.testDay];
-    XCTAssertEqualObjects(msdate.date, [self.dateComponents date]);
+    MSDate *msdate = [[MSDate alloc] initWithYear:_testYear month:_testMonth day:_testDay];
+    XCTAssertEqualObjects(msdate.date, [_dateComponents date]);
 }
 
 -(void)testMSDatePropertiesFromInitWithYear{
-    MSDate *msdate = [[MSDate alloc] initWithYear:self.testYear month:self.testMonth day:self.testDay];
-    XCTAssertEqual([msdate year], self.testYear);
-    XCTAssertEqual(msdate.month, self.testMonth);
-    XCTAssertEqual(msdate.day, self.testDay);
+    MSDate *msdate = [[MSDate alloc] initWithYear:_testYear month:_testMonth day:_testDay];
+    XCTAssertEqual([msdate year], _testYear);
+    XCTAssertEqual(msdate.month, _testMonth);
+    XCTAssertEqual(msdate.day, _testDay);
 }
 -(void)testMSDateProertiesFromInitWithDate{
     
@@ -83,17 +83,17 @@
 }
 
 -(void)testMs_toString{
-    MSDate *msdate = [[MSDate alloc] initWithYear:self.testYear month:self.testMonth day:self.testDay];
+    MSDate *msdate = [[MSDate alloc] initWithYear:_testYear month:_testMonth day:_testDay];
     NSString *dateString = [msdate ms_toString];
-    NSString *expectedString =[NSString stringWithFormat:@"%@-0%@-%@",[@(self.testYear) stringValue],[@(self.testMonth) stringValue],[@(self.testDay) stringValue]];
+    NSString *expectedString =[NSString stringWithFormat:@"%@-0%@-%@",[@(_testYear) stringValue],[@(_testMonth) stringValue],[@(_testDay) stringValue]];
     XCTAssertEqualObjects(dateString, expectedString);
 }
 
 -(void)testMs_dateFromString{
-    MSDate *msdate = [MSDate ms_dateFromString:[NSString stringWithFormat:@"%@-0%@-%@",[@(self.testYear) stringValue],[@(self.testMonth) stringValue],[@(self.testDay) stringValue]]];
+    MSDate *msdate = [MSDate ms_dateFromString:[NSString stringWithFormat:@"%@-0%@-%@",[@(_testYear) stringValue],[@(_testMonth) stringValue],[@(_testDay) stringValue]]];
     
     XCTAssertNotNil(msdate);
-    XCTAssertEqualObjects(msdate.date, [self.dateComponents date]);
+    XCTAssertEqualObjects(msdate.date, [_dateComponents date]);
 }
 -(void)testMs_dateFromNilString{
     MSDate *msdate = [MSDate ms_dateFromString:nil];

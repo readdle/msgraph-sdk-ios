@@ -21,7 +21,7 @@
 - (void)setUp {
     [super setUp];
     self.firstKey = @"foo", self.firstValue = @"bar";
-    self.basicString = [[NSMutableString alloc] initWithFormat:@"?%@=%@",self.firstKey,self.firstValue];
+    self.basicString = [[NSMutableString alloc] initWithFormat:@"?%@=%@",_firstKey,_firstValue];
 }
 
 - (void)tearDown {
@@ -35,68 +35,68 @@
     XCTAssertEqualObjects(msExpandOptions.key, @"$expand");
     XCTAssertEqualObjects(msExpandOptions.value, @"thumb");
 
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msExpandOptions appendOptionToQueryString:queryString];
-    NSString *expectedString = [NSString stringWithFormat:@"%@&$expand=thumb",self.basicString];
+    NSString *expectedString = [NSString stringWithFormat:@"%@&$expand=thumb",_basicString];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 
 -(void)testMSFunctionParameters{
-    MSFunctionParameters *msFunctionParameters = [[MSFunctionParameters alloc] initWithKey:self.firstKey value:self.firstValue];
+    MSFunctionParameters *msFunctionParameters = [[MSFunctionParameters alloc] initWithKey:_firstKey value:_firstValue];
     XCTAssertNotNil(msFunctionParameters);
-    XCTAssertEqualObjects(msFunctionParameters.key, self.firstKey);
-    XCTAssertEqualObjects(msFunctionParameters.value, self.firstValue);
+    XCTAssertEqualObjects(msFunctionParameters.key, _firstKey);
+    XCTAssertEqualObjects(msFunctionParameters.value, _firstValue);
     
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msFunctionParameters appendOptionToFunctionParams:queryString];
-    NSString *expectedString = [NSString stringWithFormat:@"%@,foo='bar'",self.basicString];
+    NSString *expectedString = [NSString stringWithFormat:@"%@,foo='bar'",_basicString];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 -(void)testMSFunctionParametersWithNilValue{
-    MSFunctionParameters *msFunctionParameters = [[MSFunctionParameters alloc] initWithKey:self.firstKey value:nil];
+    MSFunctionParameters *msFunctionParameters = [[MSFunctionParameters alloc] initWithKey:_firstKey value:nil];
     XCTAssertNotNil(msFunctionParameters);
-    XCTAssertEqualObjects(msFunctionParameters.key, self.firstKey);
+    XCTAssertEqualObjects(msFunctionParameters.key, _firstKey);
     XCTAssertEqualObjects(msFunctionParameters.value, nil);
     
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msFunctionParameters appendOptionToFunctionParams:queryString];
-    NSString *expectedString = [NSString stringWithFormat:@"%@,foo=(null)",self.basicString];
+    NSString *expectedString = [NSString stringWithFormat:@"%@,foo=(null)",_basicString];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 -(void)testMSHeaderOptions{
-    MSHeaderOptions *hearderOptions =[[MSHeaderOptions alloc] initWithKey:self.firstKey value:self.firstValue];
+    MSHeaderOptions *hearderOptions =[[MSHeaderOptions alloc] initWithKey:_firstKey value:_firstValue];
     XCTAssertNotNil(hearderOptions);
-    XCTAssertEqualObjects(hearderOptions.key, self.firstKey);
-    XCTAssertEqualObjects(hearderOptions.value, self.firstValue);
+    XCTAssertEqualObjects(hearderOptions.key, _firstKey);
+    XCTAssertEqualObjects(hearderOptions.value, _firstValue);
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"xxcc", @"token", nil];
     [hearderOptions appendOptionToHeaders:dic];
     XCTAssertEqual([dic count], 2);
-    XCTAssertEqualObjects([dic objectForKey:self.firstKey], self.firstValue);
+    XCTAssertEqualObjects([dic objectForKey:_firstKey], _firstValue);
     XCTAssertEqualObjects([dic objectForKey:@"token"], @"xxcc");
 }
 -(void)testMSIfMatch{
-    MSIfMatch *msIfMatch = [MSIfMatch entityTags:self.firstValue];
+    MSIfMatch *msIfMatch = [MSIfMatch entityTags:_firstValue];
     XCTAssertNotNil(msIfMatch);
     XCTAssertEqualObjects(msIfMatch.key, @"If-Match");
-    XCTAssertEqualObjects(msIfMatch.value, self.firstValue);
+    XCTAssertEqualObjects(msIfMatch.value, _firstValue);
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"xxcc", @"token", nil];
     [msIfMatch appendOptionToHeaders:dic];
     XCTAssertEqual([dic count], 2);
-    XCTAssertEqualObjects([dic objectForKey:@"If-Match"], self.firstValue);
+    XCTAssertEqualObjects([dic objectForKey:@"If-Match"], _firstValue);
     XCTAssertEqualObjects([dic objectForKey:@"token"], @"xxcc");
 }
 -(void)testMSIfNoneMatch{
-    MSIfNoneMatch *msIfNoneMatch = [MSIfNoneMatch entityTags:self.firstValue];
+    MSIfNoneMatch *msIfNoneMatch = [MSIfNoneMatch entityTags:_firstValue];
     XCTAssertNotNil(msIfNoneMatch);
     XCTAssertEqualObjects(msIfNoneMatch.key, @"If-None-Match");
-    XCTAssertEqualObjects(msIfNoneMatch.value, self.firstValue);
+    XCTAssertEqualObjects(msIfNoneMatch.value, _firstValue);
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"xxcc", @"token", nil];
     [msIfNoneMatch appendOptionToHeaders:dic];
     XCTAssertEqual([dic count], 2);
-    XCTAssertEqualObjects([dic objectForKey:@"If-None-Match"], self.firstValue);
+    XCTAssertEqualObjects([dic objectForKey:@"If-None-Match"], _firstValue);
     XCTAssertEqualObjects([dic objectForKey:@"token"], @"xxcc");
 }
 -(void)testMSOrderByOptions{
@@ -105,9 +105,9 @@
     XCTAssertEqualObjects(msOrderByOptions.key, @"$orderby");
     XCTAssertEqualObjects(msOrderByOptions.value, @"name");
     
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msOrderByOptions appendOptionToQueryString:queryString];
-    NSString *expectedString = [NSString stringWithFormat:@"%@&%@=%@",self.basicString, msOrderByOptions.key, msOrderByOptions.value];
+    NSString *expectedString = [NSString stringWithFormat:@"%@&%@=%@",_basicString, msOrderByOptions.key, msOrderByOptions.value];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 -(void)testMSSelectOptions{
@@ -116,9 +116,9 @@
     XCTAssertEqualObjects(msSelectOptions.key, @"$select");
     XCTAssertEqualObjects(msSelectOptions.value, @"name");
     
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msSelectOptions appendOptionToQueryString:queryString];
-    NSString *expectedString = [NSString stringWithFormat:@"%@&%@=%@",self.basicString, msSelectOptions.key, msSelectOptions.value];
+    NSString *expectedString = [NSString stringWithFormat:@"%@&%@=%@",_basicString, msSelectOptions.key, msSelectOptions.value];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 -(void)testMSTopOptions{
@@ -127,9 +127,9 @@
     XCTAssertEqualObjects(msTopOptions.key, @"$top");
     XCTAssertEqualObjects(msTopOptions.value, @"10");
     
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msTopOptions appendOptionToQueryString:queryString];
-    NSString *expectedString = [NSString stringWithFormat:@"%@&%@=%@",self.basicString, msTopOptions.key, msTopOptions.value];
+    NSString *expectedString = [NSString stringWithFormat:@"%@&%@=%@",_basicString, msTopOptions.key, msTopOptions.value];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 @end

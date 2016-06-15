@@ -19,8 +19,8 @@
 
 - (void)setUp {
     [super setUp];
-    _demoData = [NSJSONSerialization dataWithJSONObject:@{@"initKey":@"initData"} options:0 error:nil];
-    _demoFileLocation = [NSURL URLWithString:@"foo/bar/baz"];
+    self.demoData = [NSJSONSerialization dataWithJSONObject:@{@"initKey":@"initData"} options:0 error:nil];
+    self.demoFileLocation = [NSURL URLWithString:@"foo/bar/baz"];
 }
 
 - (void)tearDown {
@@ -34,22 +34,22 @@
     
     XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:nil data:_demoData client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
     }]);
-    XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest data:nil client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
+    XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock data:nil client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
     }]);
-    XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest data:_demoData client:nil completionHandler:^(NSDictionary *response, NSError *error) {
+    XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock data:_demoData client:nil completionHandler:^(NSDictionary *response, NSError *error) {
     }]);
     
 
     XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:nil fromFile:_demoFileLocation client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
     }]);
-    XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest fromFile:nil client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
+    XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock fromFile:nil client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
     }]);
-    XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest fromFile:_demoFileLocation client:nil completionHandler:^(NSDictionary *response, NSError *error) {
+    XCTAssertThrows([[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock fromFile:_demoFileLocation client:nil completionHandler:^(NSDictionary *response, NSError *error) {
     }]);
     
     
-    MSURLSessionUploadTask *uploadTask  = [[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest data:_demoData client:self.mockClient completionHandler:nil];
-    MSURLSessionUploadTask *uploadTaskFromFile  = [[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest fromFile:_demoFileLocation client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
+    MSURLSessionUploadTask *uploadTask  = [[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock data:_demoData client:self.mockClient completionHandler:nil];
+    MSURLSessionUploadTask *uploadTaskFromFile  = [[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock fromFile:_demoFileLocation client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
     }];
     XCTAssertNotNil(uploadTask);
     XCTAssertNotNil(uploadTaskFromFile);
@@ -63,7 +63,7 @@
     __block NSError *authError = [NSError errorWithDomain:@"autherror" code:123 userInfo:@{}];
     [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:nil error:authError];
     
-    __block MSURLSessionUploadTask *uploadTask = [[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest fromFile:self.demoFileLocation client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
+    __block MSURLSessionUploadTask *uploadTask = [[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock fromFile:_demoFileLocation client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
         XCTAssertNotNil(error);
         XCTAssertEqual(error, authError);
     }];
@@ -78,9 +78,9 @@
  */
 - (void)testMSURLSessionUploadTaskWithData {
     __block NSHTTPURLResponse *validResponse = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:200 HTTPVersion:@"foo" headerFields:@{}];
-    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.testRequest error:nil];
-    [self uploadTaskFromDataCompletionWithRequest:self.testRequest progress:nil responseData:self.demoData response:validResponse error:nil];
-    __block MSURLSessionUploadTask *uploadTask = [[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest data:self.demoData client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
+    [self uploadTaskFromDataCompletionWithRequest:self.requestForMock progress:nil responseData:_demoData response:validResponse error:nil];
+    __block MSURLSessionUploadTask *uploadTask = [[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock data:_demoData client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
         XCTAssertNil(error);
         XCTAssertNotNil(response);
     }];
@@ -96,9 +96,9 @@
  */
 - (void)testMSURLSessionUploadTaskWithFileURL {
     __block NSHTTPURLResponse *validResponse = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:200 HTTPVersion:@"foo" headerFields:@{}];
-    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.testRequest error:nil];
-    [self uploadTaskFromFileURLCompletionWithRequest:self.testRequest progress:nil fileURL:self.demoFileLocation responseData:nil response:validResponse error:nil];
-    __block MSURLSessionUploadTask *uploadTask = [[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest fromFile:self.demoFileLocation client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
+    [self uploadTaskFromFileURLCompletionWithRequest:self.requestForMock progress:nil fileURL:_demoFileLocation responseData:nil response:validResponse error:nil];
+    __block MSURLSessionUploadTask *uploadTask = [[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock fromFile:_demoFileLocation client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
         XCTAssertNil(error);
         XCTAssertNil(response);
     }];
@@ -114,15 +114,15 @@
 - (void)testMSURLSessionUploadTaskWith404{
     __block NSHTTPURLResponse *notFound = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:404 HTTPVersion:@"foo" headerFields:nil];
     
-    [self uploadTaskFromDataCompletionWithRequest:self.testRequest progress:nil responseData:self.demoData response:notFound error:nil];
+    [self uploadTaskFromDataCompletionWithRequest:self.requestForMock progress:nil responseData:_demoData response:notFound error:nil];
     
-    MSURLSessionUploadTask *uploadTask = [[MSURLSessionUploadTask alloc] initWithRequest:self.testRequest data:self.demoData client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
+    MSURLSessionUploadTask *uploadTask = [[MSURLSessionUploadTask alloc] initWithRequest:self.requestForMock data:_demoData client:self.mockClient completionHandler:^(NSDictionary *response, NSError *error) {
         XCTAssertNotNil(error);
         XCTAssertEqualObjects(error.domain, MSErrorDomain);
         XCTAssertEqual(error.code, 404);
     }];
     
-    [uploadTask taskWithRequest:self.testRequest];
+    [uploadTask taskWithRequest:self.requestForMock];
     XCTAssertEqual(uploadTask.state, MSURLSessionTaskStateTaskCompleted);
 }
 @end

@@ -29,31 +29,31 @@
 }
 
 - (void)testInitMSURLSessionTaskState{
-    MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.testRequest client:self.mockClient];
+    MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.requestForMock client:self.mockClient];
     XCTAssertEqual(msURLSessionTask.state, MSURLSessionTaskStateTaskCreated);
     XCTAssertEqual(msURLSessionTask.client, self.mockClient);
 }
 
 - (void)testMSURLSessionTaskAuthFailed{
     __block NSError *authError = [NSError errorWithDomain:@"autherror" code:123 userInfo:@{}];
-    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.testRequest error:authError];
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:authError];
     
-    MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.testRequest client:self.mockClient];
+    MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.requestForMock client:self.mockClient];
     XCTAssertThrows([msURLSessionTask execute]);
     XCTAssertEqual(msURLSessionTask.state, MSURLSessionTaskStateTaskAuthFailed);
 }
 - (void)testMSURLSessionTaskWithSuccessAuth{
-    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.testRequest error:nil];
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
     
-    MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.testRequest client:self.mockClient];
+    MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.requestForMock client:self.mockClient];
     XCTAssertThrows([msURLSessionTask execute]);
     XCTAssertEqual(msURLSessionTask.state, MSURLSessionTaskStateTaskExecuting);
 }
 - (void)testCancelMSURLSessionTask{
-    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.testRequest error:nil];
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
     
     id mockNSURLSessionTask = OCMClassMock([NSURLSessionTask class]);
-    MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.testRequest client:self.mockClient];
+    MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.requestForMock client:self.mockClient];
     id mockMSSessionTask = OCMPartialMock(msURLSessionTask);
     OCMStub([mockMSSessionTask taskWithRequest:[OCMArg any]]).andReturn(mockNSURLSessionTask);
     

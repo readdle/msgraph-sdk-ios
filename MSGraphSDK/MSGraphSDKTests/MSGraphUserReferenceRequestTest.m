@@ -7,16 +7,18 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "MSGraphTestCase.h"
 
-@interface MSGraphUserReferenceRequestTest : XCTestCase
-
+@interface MSGraphUserReferenceRequestTest : MSGraphTestCase
+@property (nonatomic) NSURL *userReferenceURL;
 @end
-
+//EntityReferenceRequest test
 @implementation MSGraphUserReferenceRequestTest
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.userReferenceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/manager/$ref",self.graphUrl]];
+    self.requestForMock = [[NSMutableURLRequest alloc] initWithURL:_userReferenceURL];
 }
 
 - (void)tearDown {
@@ -24,16 +26,37 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testMSGraphUserReferenceRequestInit {
+    MSGraphUserReferenceRequest *request = [[MSGraphUserReferenceRequest alloc] initWithURL:_userReferenceURL client:self.mockClient];
+    XCTAssertNotNil(request);
+    XCTAssertEqualObjects(request.requestURL, _userReferenceURL);
+    XCTAssertEqualObjects(request.client, self.mockClient);
+    
+    XCTAssertThrows([[MSGraphUserReferenceRequest alloc] initWithURL:nil client:self.mockClient]);
+    XCTAssertThrows([[MSGraphUserReferenceRequest alloc] initWithURL:_userReferenceURL client:nil]);
+    XCTAssertThrows([[MSGraphUserReferenceRequest alloc] initWithURL:nil client:nil]);
 }
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+- (void)testMSGraphUserReferenceRequestDeleteWithOK {
+    MSGraphUserReferenceRequest *request = [[MSGraphUserReferenceRequest alloc] initWithURL:_userReferenceURL client:self.mockClient];
+    
+    NSHTTPURLResponse *OKresponse = [[NSHTTPURLResponse alloc] initWithURL:_userReferenceURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil];
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:OKresponse error:nil];
+    MSURLSessionDataTask *task = [request deleteWithCompletion:^(NSError *error) {
+        XCTAssertNil(error);
     }];
+    [self CheckRequest:task Method:@"DELETE" URL:_userReferenceURL];
 }
-
+- (void)testMSGraphUserReferenceRequestDeleteWith403 {
+    MSGraphUserReferenceRequest *request = [[MSGraphUserReferenceRequest alloc] initWithURL:_userReferenceURL client:self.mockClient];
+    
+    NSHTTPURLResponse *Response403 = [[NSHTTPURLResponse alloc] initWithURL:_userReferenceURL statusCode:MSClientErrorCodeForbidden HTTPVersion:@"foo" headerFields:nil];
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:Response403 error:nil];
+    MSURLSessionDataTask *task = [request deleteWithCompletion:^(NSError *error) {
+        XCTAssertNotNil(error);
+        XCTAssertEqual(error.code, MSClientErrorCodeForbidden);
+    }];
+    [self CheckRequest:task Method:@"DELETE" URL:_userReferenceURL];
+}
 @end

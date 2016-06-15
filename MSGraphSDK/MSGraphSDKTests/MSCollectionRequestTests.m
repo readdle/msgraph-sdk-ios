@@ -34,9 +34,9 @@
     NSDictionary *responseObject = @{ MSCollectionValueKey : values, MSODataNextContext : @"foo" };
     
     NSHTTPURLResponse *OKresponse = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil];
-    [self dataTaskCompletionWithRequest:self.testRequest data:[NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil] response:OKresponse error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:[NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil] response:OKresponse error:nil];
     
-    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.testRequest odObjectWithDictionary:^MSObject *(NSDictionary *response) {
+    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.requestForMock odObjectWithDictionary:^MSObject *(NSDictionary *response) {
         XCTAssertNotNil(response);
         XCTAssert([values containsObject:response]);
         MSObject *cast = [[MSObject alloc] initWithDictionary:response];
@@ -57,15 +57,15 @@
         XCTAssertEqualObjects(response.additionalData, responseObject);
         
     }];
-    [dataTask taskWithRequest:self.testRequest];
+    [dataTask taskWithRequest:self.requestForMock];
     
 }
 - (void)testMSCollectionRequestWithNilResponse{
     MSCollectionRequest *collectionRequst = [[MSCollectionRequest alloc] initWithURL:self.testBaseURL client:self.mockClient];
 
-    [self dataTaskCompletionWithRequest:self.testRequest data:nil response:nil error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:nil error:nil];
     
-    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.testRequest odObjectWithDictionary:^MSObject *(NSDictionary *response) {
+    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.requestForMock odObjectWithDictionary:^MSObject *(NSDictionary *response) {
         // This should never get called if the response was nil
         XCTAssert(YES);
     } completion:^(MSCollection *response, NSError *error) {
@@ -73,16 +73,16 @@
         XCTAssertNil(error);
     }];
     
-    [dataTask taskWithRequest:self.testRequest];
+    [dataTask taskWithRequest:self.requestForMock];
     
 }
 - (void)testMSCollectionRequestWithBadResponse{
    NSHTTPURLResponse *Badresponse = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSClientErrorCodeBadRequest HTTPVersion:@"foo" headerFields:nil];
     MSCollectionRequest *collectionRequst = [[MSCollectionRequest alloc] initWithURL:self.testBaseURL client:self.mockClient];
     
-    [self dataTaskCompletionWithRequest:self.testRequest data:nil response:Badresponse error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:Badresponse error:nil];
     
-    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.testRequest odObjectWithDictionary:^MSObject *(NSDictionary *response) {
+    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.requestForMock odObjectWithDictionary:^MSObject *(NSDictionary *response) {
         // This should never get called if the response was nil
         XCTAssert(YES);
     } completion:^(MSCollection *response, NSError *error) {
@@ -91,7 +91,7 @@
         XCTAssertEqual(error.code, MSClientErrorCodeBadRequest);
     }];
     
-    [dataTask taskWithRequest:self.testRequest];
+    [dataTask taskWithRequest:self.requestForMock];
     
 }
 
@@ -106,9 +106,9 @@
     NSDictionary *responseObject = @{ MSCollectionValueKey : values, MSODataNextContext : @"foo" };
     
     NSHTTPURLResponse *OKresponse = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil];
-    [self dataTaskCompletionWithRequest:self.testRequest data:[NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil] response:OKresponse error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:[NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil] response:OKresponse error:nil];
     
-    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.testRequest odObjectWithDictionary:^MSObject *(NSDictionary *response) {
+    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.requestForMock odObjectWithDictionary:^MSObject *(NSDictionary *response) {
         XCTAssertNotNil(response);
         XCTAssert([values containsObject:response]);
         if([response.allKeys  containsObject:@"foo"]){
@@ -122,7 +122,7 @@
         XCTAssertNil(response);
         XCTAssertNil(error);
     }];
-    [dataTask taskWithRequest:self.testRequest];
+    [dataTask taskWithRequest:self.requestForMock];
     
 }
 
@@ -131,9 +131,9 @@
     NSDictionary *responseObject = @{ MSCollectionValueKey : @[], MSODataNextContext : @"foo" };
     
     NSHTTPURLResponse *OKresponse = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil];
-    [self dataTaskCompletionWithRequest:self.testRequest data:[NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil] response:OKresponse error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:[NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil] response:OKresponse error:nil];
     
-    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.testRequest odObjectWithDictionary:^MSObject *(NSDictionary *response) {
+    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.requestForMock odObjectWithDictionary:^MSObject *(NSDictionary *response) {
         XCTAssert(YES);
         return nil;
         }
@@ -143,7 +143,7 @@
          XCTAssertEqual(response.value.count,0);
         XCTAssertNil(error);
     }];
-    [dataTask taskWithRequest:self.testRequest];
+    [dataTask taskWithRequest:self.requestForMock];
     
 }
 -(void)testMSCollectionRequestWithNilNextLink{
@@ -155,9 +155,9 @@
     NSDictionary *responseObject = @{ MSCollectionValueKey : values};
     
     NSHTTPURLResponse *OKresponse = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil];
-    [self dataTaskCompletionWithRequest:self.testRequest data:[NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil] response:OKresponse error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:[NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil] response:OKresponse error:nil];
     
-    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.testRequest
+    MSURLSessionDataTask *dataTask = [collectionRequst collectionTaskWithRequest:self.requestForMock
                                                           odObjectWithDictionary:^MSObject *(NSDictionary *response) {
                                                               MSObject *cast = [[MSObject alloc] initWithDictionary:response];
                                                               return cast;
@@ -168,7 +168,7 @@
                                                                           XCTAssertNil(response.nextLink);
                                                                           XCTAssertNil(error);
                                                                       }];
-    [dataTask taskWithRequest:self.testRequest];
+    [dataTask taskWithRequest:self.requestForMock];
     
 }
 

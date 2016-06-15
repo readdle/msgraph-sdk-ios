@@ -7,7 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E0CFD9D1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */; };
+		0E0CFD9F1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */; };
+		0E0CFDA11D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */; };
+		0E0CFDA31D082143009F9F84 /* MSGraphUserWithReferenceRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDA21D082143009F9F84 /* MSGraphUserWithReferenceRequestBuilderTests.m */; };
+		0E0CFDA51D08216C009F9F84 /* MSGraphUserWithReferenceRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDA41D08216C009F9F84 /* MSGraphUserWithReferenceRequestTests.m */; };
+		0E0CFDA71D08226B009F9F84 /* MSGraphProfilePhotoRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDA61D08226B009F9F84 /* MSGraphProfilePhotoRequestTests.m */; };
+		0E0CFDA91D082299009F9F84 /* MSGraphProfilePhotoRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDA81D082299009F9F84 /* MSGraphProfilePhotoRequestBuilderTests.m */; };
+		0E0CFDAB1D082389009F9F84 /* MSGraphUserMessagesCollectionRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDAA1D082389009F9F84 /* MSGraphUserMessagesCollectionRequestBuilderTests.m */; };
+		0E0CFDAD1D0823A9009F9F84 /* MSGraphUserMessagesCollectionRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDAC1D0823A9009F9F84 /* MSGraphUserMessagesCollectionRequestTests.m */; };
+		0E0CFDB11D0824BC009F9F84 /* MSGraphGroupMembersCollectionReferencesRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDB01D0824BC009F9F84 /* MSGraphGroupMembersCollectionReferencesRequestTests.m */; };
+		0E0CFDB31D082531009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDB21D082531009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestTests.m */; };
+		0E0CFDB51D082562009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDB41D082562009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests.m */; };
+		0E417A471D10EE14000E1E5D /* MSBlockAuthenticationProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E417A461D10EE14000E1E5D /* MSBlockAuthenticationProviderTests.m */; };
+		0E417A4A1D110564000E1E5D /* MSLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E417A491D110564000E1E5D /* MSLoggerTests.m */; };
+		0E417A4D1D1135C7000E1E5D /* MSURLSessionManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E417A4C1D1135C7000E1E5D /* MSURLSessionManagerTests.m */; };
 		0E4730DF1D06592B00B4E174 /* NSJSONSerialization+ResponseHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4730DE1D06592B00B4E174 /* NSJSONSerialization+ResponseHelperTests.m */; };
+		0E4773DD1D07ABA7008F57B9 /* MSGraphSDKVersionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4773DC1D07ABA7008F57B9 /* MSGraphSDKVersionTests.m */; };
+		0E4773E01D07ADA4008F57B9 /* NSError+MSGraphSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4773DF1D07ADA4008F57B9 /* NSError+MSGraphSDKTests.m */; };
+		0E4773E21D07C4E3008F57B9 /* MSGraphClientConfiguration+DefaultConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4773E11D07C4E3008F57B9 /* MSGraphClientConfiguration+DefaultConfigurationTests.m */; };
+		0E4773E41D07CA8D008F57B9 /* MSGraphClient+DefaultConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4773E31D07CA8D008F57B9 /* MSGraphClient+DefaultConfigurationTests.m */; };
 		0E59ABFE1D0115B7004C7F92 /* MSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E59ABFD1D0115B7004C7F92 /* MSDateTests.m */; };
 		0E59AC001D0135F6004C7F92 /* MSOptionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E59ABFF1D0135F6004C7F92 /* MSOptionsTests.m */; };
 		0E59AC021D013787004C7F92 /* MSQueryParametersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E59AC011D013787004C7F92 /* MSQueryParametersTests.m */; };
@@ -20,6 +39,11 @@
 		0E6D51E51D06DAEF00A66F4E /* MSGraphDriveSpecialCollectionRequestBuilder+KnownFoldersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D51E41D06DAEF00A66F4E /* MSGraphDriveSpecialCollectionRequestBuilder+KnownFoldersTests.m */; };
 		0E721E221CFD51F0006BDC22 /* MSURLSessionDownloadTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E721E211CFD51EF006BDC22 /* MSURLSessionDownloadTaskTests.m */; };
 		0E721E241CFD6417006BDC22 /* MSURLSessionUploadTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E721E231CFD6417006BDC22 /* MSURLSessionUploadTaskTests.m */; };
+		0E78511F1D0CF61D00F575F4 /* MSGraphDriveItemSearchRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E78511E1D0CF61D00F575F4 /* MSGraphDriveItemSearchRequestTests.m */; };
+		0E7851211D0CF7A400F575F4 /* MSGraphDriveItemSearchRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7851201D0CF7A400F575F4 /* MSGraphDriveItemSearchRequestBuilderTests.m */; };
+		0E7851231D0CFD0900F575F4 /* MSGraphThumbnailSetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7851221D0CFD0900F575F4 /* MSGraphThumbnailSetTests.m */; };
+		0E7851251D0D1B4800F575F4 /* MSGraphItemBodyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7851241D0D1B4800F575F4 /* MSGraphItemBodyTests.m */; };
+		0E7851271D0D253E00F575F4 /* MSGraphCalendarColorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7851261D0D253E00F575F4 /* MSGraphCalendarColorTests.m */; };
 		0E8313DE1D0516E000A2A387 /* MSGraphClient+BaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8313DD1D0516E000A2A387 /* MSGraphClient+BaseTests.m */; };
 		0E8313E01D0549FC00A2A387 /* MSGraphDriveItemRequestBuilder+ItemByPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8313DF1D0549FC00A2A387 /* MSGraphDriveItemRequestBuilder+ItemByPathTests.m */; };
 		0E8313E21D055CFA00A2A387 /* MSGraphThumbnailSet+CustomThumbnailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8313E11D055CFA00A2A387 /* MSGraphThumbnailSet+CustomThumbnailTests.m */; };
@@ -876,7 +900,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphProfilePhotoStreamRequestTests.m; sourceTree = "<group>"; };
+		0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserReferenceRequestBuilderTests.m; sourceTree = "<group>"; };
+		0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserReferenceRequestTest.m; sourceTree = "<group>"; };
+		0E0CFDA21D082143009F9F84 /* MSGraphUserWithReferenceRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserWithReferenceRequestBuilderTests.m; sourceTree = "<group>"; };
+		0E0CFDA41D08216C009F9F84 /* MSGraphUserWithReferenceRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserWithReferenceRequestTests.m; sourceTree = "<group>"; };
+		0E0CFDA61D08226B009F9F84 /* MSGraphProfilePhotoRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphProfilePhotoRequestTests.m; sourceTree = "<group>"; };
+		0E0CFDA81D082299009F9F84 /* MSGraphProfilePhotoRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphProfilePhotoRequestBuilderTests.m; sourceTree = "<group>"; };
+		0E0CFDAA1D082389009F9F84 /* MSGraphUserMessagesCollectionRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserMessagesCollectionRequestBuilderTests.m; sourceTree = "<group>"; };
+		0E0CFDAC1D0823A9009F9F84 /* MSGraphUserMessagesCollectionRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserMessagesCollectionRequestTests.m; sourceTree = "<group>"; };
+		0E0CFDB01D0824BC009F9F84 /* MSGraphGroupMembersCollectionReferencesRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphGroupMembersCollectionReferencesRequestTests.m; sourceTree = "<group>"; };
+		0E0CFDB21D082531009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphGroupMembersCollectionWithReferencesRequestTests.m; sourceTree = "<group>"; };
+		0E0CFDB41D082562009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests.m; sourceTree = "<group>"; };
+		0E417A461D10EE14000E1E5D /* MSBlockAuthenticationProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBlockAuthenticationProviderTests.m; sourceTree = "<group>"; };
+		0E417A491D110564000E1E5D /* MSLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSLoggerTests.m; sourceTree = "<group>"; };
+		0E417A4C1D1135C7000E1E5D /* MSURLSessionManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSURLSessionManagerTests.m; sourceTree = "<group>"; };
 		0E4730DE1D06592B00B4E174 /* NSJSONSerialization+ResponseHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+ResponseHelperTests.m"; sourceTree = "<group>"; };
+		0E4773DC1D07ABA7008F57B9 /* MSGraphSDKVersionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphSDKVersionTests.m; sourceTree = "<group>"; };
+		0E4773DF1D07ADA4008F57B9 /* NSError+MSGraphSDKTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+MSGraphSDKTests.m"; sourceTree = "<group>"; };
+		0E4773E11D07C4E3008F57B9 /* MSGraphClientConfiguration+DefaultConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSGraphClientConfiguration+DefaultConfigurationTests.m"; sourceTree = "<group>"; };
+		0E4773E31D07CA8D008F57B9 /* MSGraphClient+DefaultConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSGraphClient+DefaultConfigurationTests.m"; sourceTree = "<group>"; };
 		0E59ABFD1D0115B7004C7F92 /* MSDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSDateTests.m; sourceTree = "<group>"; };
 		0E59ABFF1D0135F6004C7F92 /* MSOptionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSOptionsTests.m; sourceTree = "<group>"; };
 		0E59AC011D013787004C7F92 /* MSQueryParametersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSQueryParametersTests.m; sourceTree = "<group>"; };
@@ -889,6 +932,11 @@
 		0E6D51E41D06DAEF00A66F4E /* MSGraphDriveSpecialCollectionRequestBuilder+KnownFoldersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSGraphDriveSpecialCollectionRequestBuilder+KnownFoldersTests.m"; sourceTree = "<group>"; };
 		0E721E211CFD51EF006BDC22 /* MSURLSessionDownloadTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSURLSessionDownloadTaskTests.m; sourceTree = "<group>"; };
 		0E721E231CFD6417006BDC22 /* MSURLSessionUploadTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSURLSessionUploadTaskTests.m; sourceTree = "<group>"; };
+		0E78511E1D0CF61D00F575F4 /* MSGraphDriveItemSearchRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphDriveItemSearchRequestTests.m; sourceTree = "<group>"; };
+		0E7851201D0CF7A400F575F4 /* MSGraphDriveItemSearchRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphDriveItemSearchRequestBuilderTests.m; sourceTree = "<group>"; };
+		0E7851221D0CFD0900F575F4 /* MSGraphThumbnailSetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphThumbnailSetTests.m; sourceTree = "<group>"; };
+		0E7851241D0D1B4800F575F4 /* MSGraphItemBodyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphItemBodyTests.m; sourceTree = "<group>"; };
+		0E7851261D0D253E00F575F4 /* MSGraphCalendarColorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphCalendarColorTests.m; sourceTree = "<group>"; };
 		0E8313DD1D0516E000A2A387 /* MSGraphClient+BaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSGraphClient+BaseTests.m"; sourceTree = "<group>"; };
 		0E8313DF1D0549FC00A2A387 /* MSGraphDriveItemRequestBuilder+ItemByPathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSGraphDriveItemRequestBuilder+ItemByPathTests.m"; sourceTree = "<group>"; };
 		0E8313E11D055CFA00A2A387 /* MSGraphThumbnailSet+CustomThumbnailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSGraphThumbnailSet+CustomThumbnailTests.m"; sourceTree = "<group>"; };
@@ -1760,6 +1808,82 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E0CFD931D081D3C009F9F84 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				0E0CFD941D081D83009F9F84 /* Model */,
+				0E0CFD951D081D8B009F9F84 /* Requests */,
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		0E0CFD941D081D83009F9F84 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0E7851221D0CFD0900F575F4 /* MSGraphThumbnailSetTests.m */,
+				0E7851241D0D1B4800F575F4 /* MSGraphItemBodyTests.m */,
+				0E7851261D0D253E00F575F4 /* MSGraphCalendarColorTests.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0E0CFD951D081D8B009F9F84 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				0E0CFDA81D082299009F9F84 /* MSGraphProfilePhotoRequestBuilderTests.m */,
+				0E0CFDA61D08226B009F9F84 /* MSGraphProfilePhotoRequestTests.m */,
+				0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */,
+				0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */,
+				0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */,
+				0E0CFDA21D082143009F9F84 /* MSGraphUserWithReferenceRequestBuilderTests.m */,
+				0E0CFDA41D08216C009F9F84 /* MSGraphUserWithReferenceRequestTests.m */,
+				0E0CFDAA1D082389009F9F84 /* MSGraphUserMessagesCollectionRequestBuilderTests.m */,
+				0E0CFDAC1D0823A9009F9F84 /* MSGraphUserMessagesCollectionRequestTests.m */,
+				0E0CFDB01D0824BC009F9F84 /* MSGraphGroupMembersCollectionReferencesRequestTests.m */,
+				0E0CFDB41D082562009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests.m */,
+				0E0CFDB21D082531009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestTests.m */,
+				0E7851201D0CF7A400F575F4 /* MSGraphDriveItemSearchRequestBuilderTests.m */,
+				0E78511E1D0CF61D00F575F4 /* MSGraphDriveItemSearchRequestTests.m */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
+		0E417A451D10E8DE000E1E5D /* MSGraphSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0E417A461D10EE14000E1E5D /* MSBlockAuthenticationProviderTests.m */,
+				0E417A491D110564000E1E5D /* MSLoggerTests.m */,
+				0E417A4B1D11359F000E1E5D /* MSURLSessionManager */,
+			);
+			name = MSGraphSDK;
+			sourceTree = "<group>";
+		};
+		0E417A4B1D11359F000E1E5D /* MSURLSessionManager */ = {
+			isa = PBXGroup;
+			children = (
+				0E417A4C1D1135C7000E1E5D /* MSURLSessionManagerTests.m */,
+			);
+			name = MSURLSessionManager;
+			sourceTree = "<group>";
+		};
+		0E4773DB1D07AAAA008F57B9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0E4773DC1D07ABA7008F57B9 /* MSGraphSDKVersionTests.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		0E4773DE1D07AD64008F57B9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0E4773DF1D07ADA4008F57B9 /* NSError+MSGraphSDKTests.m */,
+				0E4773E11D07C4E3008F57B9 /* MSGraphClientConfiguration+DefaultConfigurationTests.m */,
+				0E4773E31D07CA8D008F57B9 /* MSGraphClient+DefaultConfigurationTests.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		0E59AC091D01901A004C7F92 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -1771,6 +1895,7 @@
 		0E5F8AE41CFA855B0070C38F /* MSGraphCoreSDK */ = {
 			isa = PBXGroup;
 			children = (
+				0E0CFD931D081D3C009F9F84 /* Generated */,
 				0E8313DC1D05167C00A2A387 /* Extensions */,
 				0EFE525F1CED834A002494E7 /* Core */,
 				0E59AC091D01901A004C7F92 /* Errors */,
@@ -1824,15 +1949,17 @@
 			name = MSURLSession;
 			sourceTree = "<group>";
 		};
-		0EFE52551CEC9627002494E7 /* MSGraphCoreSDKTests */ = {
+		0EFE52551CEC9627002494E7 /* MSGraphSDKTests */ = {
 			isa = PBXGroup;
 			children = (
 				0EB499811CF993BF001617C3 /* MSGraphTestCase.h */,
 				0EB4997F1CF9935E001617C3 /* MSGraphTestCase.m */,
+				0E4773DB1D07AAAA008F57B9 /* Common */,
+				0E417A451D10E8DE000E1E5D /* MSGraphSDK */,
+				0E4773DE1D07AD64008F57B9 /* Extensions */,
 				0E5F8AE41CFA855B0070C38F /* MSGraphCoreSDK */,
 				0E9BCBE71CFECFDF008A938E /* Supporting Files */,
 			);
-			name = MSGraphCoreSDKTests;
 			path = MSGraphSDKTests;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -1855,7 +1982,7 @@
 		10B4D1161AF8215D0083D86C = {
 			isa = PBXGroup;
 			children = (
-				0EFE52551CEC9627002494E7 /* MSGraphCoreSDKTests */,
+				0EFE52551CEC9627002494E7 /* MSGraphSDKTests */,
 				10B4D1221AF8215D0083D86C /* MSGraphSDK */,
 				10B4D1211AF8215D0083D86C /* Products */,
 				F08C8D1591C8897B6CBE2BAF /* Pods */,
@@ -3405,31 +3532,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E9BCBED1CFFF2C1008A938E /* MSRequestBuilderTests.m in Sources */,
+				0E0CFDB51D082562009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests.m in Sources */,
+				0E0CFDA71D08226B009F9F84 /* MSGraphProfilePhotoRequestTests.m in Sources */,
 				0E59AC081D01854A004C7F92 /* MSRequestOptionsBuilderTests.m in Sources */,
+				0E7851271D0D253E00F575F4 /* MSGraphCalendarColorTests.m in Sources */,
 				0E721E221CFD51F0006BDC22 /* MSURLSessionDownloadTaskTests.m in Sources */,
 				0EB499801CF9935E001617C3 /* MSGraphTestCase.m in Sources */,
 				0E721E241CFD6417006BDC22 /* MSURLSessionUploadTaskTests.m in Sources */,
+				0E417A471D10EE14000E1E5D /* MSBlockAuthenticationProviderTests.m in Sources */,
 				0EBC14CF1CFC32C700FDF800 /* MSURLSessionDataTaskTests.m in Sources */,
 				0E59AC001D0135F6004C7F92 /* MSOptionsTests.m in Sources */,
+				0E7851231D0CFD0900F575F4 /* MSGraphThumbnailSetTests.m in Sources */,
+				0E417A4D1D1135C7000E1E5D /* MSURLSessionManagerTests.m in Sources */,
+				0E0CFD9F1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m in Sources */,
+				0E4773E21D07C4E3008F57B9 /* MSGraphClientConfiguration+DefaultConfigurationTests.m in Sources */,
 				0E59AC021D013787004C7F92 /* MSQueryParametersTests.m in Sources */,
+				0E0CFD9D1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m in Sources */,
 				0E6D51E31D06D76A00A66F4E /* MSGraphUserMailFoldersCollectionRequestBuilder+KnownFoldersTests.m in Sources */,
+				0E417A4A1D110564000E1E5D /* MSLoggerTests.m in Sources */,
+				0E4773E01D07ADA4008F57B9 /* NSError+MSGraphSDKTests.m in Sources */,
 				0E59AC061D0182EB004C7F92 /* MSNameConflictTests.m in Sources */,
+				0E7851251D0D1B4800F575F4 /* MSGraphItemBodyTests.m in Sources */,
 				0E8313DE1D0516E000A2A387 /* MSGraphClient+BaseTests.m in Sources */,
+				0E4773DD1D07ABA7008F57B9 /* MSGraphSDKVersionTests.m in Sources */,
+				0E0CFDA11D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m in Sources */,
+				0E4773E41D07CA8D008F57B9 /* MSGraphClient+DefaultConfigurationTests.m in Sources */,
 				0E83DA321CFEB2AB0018FAD1 /* MSCollectionRequestTests.m in Sources */,
 				0E8313E01D0549FC00A2A387 /* MSGraphDriveItemRequestBuilder+ItemByPathTests.m in Sources */,
+				0E7851211D0CF7A400F575F4 /* MSGraphDriveItemSearchRequestBuilderTests.m in Sources */,
+				0E0CFDB31D082531009F9F84 /* MSGraphGroupMembersCollectionWithReferencesRequestTests.m in Sources */,
+				0E0CFDAB1D082389009F9F84 /* MSGraphUserMessagesCollectionRequestBuilderTests.m in Sources */,
 				0EFE52611CED838F002494E7 /* MSCollectionTests.m in Sources */,
 				0E8313E21D055CFA00A2A387 /* MSGraphThumbnailSet+CustomThumbnailTests.m in Sources */,
 				0E59AC041D013A41004C7F92 /* MSRequestOptionsTests.m in Sources */,
 				0E59ABFE1D0115B7004C7F92 /* MSDateTests.m in Sources */,
 				0E5F8AE81CFA870D0070C38F /* MSURLSessionTaskTests.m in Sources */,
 				0E59AC0B1D019056004C7F92 /* MSErrorTest.m in Sources */,
+				0E0CFDB11D0824BC009F9F84 /* MSGraphGroupMembersCollectionReferencesRequestTests.m in Sources */,
 				0E4730DF1D06592B00B4E174 /* NSJSONSerialization+ResponseHelperTests.m in Sources */,
+				0E78511F1D0CF61D00F575F4 /* MSGraphDriveItemSearchRequestTests.m in Sources */,
+				0E0CFDA31D082143009F9F84 /* MSGraphUserWithReferenceRequestBuilderTests.m in Sources */,
 				0E9BCBE61CFECDF9008A938E /* MSObjectTests.m in Sources */,
 				0E6D51E51D06DAEF00A66F4E /* MSGraphDriveSpecialCollectionRequestBuilder+KnownFoldersTests.m in Sources */,
+				0E0CFDA51D08216C009F9F84 /* MSGraphUserWithReferenceRequestTests.m in Sources */,
+				0E0CFDA91D082299009F9F84 /* MSGraphProfilePhotoRequestBuilderTests.m in Sources */,
 				0E83DA341CFEB8490018FAD1 /* MSRequestTests.m in Sources */,
 				0E8313E61D058D8300A2A387 /* NSArray+MSSerializationTests.m in Sources */,
 				0E8313E41D057AA200A2A387 /* NSDate+MSSerializationTests.m in Sources */,
 				0E9BCBEF1D000C8D008A938E /* ODataBaseClientTests.m in Sources */,
+				0E0CFDAD1D0823A9009F9F84 /* MSGraphUserMessagesCollectionRequestTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

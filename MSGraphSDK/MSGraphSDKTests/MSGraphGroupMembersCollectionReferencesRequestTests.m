@@ -7,16 +7,29 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "MSGraphTestCase.h"
 
-@interface MSGraphGroupMembersCollectionReferencesRequestTests : XCTestCase
-
+@interface MSGraphGroupMembersCollectionReferencesRequestTests : MSGraphTestCase
+@property (nonatomic, retain) NSURL *groupMembersRequestURL;
+@property (nonatomic, retain) MSGraphClient *client;
+@property (nonatomic, retain) NSHTTPURLResponse *OKresponse;
+@property (nonatomic, retain) NSHTTPURLResponse *Response403;
 @end
-
+//EntityCollectionReferenceRequest tests
 @implementation MSGraphGroupMembersCollectionReferencesRequestTests
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.groupMembersRequestURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/groups/groupId/members/$ref",self.graphUrl]];
+    self.requestForMock = [[NSMutableURLRequest alloc] initWithURL:self.groupMembersRequestURL];
+    self.OKresponse = [[NSHTTPURLResponse alloc] initWithURL:_groupMembersRequestURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil];
+    self.Response403 = [[NSHTTPURLResponse alloc] initWithURL:_groupMembersRequestURL statusCode:MSClientErrorCodeForbidden HTTPVersion:@"foo" headerFields:nil];
+
+    
+    [MSGraphClient setAuthenticationProvider:self.mockAuthProvider];
+    [MSGraphClient setHttpProvider:self.mockHttpProvider];
+    self.client = [MSGraphClient client];
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
 }
 
 - (void)tearDown {
@@ -24,16 +37,39 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testMSGraphGroupMembersCollectionReferencesRequestInit {
+    MSGraphGroupMembersCollectionReferencesRequestBuilder *builder = [[[_client groups:@"groupId"] members] references];
+    XCTAssertNotNil(builder);
+    XCTAssertEqualObjects(builder.requestURL, _groupMembersRequestURL);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+-(void)testAddDirectoryObjectWithOk{
+    
+    MSGraphUser *userToCreate = [[MSGraphUser alloc] init];
+    userToCreate.entityId = @"userId";
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:@{@"@odata.id":[NSString stringWithFormat:@"%@/directoryObjects/%@",self.graphUrl,userToCreate.entityId]} options:0 error:nil];
+    
+    NSDictionary *dierctoryDict = @{@"id":@"testId",@"@odata.type":@"testType"};
+    NSData *responseData = [NSJSONSerialization dataWithJSONObject:dierctoryDict options:0 error:nil];
+    
+    [self dataTaskCompletionWithRequest:self.requestForMock data:responseData response:_OKresponse error:nil];
+    MSURLSessionDataTask * task = [[[[[_client groups:@"groupId"] members] references] request] addDirectoryObject:userToCreate withCompletion:^(MSGraphDirectoryObject *response, NSError *error) {
+        XCTAssertNil(error);
+        XCTAssertNotNil(response);
+        XCTAssertEqualObjects(response.entityId, dierctoryDict[@"id"]);
+        XCTAssertEqualObjects(response.oDataType, dierctoryDict[@"@odata.type"]);
+    }];
+    [self CheckRequest:task Method:@"POST" URL:_groupMembersRequestURL];
+    XCTAssertEqualObjects(task.request.HTTPBody, postData);
+}
+
+-(void)testAddDirectoryObjectWith403Response{
+    MSGraphUser *userToCreate = [[MSGraphUser alloc] init];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:_Response403 error:nil];
+    [[[[[_client groups:@"groupId"] members] references] request] addDirectoryObject:userToCreate withCompletion:^(MSGraphDirectoryObject *response, NSError *error) {
+        XCTAssertNil(response);
+        XCTAssertNotNil(error);
+        XCTAssertEqual(error.code, MSClientErrorCodeForbidden);
     }];
 }
-
 @end

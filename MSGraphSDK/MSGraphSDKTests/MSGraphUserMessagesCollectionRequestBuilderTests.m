@@ -7,11 +7,12 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "MSGraphTestCase.h"
 
-@interface MSGraphUserMessagesCollectionRequestBuilderTests : XCTestCase
+@interface MSGraphUserMessagesCollectionRequestBuilderTests : MSGraphTestCase
 
 @end
-
+//CollectionRequestBuilder tests
 @implementation MSGraphUserMessagesCollectionRequestBuilderTests
 
 - (void)setUp {
@@ -24,16 +25,20 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testMSGraphUserMessagesCollectionRequestBuilderInit {
+    MSGraphUserMessagesCollectionRequestBuilder *requestBuilder = [[MSGraphUserMessagesCollectionRequestBuilder alloc] initWithURL:self.testBaseURL client:self.mockClient];
+    XCTAssertNotNil(requestBuilder);
+    XCTAssertEqualObjects(requestBuilder.requestURL, self.testBaseURL);
+    XCTAssertEqualObjects(requestBuilder.client, self.mockClient);
 }
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testGetMessageRequestBuilderInit {
+    NSString *messageId = @"AAMkADdhZTdhZjgxLTQzNDMtNGY5ZS04MDlkLThkM2E4N2Q4ZGE5MwBGAAAAAACXEUYc36v1RKhxupm0C73VBwDSgdiHnD3UTZ-LhQEVoM4pAAAAAAEMAADSgdiHnD3UTZ-LhQEVoM4pAADNWLEhAAA=";
+    MSGraphUserMessagesCollectionRequestBuilder *messageCollectionRequestBuilder = [[MSGraphUserMessagesCollectionRequestBuilder alloc] initWithURL:self.testBaseURL client:self.mockClient];
+    MSGraphMessageRequestBuilder *messageRequestBuilder = [messageCollectionRequestBuilder message:messageId];
+    XCTAssertNotNil(messageRequestBuilder);
+    XCTAssertEqualObjects(messageRequestBuilder.client, self.mockClient);
+    NSURL *expectedURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[self.testBaseURL absoluteString],messageId]];
+    XCTAssertEqualObjects(messageRequestBuilder.requestURL, expectedURL);
 }
 
 @end

@@ -8,11 +8,11 @@
 //
 
 #import <XCTest/XCTest.h>
-
-@interface MSGraphUserWithReferenceRequestBuilderTests : XCTestCase
+#import "MSGraphTestCase.h"
+@interface MSGraphUserWithReferenceRequestBuilderTests : MSGraphTestCase
 
 @end
-
+//EntityWithReferenceRequestBuilder test
 @implementation MSGraphUserWithReferenceRequestBuilderTests
 
 - (void)setUp {
@@ -25,16 +25,18 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+-(void)testMSGraphUserWithReferenceRequestBuilderInit{
+    MSGraphUserWithReferenceRequestBuilder *requestBuilder = [[MSGraphUserWithReferenceRequestBuilder alloc] initWithURL:self.testBaseURL client:self.mockClient];
+    XCTAssertNotNil(requestBuilder);
+    XCTAssertEqualObjects(requestBuilder.requestURL, self.testBaseURL);
+    XCTAssertEqualObjects(requestBuilder.client, self.mockClient);
 }
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+-(void)testMSGraphUserWithReferenceRequestBuilderReference{
+    MSGraphUserWithReferenceRequestBuilder *userWithReferenceRequestBuilder = [[MSGraphUserWithReferenceRequestBuilder alloc] initWithURL:self.testBaseURL client:self.mockClient];
+    MSGraphUserReferenceRequestBuilder *userReferenceRequestBuilder = [userWithReferenceRequestBuilder reference];
+    XCTAssertNotNil(userReferenceRequestBuilder);
+    XCTAssertEqualObjects(userReferenceRequestBuilder.client, self.mockClient);
+    NSURL *expectedURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@/$ref",[self.testBaseURL absoluteString]]];
+    XCTAssertEqualObjects(userReferenceRequestBuilder.requestURL, expectedURL);
 }
-
 @end

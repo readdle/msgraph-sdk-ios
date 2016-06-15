@@ -12,8 +12,10 @@
 
 - (void)setUp {
     [super setUp];
+    self.graphUrl = [NSString stringWithFormat:@"%@/%@",MSGraphApiEndpoint,MSGraphApiVersion];
+    
     self.testBaseURL = [NSURL URLWithString:@"https://foo.com/bar/baz"];
-    self.testRequest = [[NSMutableURLRequest alloc] initWithURL:self.testBaseURL];
+    self.requestForMock = [[NSMutableURLRequest alloc] initWithURL:self.testBaseURL];
     
     self.mockAuthProvider = OCMProtocolMock(@protocol(MSAuthenticationProvider));
     self.mockHttpProvider = OCMProtocolMock(@protocol(MSHttpProvider));
@@ -189,6 +191,10 @@ appendHeaderResponseWith:(NSMutableURLRequest *)request
     return sessionStub;
 }
 
+-(void)CheckRequest:(MSURLSessionTask *)task  Method:(NSString *)method URL:(NSURL *)url{
+    XCTAssertEqualObjects(task.request.URL, url);
+    XCTAssertEqualObjects(task.request.HTTPMethod, method);
+}
 - (void)tearDown {
 
     [super tearDown];

@@ -7,16 +7,18 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "MSGraphTestCase.h"
 
-@interface MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests : XCTestCase
-
+@interface MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests : MSGraphTestCase
+@property (nonatomic, retain) MSGraphClient *client;
 @end
-
+//CollectionWithReferencesRequestBuilder test
 @implementation MSGraphGroupMembersCollectionWithReferencesRequestBuilderTests
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    [MSGraphClient setAuthenticationProvider:self.mockAuthProvider];
+    self.client = [MSGraphClient client];
 }
 
 - (void)tearDown {
@@ -24,16 +26,39 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testMSGraphUserMessagesCollectionRequestBuilderInit {
+    MSGraphGroupMembersCollectionWithReferencesRequestBuilder *requestBuilder = [[MSGraphGroupMembersCollectionWithReferencesRequestBuilder alloc] initWithURL:self.testBaseURL client:self.mockClient];
+    XCTAssertNotNil(requestBuilder);
+    XCTAssertEqualObjects(requestBuilder.requestURL, self.testBaseURL);
+    XCTAssertEqualObjects(requestBuilder.client, self.mockClient);
+}
+- (void)testMSGraphUserMessagesCollectionRequestBuilderInitFromClient {
+    MSGraphGroupMembersCollectionWithReferencesRequestBuilder *requestBuilder = [[_client groups:@"groupId"] members];
+    XCTAssertNotNil(requestBuilder);
+    
+    MSGraphGroupMembersCollectionWithReferencesRequest *request = [requestBuilder request];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/groups/groupId/members",self.graphUrl]];
+    XCTAssertEqualObjects(request.requestURL,expectedURL);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+-(void)testGetDirectoryObjectBuilder{
+    MSGraphGroupMembersCollectionWithReferencesRequestBuilder *requestBuilder = [[MSGraphGroupMembersCollectionWithReferencesRequestBuilder alloc] initWithURL:self.testBaseURL client:self.mockClient];
+    MSGraphDirectoryObjectRequestBuilder *directory = [requestBuilder directoryObject:@"directoryObjectId"];
+    XCTAssertNotNil(directory);
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/directoryObjectId",self.testBaseURL]];
+    XCTAssertEqualObjects(directory.requestURL,expectedURL);
+    
 }
-
+-(void)testGetDirectoryObjectBuilderFromClient{
+    MSGraphDirectoryObjectRequestBuilder *requestBuilder = [[[_client groups:@"groupId"] members] directoryObject:@"directoryObjectId"];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/groups/groupId/members/directoryObjectId",self.graphUrl]];
+    XCTAssertEqualObjects(requestBuilder.requestURL,expectedURL);
+    
+}
+-(void)testGetReferencesBuilderFromClient{
+    MSGraphGroupMembersCollectionReferencesRequestBuilder *requestBuilder = [[[_client groups:@"groupId"] members] references];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/groups/groupId/members/$ref",self.graphUrl]];
+    XCTAssertEqualObjects(requestBuilder.requestURL,expectedURL);
+    
+}
 @end

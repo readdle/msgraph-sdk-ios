@@ -63,7 +63,6 @@
 - (void)testSetLogger {
     MSGraphClientConfiguration * msgraphClientConfiguration = [MSGraphClientConfiguration defaultConfiguration];
     XCTAssertNotNil(msgraphClientConfiguration.logger);
-    XCTAssertEqual([(MSLogger *)msgraphClientConfiguration.logger logLevel], MSLogLevelLogError);
     
     id mockMSLogger = OCMProtocolMock(@protocol(MSLogger));
     
@@ -99,5 +98,7 @@
     MSLogger * loggerOut = client.logger;
     XCTAssertEqual(loggerOut.logLevel, MSLogLevelLogDebug);
     
+    //restore
+    [MSGraphClient setApiEndpoint:[NSString stringWithFormat:@"%@/%@",MSGraphApiEndpoint,MSGraphApiVersion]];
 }
 @end

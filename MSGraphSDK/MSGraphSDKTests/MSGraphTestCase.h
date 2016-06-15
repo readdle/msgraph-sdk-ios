@@ -11,15 +11,18 @@
 
 
 @interface MSURLSessionTask()
+@property (readonly) NSMutableURLRequest *request;
 - (NSURLSessionTask *)taskWithRequest:(NSMutableURLRequest*)request;
 @end
 
 @interface MSGraphTestCase : XCTestCase
-@property NSMutableURLRequest *testRequest;
+@property NSMutableURLRequest *requestForMock;
 @property NSURL *testBaseURL;
 @property id<MSAuthenticationProvider> mockAuthProvider;
 @property id<MSHttpProvider> mockHttpProvider;
 @property ODataBaseClient *mockClient;
+
+@property NSString *graphUrl;
 
 /**
  * Sets the mock auth manager to call the appendAuthHeaders completion
@@ -120,5 +123,9 @@ appendHeaderResponseWith:(NSMutableURLRequest *)request
                             response:(NSHTTPURLResponse *)response
                                error:(NSError *)error
                           uploadTask:(NSURLSessionUploadTask *)task;
+
+
+//check
+-(void)CheckRequest:(MSURLSessionTask *)task  Method:(NSString *)method URL:(NSURL *)url;
 
 @end

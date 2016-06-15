@@ -29,9 +29,9 @@
     XCTAssertNotNil(msNameConflict);
     XCTAssertEqualObjects(msNameConflict.key, @"@name.conflictBehavior");
     XCTAssertEqualObjects(msNameConflict.value, @"fail");
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msNameConflict appendOptionToQueryString:queryString];
-    NSString *expectedString = [NSString stringWithFormat:@"%@&%@=%@",self.basicString,msNameConflict.key, msNameConflict.value];
+    NSString *expectedString = [NSString stringWithFormat:@"%@&%@=%@",_basicString,msNameConflict.key, msNameConflict.value];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 -(void)testReplaceMSNameConflict{
@@ -39,9 +39,9 @@
     XCTAssertNotNil(msNameConflict);
     XCTAssertEqualObjects(msNameConflict.key, @"@name.conflictBehavior");
     XCTAssertEqualObjects(msNameConflict.value, @"replace");
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msNameConflict appendOptionToQueryString:queryString];
-    NSString * expectedString = [NSString stringWithFormat:@"%@&%@=%@",self.basicString, msNameConflict.key, msNameConflict.value];
+    NSString * expectedString = [NSString stringWithFormat:@"%@&%@=%@",_basicString, msNameConflict.key, msNameConflict.value];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 -(void)testRenameMSNameConflict{
@@ -49,9 +49,9 @@
     XCTAssertNotNil(msNameConflict);
     XCTAssertEqualObjects(msNameConflict.key, @"@name.conflictBehavior");
     XCTAssertEqualObjects(msNameConflict.value, @"rename");
-    NSMutableString *queryString = [self.basicString mutableCopy];
+    NSMutableString *queryString = [_basicString mutableCopy];
     [msNameConflict appendOptionToQueryString:queryString];
-    NSString * expectedString = [NSString stringWithFormat:@"%@&%@=%@",self.basicString, msNameConflict.key, msNameConflict.value];
+    NSString * expectedString = [NSString stringWithFormat:@"%@&%@=%@",_basicString, msNameConflict.key, msNameConflict.value];
     XCTAssertEqualObjects(queryString, expectedString);
 }
 @end

@@ -31,7 +31,7 @@
     [super tearDown];
 }
 - (void)testErrorWithDictionary {
-    MSError *error = [MSError errorWithDictionary:self.errorDictionary];
+    MSError *error = [MSError errorWithDictionary:_errorDictionary];
     XCTAssertNotNil(error);
     XCTAssertEqualObjects(error.code, MSAccessDeniedError);
     XCTAssertEqualObjects(error.innerError.code, MSGeneralExceptionError);
@@ -39,7 +39,7 @@
 }
 
 - (void)testErrorMatches{
-    MSError *error = [MSError errorWithDictionary:self.errorDictionary];
+    MSError *error = [MSError errorWithDictionary:_errorDictionary];
     XCTAssertTrue([error matches:MSGeneralExceptionError]);
     XCTAssertTrue([error matches:MSAccessDeniedError]);
     XCTAssertFalse([error matches:MSNotSupportedError]);
@@ -50,8 +50,8 @@
     XCTAssertTrue([error matches:MSMalformedErrorResponseError]);
 }
 - (void)testErrorDescrpiton{
-    MSError *error = [MSError errorWithDictionary:self.errorDictionary];
-    NSString *des = [NSString stringWithFormat:@" %@ : %@", [self.errorDictionary objectForKey:@"code"], [self.errorDictionary objectForKey:@"message"]];
+    MSError *error = [MSError errorWithDictionary:_errorDictionary];
+    NSString *des = [NSString stringWithFormat:@" %@ : %@", [_errorDictionary objectForKey:@"code"], [_errorDictionary objectForKey:@"message"]];
     XCTAssertEqualObjects([error description], des);
 }
 @end

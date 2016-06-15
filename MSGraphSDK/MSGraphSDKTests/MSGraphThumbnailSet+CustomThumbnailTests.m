@@ -17,7 +17,7 @@
 
 - (void)setUp {
     [super setUp];
-    _thumbNailsURL = @"https://graph.microsoft.com/v1.0/me/drive/items/01GOKJUAHZQA74MZDEQJHJLSYTYSGBYTDQ/thumbnails/0";
+    self.thumbNailsURL = [NSString stringWithFormat:@"%@/me/drive/items/01GOKJUAHZQA74MZDEQJHJLSYTYSGBYTDQ/thumbnails/0",self.graphUrl];
 }
 
 - (void)tearDown {
@@ -42,8 +42,8 @@
     MSGraphThumbnailSetRequestBuilder *thumbnailSetRequestBuilder = [[MSGraphThumbnailSetRequestBuilder alloc] initWithURL:self.testBaseURL client:self.mockClient];
     NSData *returnData = [NSJSONSerialization dataWithJSONObject:returnDic options:0 error:nil];
     //mock
-    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.testRequest error:nil];
-    [self dataTaskCompletionWithRequest:self.testRequest data:returnData response:[[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil] error:nil];
+    [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
+    [self dataTaskCompletionWithRequest:self.requestForMock data:returnData response:[[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil] error:nil];
     
     [thumbnailSetRequestBuilder.request getWithCompletion:^(MSGraphThumbnailSet *response, NSError *error) {
         MSGraphThumbnail *small = [response customThumbnailWithSize:@"small"];
