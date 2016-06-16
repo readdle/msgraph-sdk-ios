@@ -10,6 +10,8 @@
 
 + (MSBlockAuthenticationProvider*)providerWithBlock:(void (^)(NSMutableURLRequest *, void (^)(NSMutableURLRequest*, NSError*)))block
 {
+    NSParameterAssert(block);
+    
     MSBlockAuthenticationProvider *provider = [[MSBlockAuthenticationProvider alloc] init];
     provider.authBlock = block;
     return provider;

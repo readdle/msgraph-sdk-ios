@@ -40,10 +40,6 @@
     MSBlockAuthenticationProvider *authProvider = [MSBlockAuthenticationProvider providerWithBlock:expectedProviderBlock];
     XCTAssertNotNil(authProvider);
     XCTAssertEqualObjects(authProvider.authBlock, expectedProviderBlock);
-    
-    authProvider = [MSBlockAuthenticationProvider providerWithBlock:nil];
-    XCTAssertNotNil(authProvider);
-    XCTAssertNil(authProvider.authBlock);
 }
 
 -(void)testAppendAuthenticationHeadersDelegateOK{
@@ -90,15 +86,7 @@
         XCTAssertEqual(error.domain, @"testError");
     }];
 }
-/*-(void)testAppendAuthenticationHeadersDelegateWithNilAuthBlockCode{
-    NSURL *authRequestUrl = [NSURL URLWithString:@"https://foo/bar"];
-    NSMutableURLRequest *authRequest = [[NSMutableURLRequest alloc] initWithURL:authRequestUrl];
-    
-    MSBlockAuthenticationProvider *authProvider = [MSBlockAuthenticationProvider providerWithBlock:nil];
-    
-    self.authenticationProvider = authProvider;
-    XCTAssertThrows([self.authenticationProvider appendAuthenticationHeaders:authRequest completion:^(NSMutableURLRequest *request, NSError *error) {
-        XCTAssertTrue(NO);
-    }]);
-}*/
+-(void)testAppendAuthenticationHeadersDelegateWithNilAuthBlockCode{
+    XCTAssertThrows([MSBlockAuthenticationProvider providerWithBlock:nil]);
+}
 @end
