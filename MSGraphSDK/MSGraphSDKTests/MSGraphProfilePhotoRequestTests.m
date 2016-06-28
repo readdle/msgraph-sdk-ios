@@ -32,7 +32,6 @@
     
     self.profilePhotoRequest = [[MSGraphProfilePhotoRequest alloc] initWithURL:_profilePhotoURL client:self.mockClient];
     [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
-    
 }
 
 - (void)tearDown {
@@ -59,12 +58,13 @@
     
     [self dataTaskCompletionWithRequest:self.requestForMock data:demoData response:_OKresponse error:nil];
     MSURLSessionDataTask *task = [_profilePhotoRequest getWithCompletion:^(MSGraphProfilePhoto *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertEqualObjects(response.entityId, demoDict[@"id"]);
         XCTAssertEqual(response.width, [demoDict[@"width"] intValue]);
         XCTAssertEqual(response.height, [demoDict[@"height"] intValue]);
     }];
-    [self CheckRequest:task Method:@"GET" URL:self.profilePhotoURL];
-    
+    [self checkRequest:task Method:@"GET" URL:self.profilePhotoURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 
 - (void)testMSGraphProfilePhotoRequestGetWithErrorCompletion {
@@ -72,11 +72,13 @@
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:Response401 error:nil];
     
     [_profilePhotoRequest getWithCompletion:^(MSGraphProfilePhoto *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertEqual(error.code, (NSInteger)MSClientErrorCodeUnauthorized);
         XCTAssertEqualObjects(error.domain, MSErrorDomain);
         
     }];
+    [self checkCompletionBlockCodeInvoked];
 }
 
 - (void)testMSGraphProfilePhotoRequestUpdateWithOKCompletion {
@@ -87,13 +89,15 @@
     [self dataTaskCompletionWithRequest:self.requestForMock data:responseData response:_OKresponse error:nil];
     
     MSURLSessionDataTask *task = [_profilePhotoRequest update:profilePhoto withCompletion:^(MSGraphProfilePhoto *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(error);
         XCTAssertNotNil(response);
         XCTAssertEqual(response.width, profilePhoto.width);
         XCTAssertEqual(response.height, profilePhoto.height);
         
     }];
-    [self CheckRequest:task Method:@"PATCH" URL:self.profilePhotoURL];
+    [self checkRequest:task Method:@"PATCH" URL:self.profilePhotoURL];
+    [self checkCompletionBlockCodeInvoked];
     
 }
 - (void)testMSGraphProfilePhotoRequestUpdateWithErrorCompletion {
@@ -105,22 +109,24 @@
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:Response500 error:nil];
     
     MSURLSessionDataTask *task = [_profilePhotoRequest update:profilePhoto withCompletion:^(MSGraphProfilePhoto *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertEqual(error.code, (NSInteger)MSClientErrorCodeInternalServerError);
         XCTAssertEqualObjects(error.domain, MSErrorDomain);
         
     }];
-    [self CheckRequest:task Method:@"PATCH" URL:self.profilePhotoURL];
-    
+    [self checkRequest:task Method:@"PATCH" URL:self.profilePhotoURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 - (void)testMSGraphProfilePhotoRequestDeleteWithOKCompletion {
-    
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:_OKresponse error:nil];
     
     MSURLSessionDataTask *task = [_profilePhotoRequest deleteWithCompletion:^(NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(error);
     }];
-    [self CheckRequest:task Method:@"DELETE" URL:self.profilePhotoURL];
+    [self checkRequest:task Method:@"DELETE" URL:self.profilePhotoURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 
 - (void)testMSGraphProfilePhotoRequestDeleteWithErrorCompletion {
@@ -128,10 +134,12 @@
     
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:response403 error:nil];
     MSURLSessionDataTask *task = [_profilePhotoRequest deleteWithCompletion:^(NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertEqual(error.code, (NSInteger)MSClientErrorCodeForbidden);
         XCTAssertEqualObjects(error.domain, MSErrorDomain);
     }];
-    [self CheckRequest:task Method:@"DELETE" URL:self.profilePhotoURL];
+    [self checkRequest:task Method:@"DELETE" URL:self.profilePhotoURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 
 @end

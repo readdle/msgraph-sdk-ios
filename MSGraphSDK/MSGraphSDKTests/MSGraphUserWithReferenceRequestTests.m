@@ -51,6 +51,7 @@
     [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
     [self dataTaskCompletionWithRequest:self.requestForMock data:self.responseData response:OKresponse error:nil];
     MSURLSessionDataTask *task = [request getWithCompletion:^(MSGraphUser *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(error);
         XCTAssertNotNil(response);
         MSGraphUser *expectedUser = [[MSGraphUser alloc] initWithDictionary:_userDict];
@@ -64,7 +65,8 @@
         XCTAssertEqualObjects(response.preferredLanguage, expectedUser.preferredLanguage);
         XCTAssertEqualObjects(response.userPrincipalName, expectedUser.userPrincipalName);
     }];
-    [self CheckRequest:task Method:@"GET" URL:_userWithReferenceURL];
+    [self checkRequest:task Method:@"GET" URL:_userWithReferenceURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 - (void)testGetWithCompletion401Response {
     MSGraphUserWithReferenceRequest *request = [[MSGraphUserWithReferenceRequest alloc] initWithURL:_userWithReferenceURL client:self.mockClient];
@@ -72,12 +74,14 @@
     [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
     [self dataTaskCompletionWithRequest:self.requestForMock data:self.responseData response:Response401 error:nil];
     MSURLSessionDataTask *task = [request getWithCompletion:^(MSGraphUser *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertNotNil(error);
         XCTAssertEqual(error.code, MSClientErrorCodeUnauthorized);
         XCTAssertEqualObjects(error.domain, MSErrorDomain);
     }];
-    [self CheckRequest:task Method:@"GET" URL:_userWithReferenceURL];
+    [self checkRequest:task Method:@"GET" URL:_userWithReferenceURL];
+    [self completionBlockCodeInvoked];
 }
 - (void)testGetWithCompletionClientError {
     MSGraphUserWithReferenceRequest *request = [[MSGraphUserWithReferenceRequest alloc] initWithURL:_userWithReferenceURL client:self.mockClient];
@@ -85,11 +89,13 @@
     [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
     [self dataTaskCompletionWithRequest:self.requestForMock data:self.responseData response:nil error:testError];
     MSURLSessionDataTask *task = [request getWithCompletion:^(MSGraphUser *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertNotNil(error);
         XCTAssertEqual(error.code, testError.code);
         XCTAssertEqualObjects(error.domain, testError.domain);
     }];
-    [self CheckRequest:task Method:@"GET" URL:_userWithReferenceURL];
+    [self checkRequest:task Method:@"GET" URL:_userWithReferenceURL];
+    [self completionBlockCodeInvoked];
 }
 @end

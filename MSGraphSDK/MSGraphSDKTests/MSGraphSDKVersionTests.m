@@ -26,7 +26,7 @@
 
 - (void)testMSGraphSdkVersion {
     XCTAssertNotNil(MSGraphSdkVersion);
-    XCTAssertEqualObjects(MSGraphSdkVersion, @"0.10.0");
+    XCTAssertEqualObjects(MSGraphSdkVersion, @"0.10.1");
 }
 
 

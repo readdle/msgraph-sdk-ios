@@ -15,7 +15,6 @@
 @end
 
 @interface MSBlockAuthenticationProviderTests : MSGraphTestCase
-@property BOOL stepIntoProviderCode;
 @property (nonatomic,retain) id <MSAuthenticationProvider> authenticationProvider;
 @end
 
@@ -23,7 +22,6 @@
 
 - (void)setUp {
     [super setUp];
-    self.stepIntoProviderCode = NO;
     self.authenticationProvider = nil;
 }
 
@@ -43,15 +41,20 @@
 }
 
 -(void)testAppendAuthenticationHeadersDelegateOK{
+    __block BOOL bComoletionBlockInvoked = NO, bAuthBlockInvoked = NO;
+    
     NSURL *authRequestUrl = [NSURL URLWithString:@"https://foo/bar"];
     NSMutableURLRequest *authRequest = [[NSMutableURLRequest alloc] initWithURL:authRequestUrl];
     MSAuthenticationCompletion completionBlockCode = ^(NSMutableURLRequest *request, NSError *error){
+        bComoletionBlockInvoked = YES;
         XCTAssertEqualObjects(request, authRequest);
         XCTAssertEqualObjects(request.allHTTPHeaderFields[@"Authorization"], @"bearer demoaccesstoken");
         XCTAssertNil(error);
     };
     
+
     MSBlockAuthenticationProvider *authProvider = [MSBlockAuthenticationProvider providerWithBlock:^(NSMutableURLRequest *request, MSAuthenticationCompletion completion) {
+        bAuthBlockInvoked = YES;
         XCTAssertEqualObjects(request, authRequest);
         XCTAssertEqualObjects(request.URL, authRequestUrl);
         XCTAssertEqualObjects(completion, completionBlockCode);
@@ -64,12 +67,18 @@
     
     self.authenticationProvider = authProvider;
     [self.authenticationProvider appendAuthenticationHeaders:authRequest completion:completionBlockCode];
+    
+    XCTAssertTrue(bAuthBlockInvoked,@"Auth block was not invoked");
+    XCTAssertTrue(bComoletionBlockInvoked,@"Completion block was not invoked");
+    
 }
--(void)testAppendAuthenticationHeadersDelegateErroe{
+-(void)testAppendAuthenticationHeadersDelegateError{
+     __block BOOL bComoletionBlockInvoked = NO, bAuthBlockInvoked = NO;
     NSURL *authRequestUrl = [NSURL URLWithString:@"https://foo/bar"];
     NSMutableURLRequest *authRequest = [[NSMutableURLRequest alloc] initWithURL:authRequestUrl];
     
     MSBlockAuthenticationProvider *authProvider = [MSBlockAuthenticationProvider providerWithBlock:^(NSMutableURLRequest *request, MSAuthenticationCompletion completion) {
+        bComoletionBlockInvoked = YES;
         XCTAssertEqualObjects(request, authRequest);
         XCTAssertEqualObjects(request.URL, authRequestUrl);
         
@@ -79,12 +88,15 @@
     
     self.authenticationProvider = authProvider;
     [self.authenticationProvider appendAuthenticationHeaders:authRequest completion:^(NSMutableURLRequest *request, NSError *error) {
+        bAuthBlockInvoked = YES;
         XCTAssertNil(request);
         XCTAssertNotNil(authRequest);
         XCTAssertNotNil(error);
         XCTAssertEqual(error.code, 123);
         XCTAssertEqual(error.domain, @"testError");
     }];
+    XCTAssertTrue(bAuthBlockInvoked,@"Auth block was not invoked");
+    XCTAssertTrue(bComoletionBlockInvoked,@"Completion block was not invoked");
 }
 -(void)testAppendAuthenticationHeadersDelegateWithNilAuthBlockCode{
     XCTAssertThrows([MSBlockAuthenticationProvider providerWithBlock:nil]);

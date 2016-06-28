@@ -20,6 +20,9 @@
     self.mockAuthProvider = OCMProtocolMock(@protocol(MSAuthenticationProvider));
     self.mockHttpProvider = OCMProtocolMock(@protocol(MSHttpProvider));
     self.mockClient = OCMPartialMock([[ODataBaseClient alloc] initWithURL:[self.testBaseURL absoluteString] httpProvider:self.mockHttpProvider authenticationProvider:self.mockAuthProvider]);
+    
+    self.bCompletionBlockInvoked = NO;
+    self.bCastBlockInvoked = NO;
 
 }
 - (void) setAuthProvider:(id <MSAuthenticationProvider> )mockAuthProvider
@@ -191,10 +194,24 @@ appendHeaderResponseWith:(NSMutableURLRequest *)request
     return sessionStub;
 }
 
--(void)CheckRequest:(MSURLSessionTask *)task  Method:(NSString *)method URL:(NSURL *)url{
+-(void)checkRequest:(MSURLSessionTask *)task  Method:(NSString *)method URL:(NSURL *)url{
     XCTAssertEqualObjects(task.request.URL, url);
     XCTAssertEqualObjects(task.request.HTTPMethod, method);
 }
+-(void)castBlockCodeInvoked{
+    _bCastBlockInvoked = YES;
+}
+-(void)completionBlockCodeInvoked{
+    _bCompletionBlockInvoked = YES;
+}
+-(void)checkCompletionBlockCodeInvoked{
+    XCTAssertTrue(_bCompletionBlockInvoked);
+}
+-(void)checkCastAndCompletionBlockCodeInvoked{
+    XCTAssertTrue(_bCastBlockInvoked);
+    XCTAssertTrue(_bCompletionBlockInvoked);
+}
+
 - (void)tearDown {
 
     [super tearDown];

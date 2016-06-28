@@ -65,6 +65,7 @@
     [self dataTaskCompletionWithRequest:self.requestForMock data:_responseData response:OKresponse error:nil];
     
     MSURLSessionDataTask *task = [[reqest top:1] getWithCompletion:^(MSCollection *response, MSGraphGroupMembersCollectionWithReferencesRequest *nextRequest, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertEqual([response.value count], [_expectedCollection.value  count]);
         MSGraphDirectoryObject * directoryObject = response.value[0];
         XCTAssertEqualObjects(directoryObject.entityId, _expectedCollection.value[0][@"id"]);
@@ -73,7 +74,8 @@
         XCTAssertNotNil(nextRequest);
         XCTAssertEqualObjects([nextRequest requestURL], _expectedCollection.nextLink);
     }];
-    [self CheckRequest:task Method:@"GET" URL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/groups/groupid/members?$top=1",self.graphUrl]]];
+    [self checkRequest:task Method:@"GET" URL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/groups/groupid/members?$top=1",self.graphUrl]]];
+    [self checkCompletionBlockCodeInvoked];
 }
 -(void)testExpand{
     MSGraphGroupMembersCollectionWithReferencesRequest *request = [[[[_client groups:@"groupId"] members] request] expand:@"testwz"];

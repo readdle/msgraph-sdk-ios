@@ -65,6 +65,7 @@
     [self dataTaskCompletionWithRequest:self.requestForMock data:_responseData response:OKresponse error:nil];
     
     MSURLSessionDataTask *task = [request executeWithCompletion:^(MSCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertEqual([response.value count], [_expectedCollection.value  count]);
         MSGraphDriveItem * driveItem1 = response.value[0];
         XCTAssertEqualObjects(driveItem1.entityId, _expectedCollection.value[0][@"id"]);
@@ -80,28 +81,30 @@
         XCTAssertEqualObjects([nextRequest requestURL], _expectedCollection.nextLink);
     }];
     expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/drive/root/microsoft.graph.search(q='test')",self.graphUrl]];
-    [self CheckRequest:task Method:@"GET" URL:expectedURL];
+    [self checkRequest:task Method:@"GET" URL:expectedURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 - (void)testMSGraphDriveItemSearchRequestWithNilQ{
     MSGraphDriveItemSearchRequest *request = [[[[[_client me] drive] root] searchWithQ:nil] request];
     XCTAssertNotNil(request);
     XCTAssertEqualObjects(request.q, nil);
     MSURLSessionDataTask *task = [request executeWithCompletion:^(MSCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error) {
-        XCTAssertTrue(NO);
     }];
     NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/drive/root/microsoft.graph.search(q=null)",self.graphUrl]];
-    [self CheckRequest:task Method:@"GET" URL:expectedURL];
+    [self checkRequest:task Method:@"GET" URL:expectedURL];
 }
 - (void)testMSGraphDriveItemSearchRequestWith401Response{
     NSHTTPURLResponse *Response401 = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSClientErrorCodeUnauthorized HTTPVersion:@"foo" headerFields:nil];
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:Response401 error:nil];
     
     [[[[[[_client me] drive] root] searchWithQ:@"test"] request] executeWithCompletion:^(MSCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertNil(nextRequest);
         XCTAssertNotNil(error);
         XCTAssertEqual(error.code, MSClientErrorCodeUnauthorized);
         XCTAssertEqualObjects(error.domain, MSErrorDomain);
     }];
+    [self checkCompletionBlockCodeInvoked];
 }
 @end

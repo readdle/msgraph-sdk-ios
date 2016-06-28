@@ -22,20 +22,18 @@
 @end
 
 @interface MSRequestTests : MSGraphTestCase
-@property NSData * demoData;
-@property NSURL *demoFileLocation;
-@property MSRequest *msRequest;
-@property NSHTTPURLResponse *OKresponse;
-@property NSHTTPURLResponse *Badresponse;
-@property NSError *testError;
+@property (nonatomic,retain) NSData * demoData;
+@property (nonatomic,retain) NSURL *demoFileLocation;
+@property (nonatomic,retain) MSRequest *msRequest;
+@property (nonatomic,retain) NSHTTPURLResponse *OKresponse;
+@property (nonatomic,retain) NSHTTPURLResponse *Badresponse;
+@property (nonatomic,retain) NSError *testError;
 @end
 
 @implementation MSRequestTests
 
 - (void)setUp {
     [super setUp];
-    
-    
     self.demoData = [NSJSONSerialization dataWithJSONObject:@{@"initKey":@"initData"} options:0 error:nil];
     self.demoFileLocation = [NSURL URLWithString:@"foo/bar/baz"];
     
@@ -54,10 +52,10 @@
 }
 
 - (void)testInit{
-    MSRequest * requst = [[MSRequest alloc] initWithURL:self.testBaseURL client:self.mockClient];
-    XCTAssertNotNil(requst);
-    XCTAssertEqualObjects(requst.requestURL, self.testBaseURL);
-    XCTAssertEqual(requst.client, self.mockClient);
+    MSRequest * request = [[MSRequest alloc] initWithURL:self.testBaseURL client:self.mockClient];
+    XCTAssertNotNil(request);
+    XCTAssertEqualObjects(request.requestURL, self.testBaseURL);
+    XCTAssertEqual(request.client, self.mockClient);
 }
 -(void)testAllOptionMethod{
     MSRequest *selectRequest =[[MSRequest alloc] initWithURL:self.testBaseURL client:self.mockClient];
@@ -141,18 +139,21 @@
     
     NSDictionary *odObject = @{@"foo" : @"bar"};
     MSURLSessionDataTask *dataTask = [_msRequest taskWithRequest:testURLRequest odObjectWithDictionary:^id(NSDictionary *response) {
+        [self castBlockCodeInvoked];
         XCTAssertNotNil(response);
         XCTAssertEqual(response.count, 1);
         XCTAssertEqualObjects([response objectForKey:@"barz"], [responseObject objectForKey:@"barz"]);
         return odObject;
         
     } completion:^(id response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNotNil(response);
         XCTAssertNil(error);
         XCTAssertEqual(response, odObject);
     }];
     
     [dataTask taskWithRequest:testURLRequest];
+    [self checkCastAndCompletionBlockCodeInvoked];
 }
 -(void)testTaskWithRequestWithErrorResponse{
     NSMutableURLRequest *testURLRequest = [_msRequest requestWithMethod:@"GET" body:nil headers:nil];
@@ -160,86 +161,83 @@
     
     MSURLSessionDataTask *dataTask = [_msRequest taskWithRequest:testURLRequest odObjectWithDictionary:^id(NSDictionary *response) {
         XCTAssert(NO);
-        return nil;
     } completion:^(id response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertEqual(error.code, _Badresponse.statusCode);
     }];
     [dataTask taskWithRequest:testURLRequest];
+    [self checkCompletionBlockCodeInvoked];
 }
 
 -(void)testUploadTaskWithRequestFromFile{
     NSDictionary *odObject = @{@"foo" : @"bar"};
-    
     NSMutableURLRequest *testURLRequest = [_msRequest requestWithMethod:@"POST" body:nil headers:nil];
     [self uploadTaskFromFileURLCompletionWithRequest:testURLRequest progress:nil fileURL:_demoFileLocation responseData:_demoData response:_OKresponse error:nil];
     
-    
     MSURLSessionUploadTask *uploadTask = [_msRequest uploadTaskWithRequest:testURLRequest fromFile:_demoFileLocation odobjectWithDictionary:^id(NSDictionary *response) {
+        [self castBlockCodeInvoked];
         XCTAssertNotNil(response);
         XCTAssertEqualObjects([response objectForKey:@"initKey"],@"initData");
         return odObject;
-        
     } completionHandler:^(id response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertEqualObjects(response, odObject);
     }];
-    
     [uploadTask taskWithRequest:testURLRequest];
-    
+    [self checkCastAndCompletionBlockCodeInvoked];
 }
 -(void)testUploadTaskWithRequestFromFileWithErrorResponse{
-    
     NSMutableURLRequest *testURLRequest = [_msRequest requestWithMethod:@"POST" body:nil headers:nil];
     [self uploadTaskFromFileURLCompletionWithRequest:testURLRequest progress:nil fileURL:_demoFileLocation responseData:_demoData response:nil error:_testError];
     
-    
     MSURLSessionUploadTask *uploadTask = [_msRequest uploadTaskWithRequest:testURLRequest fromFile:_demoFileLocation odobjectWithDictionary:^id(NSDictionary *response) {
-        XCTAssert(YES);
-        return nil;
+         XCTAssert(NO);
     } completionHandler:^(id response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertEqualObjects(error, _testError);
     }];
-    
     [uploadTask taskWithRequest:testURLRequest];
     
+    [self checkCompletionBlockCodeInvoked];
 }
 -(void)testUploadTaskWithRequestFromData{
     NSMutableURLRequest *testURLRequest = [_msRequest requestWithMethod:@"POST" body:nil headers:nil];
     [self uploadTaskFromDataCompletionWithRequest:testURLRequest progress:nil responseData:_demoData response:_OKresponse error:nil];
     
-    
     MSURLSessionUploadTask *uploadTask = [_msRequest uploadTaskWithRequest:testURLRequest fromData:_demoData odobjectWithDictionary:^id(NSDictionary *response) {
+        [self castBlockCodeInvoked];
         XCTAssertNotNil(response);
         XCTAssertEqualObjects([response objectForKey:@"initKey"],@"initData");
         return @"cast test";
         
     } completionHandler:^(id response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertEqualObjects(response, @"cast test");
         XCTAssertNil(error);
     }];
-    
     [uploadTask taskWithRequest:testURLRequest];
-    
+    [self checkCastAndCompletionBlockCodeInvoked];
 }
 -(void)testUploadTaskWithRequestFromDataWithErrorResponse{
-    NSData * uploadData = [NSJSONSerialization dataWithJSONObject:@{@"foo" : @"bar"} options:0 error:nil];
     
+    NSData * uploadData = [NSJSONSerialization dataWithJSONObject:@{@"foo" : @"bar"} options:0 error:nil];
     NSMutableURLRequest *testURLRequest = [_msRequest requestWithMethod:@"POST" body:nil headers:nil];
     [self uploadTaskFromDataCompletionWithRequest:testURLRequest progress:nil responseData:_demoData response:_Badresponse error:nil];
     
-    
     MSURLSessionUploadTask *uploadTask = [_msRequest uploadTaskWithRequest:testURLRequest fromData:uploadData odobjectWithDictionary:^id(NSDictionary *response) {
-        XCTAssert(YES);
+        XCTAssert(NO);
         return nil;
         
     } completionHandler:^(id response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertEqual(error.code, _Badresponse.statusCode);
     }];
     
     [uploadTask taskWithRequest:testURLRequest];
-    
+    [self checkCompletionBlockCodeInvoked];
 }
 - (void)testRequestWithHeaderOptions{
     MSHeaderOptions *testHeaders = [[MSHeaderOptions alloc] initWithKey:@"foo" value:@"Bar"];
@@ -253,11 +251,5 @@
     XCTAssertEqualObjects(testRequest.HTTPMethod, expectedRequest.HTTPMethod);
     XCTAssertEqualObjects(testRequest.HTTPBody, expectedRequest.HTTPBody);
     XCTAssertEqual([testRequest.allHTTPHeaderFields objectForKey:@"foo"], [expectedRequest.allHTTPHeaderFields objectForKey:@"foo"]);
-    
-    /*[expectedRequest.allHTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop){
-        XCTAssertEqualObjects(request.allHTTPHeaderFields[key], value);
-    }];*/
-
-    
 }
 @end

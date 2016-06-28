@@ -43,9 +43,11 @@
     [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:OKresponse error:nil];
     MSURLSessionDataTask *task = [request deleteWithCompletion:^(NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(error);
     }];
-    [self CheckRequest:task Method:@"DELETE" URL:_userReferenceURL];
+    [self checkRequest:task Method:@"DELETE" URL:_userReferenceURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 - (void)testMSGraphUserReferenceRequestDeleteWith403 {
     MSGraphUserReferenceRequest *request = [[MSGraphUserReferenceRequest alloc] initWithURL:_userReferenceURL client:self.mockClient];
@@ -54,9 +56,11 @@
     [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:nil];
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:Response403 error:nil];
     MSURLSessionDataTask *task = [request deleteWithCompletion:^(NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNotNil(error);
         XCTAssertEqual(error.code, MSClientErrorCodeForbidden);
     }];
-    [self CheckRequest:task Method:@"DELETE" URL:_userReferenceURL];
+    [self checkRequest:task Method:@"DELETE" URL:_userReferenceURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 @end

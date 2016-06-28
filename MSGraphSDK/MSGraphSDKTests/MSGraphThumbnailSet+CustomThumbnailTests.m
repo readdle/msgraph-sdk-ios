@@ -46,6 +46,7 @@
     [self dataTaskCompletionWithRequest:self.requestForMock data:returnData response:[[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSExpectedResponseCodesOK HTTPVersion:@"foo" headerFields:nil] error:nil];
     
     [thumbnailSetRequestBuilder.request getWithCompletion:^(MSGraphThumbnailSet *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         MSGraphThumbnail *small = [response customThumbnailWithSize:@"small"];
         XCTAssertNotNil(small);
         XCTAssertEqual(small.height, 64);
@@ -65,6 +66,7 @@
         MSGraphThumbnail *invalidSize = [response customThumbnailWithSize:@"invalidSize"];
         XCTAssertNil(invalidSize);
     }];
+    [self checkCompletionBlockCodeInvoked];
     
 }
 

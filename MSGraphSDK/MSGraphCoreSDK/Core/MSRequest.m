@@ -152,8 +152,8 @@
         }
     }];
 }
-/*
-- (MSAsyncURLSessionDataTask *)asyncTaskWithRequest:(NSMutableURLRequest *)request
+
+/*- (MSAsyncURLSessionDataTask *)asyncTaskWithRequest:(NSMutableURLRequest *)request
                              odObjectWithDictionary:(MSObjectWithDictionary)castBlock
                                         completion:(MSAsyncActionCompletion)completionHandler
 {
@@ -183,9 +183,8 @@
         };
     }
     return [self asyncTaskWithRequest:request completion:asyncCompletion];
-}
+}*/
 
-*/
 - (MSURLSessionUploadTask *)uploadTaskWithRequest:(NSMutableURLRequest *)request
                                          fromFile:(NSURL *)fileURL
                            odobjectWithDictionary:(MSObjectWithDictionary)castBlock
@@ -233,15 +232,15 @@
         completionHandler(parsedObject, error);
     }
 }
-/*
-- (MSAsyncURLSessionDataTask *)asyncTaskWithRequest:(NSMutableURLRequest *)request
+
+/*- (MSAsyncURLSessionDataTask *)asyncTaskWithRequest:(NSMutableURLRequest *)request
                                          completion:(MSAsyncActionCompletion)completionHandler
 {
     NSParameterAssert(request);
     
     return [[MSAsyncURLSessionDataTask alloc] initWithRequest:request client:self.client completion:completionHandler];
-}
-*/
+}*/
+
 - (MSURLSessionDataTask *)taskWithRequest:(NSMutableURLRequest *)request
                                completion:(void (^)(NSDictionary *dictionary, NSError *error))completionHandler
 {

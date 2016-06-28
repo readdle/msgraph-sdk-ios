@@ -54,22 +54,26 @@
     
     [self dataTaskCompletionWithRequest:self.requestForMock data:responseData response:_OKresponse error:nil];
     MSURLSessionDataTask * task = [[[[[_client groups:@"groupId"] members] references] request] addDirectoryObject:userToCreate withCompletion:^(MSGraphDirectoryObject *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(error);
         XCTAssertNotNil(response);
         XCTAssertEqualObjects(response.entityId, dierctoryDict[@"id"]);
         XCTAssertEqualObjects(response.oDataType, dierctoryDict[@"@odata.type"]);
     }];
-    [self CheckRequest:task Method:@"POST" URL:_groupMembersRequestURL];
+    [self checkRequest:task Method:@"POST" URL:_groupMembersRequestURL];
     XCTAssertEqualObjects(task.request.HTTPBody, postData);
+    [self checkCompletionBlockCodeInvoked];
 }
 
 -(void)testAddDirectoryObjectWith403Response{
     MSGraphUser *userToCreate = [[MSGraphUser alloc] init];
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:_Response403 error:nil];
     [[[[[_client groups:@"groupId"] members] references] request] addDirectoryObject:userToCreate withCompletion:^(MSGraphDirectoryObject *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertNotNil(error);
         XCTAssertEqual(error.code, MSClientErrorCodeForbidden);
     }];
+    [self checkCompletionBlockCodeInvoked];
 }
 @end

@@ -16,13 +16,16 @@
 @end
 
 @interface MSGraphTestCase : XCTestCase
-@property NSMutableURLRequest *requestForMock;
-@property NSURL *testBaseURL;
-@property id<MSAuthenticationProvider> mockAuthProvider;
-@property id<MSHttpProvider> mockHttpProvider;
-@property ODataBaseClient *mockClient;
+@property (nonatomic,retain) NSMutableURLRequest *requestForMock;
+@property (nonatomic,retain) NSURL *testBaseURL;
+@property (nonatomic,retain) id<MSAuthenticationProvider> mockAuthProvider;
+@property (nonatomic,retain) id<MSHttpProvider> mockHttpProvider;
+@property (nonatomic,retain) ODataBaseClient *mockClient;
 
-@property NSString *graphUrl;
+@property (nonatomic,retain) NSString *graphUrl;
+
+@property (nonatomic) __block BOOL bCastBlockInvoked;
+@property (nonatomic) __block BOOL bCompletionBlockInvoked;
 
 /**
  * Sets the mock auth manager to call the appendAuthHeaders completion
@@ -126,6 +129,10 @@ appendHeaderResponseWith:(NSMutableURLRequest *)request
 
 
 //check
--(void)CheckRequest:(MSURLSessionTask *)task  Method:(NSString *)method URL:(NSURL *)url;
+-(void)checkRequest:(MSURLSessionTask *)task  Method:(NSString *)method URL:(NSURL *)url;
 
+-(void)castBlockCodeInvoked;
+-(void)completionBlockCodeInvoked;
+-(void)checkCompletionBlockCodeInvoked;
+-(void)checkCastAndCompletionBlockCodeInvoked;
 @end

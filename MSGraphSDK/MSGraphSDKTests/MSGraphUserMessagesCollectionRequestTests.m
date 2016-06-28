@@ -59,6 +59,7 @@
     [self dataTaskCompletionWithRequest:self.requestForMock data:_responseData response:OKresponse error:nil];
     
     MSURLSessionDataTask *task = [request getWithCompletion:^(MSCollection *response, MSGraphUserMessagesCollectionRequest *nextRequest, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNotNil(response);
         XCTAssertEqual([response.value count], _expectedCollection.value.count);
         [response.value enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -74,7 +75,8 @@
         XCTAssertNil(error);
     }];
     NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/messages?$select=id,subject&$top=2",self.graphUrl]];
-    [self CheckRequest:task Method:@"GET" URL:expectedURL];
+    [self checkRequest:task Method:@"GET" URL:expectedURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 - (void)testGetWithCompletion401Response {
     MSGraphUserMessagesCollectionRequest *request = [[_request select:@"id,subject"] top:2];
@@ -82,6 +84,7 @@
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:Response401 error:nil];
     
     MSURLSessionDataTask *task = [request getWithCompletion:^(MSCollection *response, MSGraphUserMessagesCollectionRequest *nextRequest, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertNil(nextRequest);
         XCTAssertNotNil(error);
@@ -89,13 +92,15 @@
         XCTAssertEqualObjects(error.domain, MSErrorDomain);
     }];
     NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/messages?$select=id,subject&$top=2",self.graphUrl]];
-    [self CheckRequest:task Method:@"GET" URL:expectedURL];
+    [self checkRequest:task Method:@"GET" URL:expectedURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 - (void)testGetWithCompletionClientError {
     NSError *testError = [NSError errorWithDomain:@"testError" code:123 userInfo:@{}];
     [self dataTaskCompletionWithRequest:self.requestForMock data:nil response:nil error:testError];
     
     MSURLSessionDataTask *task = [_request getWithCompletion:^(MSCollection *response, MSGraphUserMessagesCollectionRequest *nextRequest, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertNil(nextRequest);
         XCTAssertNotNil(error);
@@ -103,7 +108,8 @@
         XCTAssertEqualObjects(error.domain, testError.domain);
     }];
     NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/messages",self.graphUrl]];
-    [self CheckRequest:task Method:@"GET" URL:expectedURL];
+    [self checkRequest:task Method:@"GET" URL:expectedURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 
 - (void)testAddMessageOK {
@@ -116,12 +122,14 @@
     
     MSGraphUserMessagesCollectionRequest * __weak weakRequest = _request;
     MSURLSessionDataTask *task = [weakRequest addMessage:postMessage withCompletion:^(MSGraphMessage *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNotNil(response);
         XCTAssertEqualObjects(response.subject, postMessage.subject);
         XCTAssertNil(error);
     }];
     NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/messages",self.graphUrl]];
-    [self CheckRequest:task Method:@"POST" URL:expectedURL];
+    [self checkRequest:task Method:@"POST" URL:expectedURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 - (void)testAddMessage401Response {
     NSHTTPURLResponse *Response401 = [[NSHTTPURLResponse alloc] initWithURL:_messageCollectionRequestURL statusCode:MSClientErrorCodeUnauthorized HTTPVersion:@"foo" headerFields:nil];
@@ -132,12 +140,14 @@
     
     MSGraphUserMessagesCollectionRequest * __weak weakRequest = _request;
     MSURLSessionDataTask *task = [weakRequest addMessage:postMessage withCompletion:^(MSGraphMessage *response, NSError *error) {
+        [self completionBlockCodeInvoked];
         XCTAssertNil(response);
         XCTAssertNotNil(error);
         XCTAssertEqual(error.code, MSClientErrorCodeUnauthorized);
         XCTAssertEqualObjects(error.domain, MSErrorDomain);
     }];
     NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/messages",self.graphUrl]];
-    [self CheckRequest:task Method:@"POST" URL:expectedURL];
+    [self checkRequest:task Method:@"POST" URL:expectedURL];
+    [self checkCompletionBlockCodeInvoked];
 }
 @end

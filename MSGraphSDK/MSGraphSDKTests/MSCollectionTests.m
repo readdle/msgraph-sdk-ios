@@ -30,7 +30,7 @@
     MSCollection *msCollection = [[MSCollection alloc] initWithArray:array nextLink:link additionalData:dic];
     XCTAssertNotNil(msCollection);
     XCTAssertEqual(msCollection.value, array);
-    XCTAssert([msCollection.nextLink.absoluteString isEqualToString:link]);
+    XCTAssertTrue([msCollection.nextLink.absoluteString isEqualToString:link]);
     XCTAssertEqual(msCollection.additionalData, dic);
     
 }

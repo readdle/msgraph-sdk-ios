@@ -35,7 +35,7 @@
 }
 
 - (void)testMSURLSessionTaskAuthFailed{
-    __block NSError *authError = [NSError errorWithDomain:@"autherror" code:123 userInfo:@{}];
+    NSError *authError = [NSError errorWithDomain:@"autherror" code:123 userInfo:@{}];
     [self setAuthProvider:self.mockAuthProvider appendHeaderResponseWith:self.requestForMock error:authError];
     
     MSURLSessionTask *msURLSessionTask= [[MSURLSessionTask alloc] initWithRequest:self.requestForMock client:self.mockClient];

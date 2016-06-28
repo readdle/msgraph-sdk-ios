@@ -6,7 +6,6 @@
 typedef void(^MSGraphProfilePhotoUploadCompletionHandler)(MSGraphProfilePhoto *response, NSError* error);
 
 #import "MSRequest.h"
-#import "MSURLSessionTask.h"
 
 @interface MSGraphProfilePhotoStreamRequest : MSRequest
 
