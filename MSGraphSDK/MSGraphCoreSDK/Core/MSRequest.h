@@ -4,7 +4,8 @@
 
 #import <Foundation/Foundation.h>
 #import "MSRequestOptionsBuilder.h"
-#import "MSAsyncURLSessionDataTask.h"
+#import "MSURLSessionTask.h"
+/*#import "MSAsyncURLSessionDataTask.h"*/
 
 @class MSObject, MSURLSessionDataTask, MSURLSessionUploadTask;
 
@@ -114,9 +115,9 @@ typedef id (^MSObjectWithDictionary)(NSDictionary *response);
  @param castBlock A block that converts and NSDictionary into an MSObject.
  @param completionHandler A completion handler to be called when the task is complete and/or when the status has been updated.
  */
-- (MSAsyncURLSessionDataTask *)asyncTaskWithRequest:(NSMutableURLRequest *)request
+/*- (MSAsyncURLSessionDataTask *)asyncTaskWithRequest:(NSMutableURLRequest *)request
                              odObjectWithDictionary:(MSObjectWithDictionary)castBlock
-                                         completion:(MSAsyncActionCompletion)completionHandler;
+                                         completion:(MSAsyncActionCompletion)completionHandler;*/
 
 - (MSURLSessionUploadTask *)uploadTaskWithRequest:(NSMutableURLRequest *)request
                                          fromFile:(NSURL *)fileURL

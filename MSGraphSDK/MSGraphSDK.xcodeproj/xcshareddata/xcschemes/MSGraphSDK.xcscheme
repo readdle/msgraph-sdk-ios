@@ -28,8 +28,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "10B4D32C1AF827D80083D86C"
-               BuildableName = "MSGraphSDK.xctest"
+               BlueprintIdentifier = "0EFE52531CEC9627002494E7"
+               BuildableName = "MSGraphSDKTests.xctest"
                BlueprintName = "MSGraphSDKTests"
                ReferencedContainer = "container:MSGraphSDK.xcodeproj">
             </BuildableReference>
@@ -46,8 +46,8 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "10B4D32C1AF827D80083D86C"
-               BuildableName = "MSGraphSDK.xctest"
+               BlueprintIdentifier = "0EFE52531CEC9627002494E7"
+               BuildableName = "MSGraphSDKTests.xctest"
                BlueprintName = "MSGraphSDKTests"
                ReferencedContainer = "container:MSGraphSDK.xcodeproj">
             </BuildableReference>
