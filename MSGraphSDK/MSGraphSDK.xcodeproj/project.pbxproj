@@ -886,6 +886,8 @@
 		7C70EDF61C8E1D26008A0C07 /* MSGraphCoreSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C70EDF51C8E1D26008A0C07 /* MSGraphCoreSDK.h */; };
 		7C70EE4E1C90DE73008A0C07 /* MSBlockAuthenticationProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C70EE4C1C90DE73008A0C07 /* MSBlockAuthenticationProvider.h */; };
 		7C70EE4F1C90DE73008A0C07 /* MSBlockAuthenticationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C70EE4D1C90DE73008A0C07 /* MSBlockAuthenticationProvider.m */; };
+		BA23B91A1D6251E000CB0C55 /* MSTimeOfDay.h in Headers */ = {isa = PBXBuildFile; fileRef = BA23B9181D6251E000CB0C55 /* MSTimeOfDay.h */; };
+		BA23B91B1D6251E000CB0C55 /* MSTimeOfDay.m in Sources */ = {isa = PBXBuildFile; fileRef = BA23B9191D6251E000CB0C55 /* MSTimeOfDay.m */; };
 		ED791DECEFED68832BD1C1B1 /* libPods-MSGraphSDKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D0858B0D0686548DE368A8 /* libPods-MSGraphSDKTests.a */; };
 /* End PBXBuildFile section */
 
@@ -1783,6 +1785,8 @@
 		7C70EDF51C8E1D26008A0C07 /* MSGraphCoreSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGraphCoreSDK.h; sourceTree = "<group>"; };
 		7C70EE4C1C90DE73008A0C07 /* MSBlockAuthenticationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSBlockAuthenticationProvider.h; sourceTree = "<group>"; };
 		7C70EE4D1C90DE73008A0C07 /* MSBlockAuthenticationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBlockAuthenticationProvider.m; sourceTree = "<group>"; };
+		BA23B9181D6251E000CB0C55 /* MSTimeOfDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSTimeOfDay.h; sourceTree = "<group>"; };
+		BA23B9191D6251E000CB0C55 /* MSTimeOfDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSTimeOfDay.m; sourceTree = "<group>"; };
 		BE924E32305F80BA7A065278 /* Pods-MSGraphSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSGraphSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MSGraphSDKTests/Pods-MSGraphSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		D1D0858B0D0686548DE368A8 /* libPods-MSGraphSDKTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MSGraphSDKTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89BAF5C44735D6683338221 /* Pods-MSGraphSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSGraphSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MSGraphSDKTests/Pods-MSGraphSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2102,6 +2106,8 @@
 		7C70E8611C877855008A0C07 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BA23B9181D6251E000CB0C55 /* MSTimeOfDay.h */,
+				BA23B9191D6251E000CB0C55 /* MSTimeOfDay.m */,
 				7C4C19891CAAF1E000FBDFFD /* MSGraphClientConfiguration.h */,
 				7C4C198A1CAAF1E000FBDFFD /* MSGraphClientConfiguration.m */,
 				7C70E8621C877855008A0C07 /* MSCollection.h */,
@@ -3014,6 +3020,7 @@
 				7C6F58041CB33B8100EDF1C9 /* MSGraphWeekIndex.h in Headers */,
 				7C6F5AF31CB33B8B00EDF1C9 /* MSGraphEventDismissReminderRequest.h in Headers */,
 				7C6F5C4E1CB33B8B00EDF1C9 /* MSGraphUserRegisteredDevicesCollectionWithReferencesRequestBuilder.h in Headers */,
+				BA23B91A1D6251E000CB0C55 /* MSTimeOfDay.h in Headers */,
 				7C6F57731CB33B8100EDF1C9 /* MSGraphConversationThread.h in Headers */,
 				7C4C19B01CAAF90300FBDFFD /* MSGraphClient+DefaultConfiguration.h in Headers */,
 				7C70EB321C877856008A0C07 /* MSConstants.h in Headers */,
@@ -3755,6 +3762,7 @@
 				7C6F5AAE1CB33B8B00EDF1C9 /* MSGraphDriveItemChildrenCollectionRequest.m in Sources */,
 				7C6F5C251CB33B8B00EDF1C9 /* MSGraphUserMailFoldersCollectionRequest.m in Sources */,
 				7C6F5A421CB33B8B00EDF1C9 /* MSGraphCalendarGroupCalendarsCollectionRequestBuilder.m in Sources */,
+				BA23B91B1D6251E000CB0C55 /* MSTimeOfDay.m in Sources */,
 				7C6F5B041CB33B8B00EDF1C9 /* MSGraphEventSnoozeReminderRequest.m in Sources */,
 				7C6F5C451CB33B8B00EDF1C9 /* MSGraphUserReferenceRequest.m in Sources */,
 				7C6F57B61CB33B8100EDF1C9 /* MSGraphMailFolder.m in Sources */,
