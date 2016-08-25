@@ -2,11 +2,13 @@
 
 This client library is a release candidate and is still in preview status - please continue to provide feedback as we iterate towards a production supported library.
 
+For complete samples, on how to integrate and use the SDK, please visit connect samples for [swift](https://github.com/microsoftgraph/ios-swift-connect-rest-sample) and [objective-c](https://github.com/microsoftgraph/ios-objectivec-connect-rest-sample).
+
 ## 1. Installation
 
 ### Install via Cocoapods
 * [Install Cocoapods](http://guides.cocoapods.org/using/getting-started.html) - Follow the getting started guide to install Cocoapods.
-* Add the following to your Podfile : `pod 'MSGraphSDK', '~> 0.10''`
+* Add the following to your Podfile : `pod 'MSGraphSDK', '~> 0.10' - Make sure the podfile specifies the target. For more details, please refer to the complete samples mentioned above.
 * Run the command `pod install` to install the latest MSGraphSDK pod.
 * Add `#import <MSGraphSDK/MSGraphSDK.h>` to all files that need to reference the SDK.
 
