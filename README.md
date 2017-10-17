@@ -63,7 +63,7 @@ To get a user's root folder of their drive:
 For a more detailed documentation see:
 
 * [Overview](docs/overview.md)
-* [Auth] (docs/auth.md)
+* [Auth](docs/auth.md)
 * [Items](docs/items.md)
 * [Collections](docs/collections.md)
 * [Enumerations](docs/enums.md)
