@@ -1,6 +1,10 @@
-# Get started with the Microsoft Graph SDK for iOS
+# [ARCHIVED] Get started with the Microsoft Graph SDK for iOS
 
-This client library is a release candidate and is still in preview status - please continue to provide feedback as we iterate towards a production supported library.
+## IMPORTANT
+
+**This project is being archived and replaced with the [Microsoft Graph SDK for ObjC](https://github.com/microsoftgraph/msgraph-sdk-objc). As part of the archival process, we're closing all open issues and pull requests. See #37 for more context.**
+
+**You can continue to use this library "as-is", but it won't be maintained moving forward. We apologize for any inconvenience.**
 
 For complete samples, on how to integrate and use the SDK, please visit connect samples for [swift](https://github.com/microsoftgraph/ios-swift-connect-rest-sample) and [objective-c](https://github.com/microsoftgraph/ios-objectivec-connect-rest-sample).
 
