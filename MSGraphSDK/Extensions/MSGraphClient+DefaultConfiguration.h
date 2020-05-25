@@ -28,7 +28,7 @@
  @param logger The logger to set.
  @see MSLogger
  */
-+ (void)setLogger:(id <MSLogger>)logger;
++ (void)setLogger:(id <PMSLogger>)logger;
 
 /**
  Sets the Graph API endpoint URL in [MSGraphClientConfiguration defaultConfiguration]

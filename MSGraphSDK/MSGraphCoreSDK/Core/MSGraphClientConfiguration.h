@@ -27,7 +27,7 @@
 /**
  The logger to be used in the MSGraphClient.
  */
-@property (strong, nonatomic) id <MSLogger> logger;
+@property (strong, nonatomic) id <PMSLogger> logger;
 
 @property (strong, nonatomic) NSString *apiEndpoint;
 

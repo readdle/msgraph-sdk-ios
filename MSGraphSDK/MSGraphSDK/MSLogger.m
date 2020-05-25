@@ -3,7 +3,7 @@
 #import "MSLogger.h"
 #include <stdarg.h>
 
-@implementation MSLogger
+@implementation PMSLogger
 
 
 - (instancetype)initWithLogLevel:(MSLogLevel)level

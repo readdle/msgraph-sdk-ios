@@ -16,7 +16,7 @@
  @see writeMessage:
  
  */
-@interface MSLogger : NSObject <MSLogger>
+@interface PMSLogger : NSObject <PMSLogger>
 
 /**
  Creates the logger with the given level
