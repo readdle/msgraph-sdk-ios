@@ -146,6 +146,21 @@
         else {
             [self.client.logger logWithLevel:MSLogLevelLogError message:@"Error from data task : %@", error];
             [self.client.logger logWithLevel:MSLogLevelLogError message:@"Caused by request %@", request];
+            [self.client.logger logWithLevel:MSLogLevelLogError
+                                     message:@"HTTP method %@, header fields %@",
+             request.HTTPMethod, request.allHTTPHeaderFields];
+            
+            if (request.HTTPBody.length > 0) {
+                [self.client.logger logWithLevel:MSLogLevelLogError
+                                         message:@"HTTP body %@",
+                 [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]];
+            }
+            else {
+                [self.client.logger logWithLevel:MSLogLevelLogError message:@"HTTP body is missed"];
+            }
+
+            [self.client.logger logWithLevel:MSLogLevelLogError message:@"Raw response %@", rawResponse];
+            
             if(completionHandler){
                 completionHandler(nil, error);
             }
