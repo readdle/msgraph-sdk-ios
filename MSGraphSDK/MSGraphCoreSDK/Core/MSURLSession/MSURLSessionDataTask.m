@@ -42,7 +42,7 @@
     return [self.client.httpProvider dataTaskWithRequest:request
                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
                                       
-       _state = MSURLSessionTaskStateTaskCompleted;
+        self->_state = MSURLSessionTaskStateTaskCompleted;
        NSError *resolvedError = nil;
        NSDictionary *resolvedResponse = nil;
         if (!error && response){

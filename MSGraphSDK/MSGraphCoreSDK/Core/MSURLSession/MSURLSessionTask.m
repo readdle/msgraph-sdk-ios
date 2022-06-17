@@ -41,14 +41,14 @@
     [self.client.authenticationProvider appendAuthenticationHeaders:self.request completion:^(NSMutableURLRequest *request, NSError *error){
         if (self.state != MSURLSessionTaskStateTaskCanceled){
             if (!error){
-                _state = MSURLSessionTaskStateTaskExecuting;
-                _innerTask = [self taskWithRequest:request];
+                self->_state = MSURLSessionTaskStateTaskExecuting;
+                self->_innerTask = [self taskWithRequest:request];
                 [self.client.logger logWithLevel:MSLogLevelLogInfo message:@"Created NSURLSessionTask"];
-                [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Task Id : %ld", _innerTask.taskIdentifier];
-                [_innerTask resume];
+                [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Task Id : %ld", self->_innerTask.taskIdentifier];
+                [self->_innerTask resume];
             }
             else{
-                _state = MSURLSessionTaskStateTaskAuthFailed;
+                self->_state = MSURLSessionTaskStateTaskAuthFailed;
                 [self.client.logger logWithLevel:MSLogLevelLogError message:@"Authentication Failed with error :%@", error];
                 [self authenticationFailedWithError:error];
             }
