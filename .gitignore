@@ -35,6 +35,3 @@ DerivedData
 Pods/
 Podfile.lock
 **/MSGraphSDK.xcworkspace/**
-.s7control
-.s7bak
-OCMock
