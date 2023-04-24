@@ -58,7 +58,6 @@
 		0EBC14CF1CFC32C700FDF800 /* MSURLSessionDataTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC14CE1CFC32C700FDF800 /* MSURLSessionDataTaskTests.m */; };
 		0EFE52591CEC9628002494E7 /* MSGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B4D1201AF8215D0083D86C /* MSGraphSDK.framework */; };
 		0EFE52611CED838F002494E7 /* MSCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE52601CED838F002494E7 /* MSCollectionTests.m */; };
-		244D047824EA72EE00299626 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 244D046C24EA72CD00299626 /* libOCMock.a */; };
 		7C12E5B61CA3469400328A79 /* MSGraphSDKVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C12E5B41CA3469400328A79 /* MSGraphSDKVersion.h */; };
 		7C12E5B71CA3469400328A79 /* MSGraphSDKVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C12E5B51CA3469400328A79 /* MSGraphSDKVersion.m */; };
 		7C4C198B1CAAF1E000FBDFFD /* MSGraphClientConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C4C19891CAAF1E000FBDFFD /* MSGraphClientConfiguration.h */; };
@@ -899,62 +898,6 @@
 			remoteGlobalIDString = 10B4D11F1AF8215D0083D86C;
 			remoteInfo = MSGraphSDK;
 		};
-		244D046724EA72CD00299626 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 030EF0A814632FD000B04273;
-			remoteInfo = OCMock;
-		};
-		244D046924EA72CD00299626 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 03565A3118F0566E003AE91E;
-			remoteInfo = OCMockTests;
-		};
-		244D046B24EA72CD00299626 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 030EF0DC14632FF700B04273;
-			remoteInfo = OCMockLib;
-		};
-		244D046D24EA72CD00299626 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D31108AD1828DB8700737925;
-			remoteInfo = OCMockLibTests;
-		};
-		244D046F24EA72CD00299626 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F0B950F11B0080BE00942C38;
-			remoteInfo = "OCMock iOS";
-		};
-		244D047124EA72CD00299626 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 817EB1621BD765130047E85A;
-			remoteInfo = "OCMock tvOS";
-		};
-		244D047324EA72CD00299626 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DE97CA022B43EE60098C63F;
-			remoteInfo = "OCMock watchOS";
-		};
-		244D047524EA72E600299626 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 030EF0DB14632FF700B04273;
-			remoteInfo = OCMockLib;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -1013,7 +956,6 @@
 		0EFE52601CED838F002494E7 /* MSCollectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCollectionTests.m; sourceTree = "<group>"; };
 		10B4D1201AF8215D0083D86C /* MSGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B4D1241AF8215D0083D86C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		244D045D24EA72CD00299626 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = ../../OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		7C12E5B41CA3469400328A79 /* MSGraphSDKVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGraphSDKVersion.h; sourceTree = "<group>"; };
 		7C12E5B51CA3469400328A79 /* MSGraphSDKVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphSDKVersion.m; sourceTree = "<group>"; };
 		7C4C19891CAAF1E000FBDFFD /* MSGraphClientConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGraphClientConfiguration.h; sourceTree = "<group>"; };
@@ -1851,7 +1793,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				244D047824EA72EE00299626 /* libOCMock.a in Frameworks */,
 				0EFE52591CEC9628002494E7 /* MSGraphSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2010,7 +1951,6 @@
 		0EFE52551CEC9627002494E7 /* MSGraphSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				244D045D24EA72CD00299626 /* OCMock.xcodeproj */,
 				0EB499811CF993BF001617C3 /* MSGraphTestCase.h */,
 				0EB4997F1CF9935E001617C3 /* MSGraphTestCase.m */,
 				0E4773DB1D07AAAA008F57B9 /* Common */,
@@ -2076,20 +2016,6 @@
 				10B4D1241AF8215D0083D86C /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		244D045E24EA72CD00299626 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				244D046824EA72CD00299626 /* OCMock.framework */,
-				244D046A24EA72CD00299626 /* OCMockTests.xctest */,
-				244D046C24EA72CD00299626 /* libOCMock.a */,
-				244D046E24EA72CD00299626 /* OCMockLibTests.xctest */,
-				244D047024EA72CD00299626 /* OCMock.framework */,
-				244D047224EA72CD00299626 /* OCMock.framework */,
-				244D047424EA72CD00299626 /* OCMock.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		244D047724EA72EE00299626 /* Frameworks */ = {
@@ -3463,7 +3389,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				244D047624EA72E600299626 /* PBXTargetDependency */,
 				0EFE525B1CEC9628002494E7 /* PBXTargetDependency */,
 			);
 			name = MSGraphSDKTests;
@@ -3517,12 +3442,6 @@
 			mainGroup = 10B4D1161AF8215D0083D86C;
 			productRefGroup = 10B4D1211AF8215D0083D86C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 244D045E24EA72CD00299626 /* Products */;
-					ProjectRef = 244D045D24EA72CD00299626 /* OCMock.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				10B4D11F1AF8215D0083D86C /* MSGraphSDK */,
@@ -3530,58 +3449,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		244D046824EA72CD00299626 /* OCMock.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCMock.framework;
-			remoteRef = 244D046724EA72CD00299626 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		244D046A24EA72CD00299626 /* OCMockTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OCMockTests.xctest;
-			remoteRef = 244D046924EA72CD00299626 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		244D046C24EA72CD00299626 /* libOCMock.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libOCMock.a;
-			remoteRef = 244D046B24EA72CD00299626 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		244D046E24EA72CD00299626 /* OCMockLibTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OCMockLibTests.xctest;
-			remoteRef = 244D046D24EA72CD00299626 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		244D047024EA72CD00299626 /* OCMock.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCMock.framework;
-			remoteRef = 244D046F24EA72CD00299626 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		244D047224EA72CD00299626 /* OCMock.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCMock.framework;
-			remoteRef = 244D047124EA72CD00299626 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		244D047424EA72CD00299626 /* OCMock.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OCMock.framework;
-			remoteRef = 244D047324EA72CD00299626 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0EFE52521CEC9627002494E7 /* Resources */ = {
@@ -4083,11 +3950,6 @@
 			isa = PBXTargetDependency;
 			target = 10B4D11F1AF8215D0083D86C /* MSGraphSDK */;
 			targetProxy = 0EFE525A1CEC9628002494E7 /* PBXContainerItemProxy */;
-		};
-		244D047624EA72E600299626 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OCMockLib;
-			targetProxy = 244D047524EA72E600299626 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
