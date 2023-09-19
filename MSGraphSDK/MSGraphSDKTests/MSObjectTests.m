@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "MSObject.h"
-#import "OCMock.h"
+#import <OCMock/OCMock.h>
 
 
 @interface MSObjectTests : XCTestCase

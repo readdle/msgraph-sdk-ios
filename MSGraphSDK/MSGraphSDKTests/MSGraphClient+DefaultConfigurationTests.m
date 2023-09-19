@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "MSGraphSDK.h"
-#import "OCMock.h"
+#import <OCMock/OCMock.h>
 
 
 
@@ -64,7 +64,7 @@
     MSGraphClientConfiguration * msgraphClientConfiguration = [MSGraphClientConfiguration defaultConfiguration];
     XCTAssertNotNil(msgraphClientConfiguration.logger);
     
-    id mockMSLogger = OCMProtocolMock(@protocol(MSLogger));
+    id mockMSLogger = OCMProtocolMock(@protocol(PMSLogger));
     
     [MSGraphClient setLogger:mockMSLogger];
     XCTAssertNotNil(msgraphClientConfiguration.logger);
@@ -79,7 +79,7 @@
 
 -(void)testSetClient{
     id mockAuthenticationProvider = OCMProtocolMock(@protocol(MSAuthenticationProvider));
-    MSLogger *logger = [[MSLogger alloc] init];
+    PMSLogger *logger = [[PMSLogger alloc] init];
     id mockMSHttpProvider = OCMProtocolMock(@protocol(MSHttpProvider));
     
     [MSGraphClient setAuthenticationProvider:mockAuthenticationProvider];
@@ -95,7 +95,7 @@
     XCTAssertEqualObjects(client.logger, logger);
     
     [client setLogLevel:MSLogLevelLogDebug];
-    MSLogger * loggerOut = client.logger;
+    PMSLogger * loggerOut = client.logger;
     XCTAssertEqual(loggerOut.logLevel, MSLogLevelLogDebug);
     
     //restore

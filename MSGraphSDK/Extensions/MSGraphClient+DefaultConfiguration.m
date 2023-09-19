@@ -15,7 +15,7 @@
     [MSGraphClientConfiguration defaultConfiguration].httpProvider = httpProvider;
 }
 
-+ (void)setLogger:(id <MSLogger>)logger {
++ (void)setLogger:(id <PMSLogger>)logger {
     [MSGraphClientConfiguration defaultConfiguration].logger = logger;
 }
 

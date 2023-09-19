@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "MSGraphSDK.h"
-#import "OCMock.h"
+#import <OCMock/OCMock.h>
 
 
 @interface MSGraphClientConfiguration_DefaultConfigurationTests : XCTestCase
@@ -32,8 +32,8 @@
     XCTAssertNotNil(msgraphClientConfiguration);
     
     XCTAssertTrue([msgraphClientConfiguration.httpProvider isKindOfClass:[MSURLSessionManager class]]);
-    XCTAssertTrue([msgraphClientConfiguration.logger isKindOfClass:[MSLogger class]]);
-    MSLogger *logger = msgraphClientConfiguration.logger;
+    XCTAssertTrue([msgraphClientConfiguration.logger isKindOfClass:[PMSLogger class]]);
+    PMSLogger *logger = msgraphClientConfiguration.logger;
     XCTAssertEqual(logger.logLevel, MSLogLevelLogError);
     
     NSString *expectedApiEndpoint = [NSString stringWithFormat:@"%@/%@", MSGraphApiEndpoint, MSGraphApiVersion];

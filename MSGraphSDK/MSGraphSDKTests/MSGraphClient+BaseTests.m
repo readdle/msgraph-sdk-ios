@@ -21,7 +21,7 @@
     _clientConfiguration.authenticationProvider = self.mockAuthProvider;
     _clientConfiguration.httpProvider = self.mockHttpProvider;
     _clientConfiguration.apiEndpoint = [self.testBaseURL absoluteString];
-    _clientConfiguration.logger = OCMProtocolMock(@protocol(MSLogger));
+    _clientConfiguration.logger = OCMProtocolMock(@protocol(PMSLogger));
 }
 
 - (void)tearDown {

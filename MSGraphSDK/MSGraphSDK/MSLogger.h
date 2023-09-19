@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.  All Rights Reserved.  Licensed under the MIT License.  See License in the project root for license information.
 
 #import <Foundation/Foundation.h>
-#import "MSLoggerProtocol.h"
+#import <MSLoggerProtocol.h>
 
 /**
  Simple Logger for the GraphSDK will log everything to the console using NSLog
@@ -16,7 +16,7 @@
  @see writeMessage:
  
  */
-@interface MSLogger : NSObject <MSLogger>
+@interface PMSLogger : NSObject <PMSLogger>
 
 /**
  Creates the logger with the given level

@@ -37,7 +37,7 @@
     [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Creating download task with request : %@", request];
     NSProgress *progress = [self createProgress];
     return [self.client.httpProvider downloadTaskWithRequest:request progress:&progress completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error){
-        _state = MSURLSessionTaskStateTaskCompleted;
+        self->_state = MSURLSessionTaskStateTaskCompleted;
         NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
         [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Received download response with http status code %ld", statusCode];
         if (!error && statusCode != MSExpectedResponseCodesOK) {

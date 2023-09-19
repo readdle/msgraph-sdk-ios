@@ -8,17 +8,17 @@
 
 #import <XCTest/XCTest.h>
 #import "MSLogger.h"
-#import "OCMock.h"
+#import <OCMock/OCMock.h>
 
 @interface MSLoggerTests : XCTestCase
-@property(nonatomic, retain) MSLogger * mockLogger;
+@property(nonatomic, retain) PMSLogger * mockLogger;
 @end
 
 @implementation MSLoggerTests
 
 - (void)setUp {
     [super setUp];
-    self.mockLogger = OCMPartialMock([[MSLogger alloc] initWithLogLevel:MSLogLevelLogError]);
+    self.mockLogger = OCMPartialMock([[PMSLogger alloc] initWithLogLevel:MSLogLevelLogError]);
 }
 
 - (void)tearDown {
@@ -27,24 +27,24 @@
 }
 
 - (void)testInitWithLogLevelWithNoLevel {
-    MSLogger *mslogger = [[MSLogger alloc] init];
+    PMSLogger *mslogger = [[PMSLogger alloc] init];
     XCTAssertEqual(mslogger.logLevel, 0);
 }
 - (void)testInitWithLogLevelWithLevel {
-    MSLogger *mslogger = [[MSLogger alloc] initWithLogLevel:MSLogLevelLogError];
+    PMSLogger *mslogger = [[PMSLogger alloc] initWithLogLevel:MSLogLevelLogError];
     XCTAssertEqual(mslogger.logLevel, MSLogLevelLogError);
     
-    mslogger = [[MSLogger alloc] initWithLogLevel:MSLogLevelLogWarn];
+    mslogger = [[PMSLogger alloc] initWithLogLevel:MSLogLevelLogWarn];
     XCTAssertEqual(mslogger.logLevel, MSLogLevelLogWarn);
     
-    mslogger = [[MSLogger alloc] initWithLogLevel:MSLogLevelLogInfo];
+    mslogger = [[PMSLogger alloc] initWithLogLevel:MSLogLevelLogInfo];
     XCTAssertEqual(mslogger.logLevel, MSLogLevelLogInfo);
     
-    mslogger = [[MSLogger alloc] initWithLogLevel:MSLogLevelLogDebug];
+    mslogger = [[PMSLogger alloc] initWithLogLevel:MSLogLevelLogDebug];
     XCTAssertEqual(mslogger.logLevel, MSLogLevelLogDebug);
     
     //unkown level
-    mslogger = [[MSLogger alloc] initWithLogLevel:5];
+    mslogger = [[PMSLogger alloc] initWithLogLevel:5];
     XCTAssertEqual(mslogger.logLevel, 5);
 }
 -(void)testMSLoggerDelegateWithLogError{
@@ -66,7 +66,7 @@
     [self assertWriteMessage:@"Graph SDK 100 : test logger" LogLevel:100 formatter:@"test logger"];
 }
 -(void)testMSLoggerDelegateWithNilFormatter{
-    id<MSLogger> msloggerDelegate = [[MSLogger alloc] initWithLogLevel:MSLogLevelLogError];
+    id<PMSLogger> msloggerDelegate = [[PMSLogger alloc] initWithLogLevel:MSLogLevelLogError];
     [msloggerDelegate setLogLevel:MSLogLevelLogInfo];
     NSString *message = nil;
     [self getWriteMessage:&message];

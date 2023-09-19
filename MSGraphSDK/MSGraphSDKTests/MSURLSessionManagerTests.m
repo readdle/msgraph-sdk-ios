@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "MSGraphSDK.h"
 #import "MSNSURLSessionTaskDelegate.h"
-#import "OCMock.h"
+#import <OCMock/OCMock.h>
 
 
 @interface MSURLSessionManager()
