@@ -18,7 +18,20 @@
                          client:(ODataBaseClient *)client
              completionHandler:(MSDownloadCompletionHandler)completionHandler
 {
-    self = [super initWithRequest:request client:client];
+    return
+    [self
+     initWithRequest:request 
+     client:client
+     skipAuthentication:NO
+     completionHandler:completionHandler];
+}
+
+- (instancetype)initWithRequest:(NSMutableURLRequest *)request
+                         client:(ODataBaseClient *)client
+             skipAuthentication:(BOOL)skipAuthentication
+             completionHandler:(MSDownloadCompletionHandler)completionHandler
+{
+    self = [super initWithRequest:request client:client skipAuthentication:skipAuthentication];
     if (self){
         _completionHandler = completionHandler;
     }

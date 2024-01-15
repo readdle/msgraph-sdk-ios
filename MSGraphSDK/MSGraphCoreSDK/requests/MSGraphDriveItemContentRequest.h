@@ -9,6 +9,8 @@ typedef void(^MSGraphDriveItemUploadCompletionHandler)(MSGraphDriveItem *respons
 
 @interface MSGraphDriveItemContentRequest : MSRequest
 
+- (instancetype)initWithDownloadURL:(NSURL *)url client:(ODataBaseClient *)client;
+
 - (MSURLSessionDownloadTask *) downloadWithCompletion:(MSDownloadCompletionHandler)completionHandler;
 
 - (MSURLSessionUploadTask *) uploadFromData:(NSData *)data
