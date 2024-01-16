@@ -14,7 +14,25 @@
 
 @end
 
+@interface MSGraphDriveItemContentRequest ()
+
+@property (nonatomic, assign) BOOL skipAuthentication;
+
+@end
+
 @implementation MSGraphDriveItemContentRequest
+
+- (instancetype)initWithDownloadURL:(NSURL *)url client:(ODataBaseClient *)client {
+    self = [super initWithURL:url client:client];
+    if (self != nil) {
+        // EXP-11490
+        // no need to add authorization headers when using direct download url
+        // furthermore, it can cause "unauthorized error"
+        // so we skip authorization
+        _skipAuthentication = YES;
+    }
+    return self;
+}
 
 - (NSMutableURLRequest *) download
 {
@@ -27,6 +45,7 @@
 {
     MSURLSessionDownloadTask *task = [[MSURLSessionDownloadTask alloc] initWithRequest:[self download]
                                                                                 client:self.client
+                                                                    skipAuthentication:self.skipAuthentication
                                                                      completionHandler:completionHandler];
     [task execute];
     return task;
