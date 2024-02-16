@@ -8,6 +8,17 @@
 
 @implementation MSBlockAuthenticationProvider
 
++ (MSBlockAuthenticationProvider*)providerWithBearerToken:(NSString *)token
+{
+    return [self providerWithBlock:^(NSMutableURLRequest *request, MSAuthenticationCompletion completion) {
+        NSString * const header = [NSString stringWithFormat:@"Bearer %@", token];
+        [request setValue:header forHTTPHeaderField:@"Authorization"];
+        if (completion) {
+            completion(request, nil);
+        }
+    }];
+}
+
 + (MSBlockAuthenticationProvider*)providerWithBlock:(void (^)(NSMutableURLRequest *, void (^)(NSMutableURLRequest*, NSError*)))block
 {
     NSParameterAssert(block);

@@ -52,7 +52,18 @@ typedef MSRawDownloadCompletionHandler MSDownloadCompletionHandler;
  @param request The request to use. Must not be nil.
  @param client The client to make the request. Must not be nil.
  */
-- (instancetype)initWithRequest:(NSMutableURLRequest *)request client:(ODataBaseClient *)client;
+- (instancetype)initWithRequest:(NSMutableURLRequest *)request
+                         client:(ODataBaseClient *)client;
+
+/**
+ Creates an `MSURLSessionTask` with the given requests and client.
+ @param request The request to use. Must not be nil.
+ @param client The client to make the request. Must not be nil.
+ @param skipAuthentication The parameter, indicating whether authentication should be skipped
+ */
+- (instancetype)initWithRequest:(NSMutableURLRequest *)request
+                         client:(ODataBaseClient *)client
+             skipAuthentication:(BOOL)skipAuthentication;
 
 /**
  Executes the task.
