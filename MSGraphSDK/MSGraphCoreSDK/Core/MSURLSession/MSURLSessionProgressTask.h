@@ -12,6 +12,7 @@
  The NSProgress to monitor.
  */
 @property (strong, readonly) NSProgress *progress;
+@property (copy, nonatomic) void(^progressHandler)(float progress);
 
 - (NSProgress *)createProgress;
 

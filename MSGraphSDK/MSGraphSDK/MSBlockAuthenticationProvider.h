@@ -7,6 +7,7 @@ typedef void (^MSAuthenticationBlock) (NSMutableURLRequest *request, MSAuthentic
 
 @interface MSBlockAuthenticationProvider : NSObject <MSAuthenticationProvider>
 
++ (MSBlockAuthenticationProvider*)providerWithBearerToken:(NSString *)token;
 + (MSBlockAuthenticationProvider*)providerWithBlock:(MSAuthenticationBlock)block;
 
 @end
