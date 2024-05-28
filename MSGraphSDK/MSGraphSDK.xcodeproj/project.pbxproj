@@ -4111,6 +4111,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MSGraphSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Microsoft.MSGraph.$(PRODUCT_NAME:rfc1034identifier)";
@@ -4129,6 +4130,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MSGraphSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Microsoft.MSGraph.$(PRODUCT_NAME:rfc1034identifier)";
