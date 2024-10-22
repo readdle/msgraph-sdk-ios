@@ -14,7 +14,7 @@
 
 - (MSGraphDriveItemDeltaRequest *)requestWithOptions:(NSArray *)options
 {
-    return [[MSGraphDriveItemDeltaRequest alloc] initWithURL:self.requestURL client:self.client];
+    return [[MSGraphDriveItemDeltaRequest alloc] initWithURL:self.requestURL options:options client:self.client];
 }
 
 @end
