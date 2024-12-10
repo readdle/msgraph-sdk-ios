@@ -7,7 +7,6 @@
 @interface MSURLSessionTask()
 
 @property (readonly) NSMutableURLRequest *request;
-@property (nonatomic, assign) BOOL skipAuthentication;
 
 @end
 
@@ -16,13 +15,6 @@
 - (instancetype)initWithRequest:(NSMutableURLRequest *)request
                          client:(ODataBaseClient *)client
 {
-    return [self initWithRequest:request client:client skipAuthentication:NO];
-}
-
-- (instancetype)initWithRequest:(NSMutableURLRequest *)request
-                         client:(ODataBaseClient *)client
-             skipAuthentication:(BOOL)skipAuthentication
-{
     NSParameterAssert(request);
     NSParameterAssert(client);
     
@@ -30,7 +22,6 @@
     if (self){
         _client = client;
         _request = request;
-        _skipAuthentication = skipAuthentication;
         _state = MSURLSessionTaskStateTaskCreated;
     }
     return self;
@@ -46,12 +37,7 @@
     {
         [self.request setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
     }
-
-    if (self.skipAuthentication) {
-        [self startTaskWithRequest:self.request];
-        return;
-    }
-
+    
     [self.client.authenticationProvider appendAuthenticationHeaders:self.request completion:^(NSMutableURLRequest *request, NSError *error){
         if (self.state != MSURLSessionTaskStateTaskCanceled){
             if (!error){

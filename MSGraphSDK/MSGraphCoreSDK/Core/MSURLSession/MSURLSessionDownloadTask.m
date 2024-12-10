@@ -18,20 +18,7 @@
                          client:(ODataBaseClient *)client
              completionHandler:(MSDownloadCompletionHandler)completionHandler
 {
-    return
-    [self
-     initWithRequest:request 
-     client:client
-     skipAuthentication:NO
-     completionHandler:completionHandler];
-}
-
-- (instancetype)initWithRequest:(NSMutableURLRequest *)request
-                         client:(ODataBaseClient *)client
-             skipAuthentication:(BOOL)skipAuthentication
-             completionHandler:(MSDownloadCompletionHandler)completionHandler
-{
-    self = [super initWithRequest:request client:client skipAuthentication:skipAuthentication];
+    self = [super initWithRequest:request client:client];
     if (self){
         _completionHandler = completionHandler;
     }
@@ -49,7 +36,10 @@
 {
     [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Creating download task with request : %@", request];
     NSProgress *progress = [self createProgress];
-    return [self.client.httpProvider downloadTaskWithRequest:request progress:&progress completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error){
+    
+    return [self.client.httpProvider downloadTaskWithRequest:request
+                                                    progress:&progress
+                                           completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
         self->_state = MSURLSessionTaskStateTaskCompleted;
         NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
         [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Received download response with http status code %ld", statusCode];
@@ -57,12 +47,13 @@
             // The only response that should allow for the binary data to be in the file is a 200, otherwise it will be empty (304 no body)
             // or contain the error json blob which will be passed back in the error object if it exists
             // because this is a download task it will download the response to disk instead of memory
-            if ( statusCode != MSExpectedResponseCodesNotModified){
+            if ( statusCode != MSExpectedResponseCodesNotModified) {
                 error = [self readErrorFromFile:location response:response];
             }
             location = nil;
         }
-        if (self.completionHandler){
+        
+        if (self.completionHandler) {
             self.completionHandler(location, response, error);
         }
     }];

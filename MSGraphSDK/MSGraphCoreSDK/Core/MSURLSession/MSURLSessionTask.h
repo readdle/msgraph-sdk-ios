@@ -56,16 +56,6 @@ typedef MSRawDownloadCompletionHandler MSDownloadCompletionHandler;
                          client:(ODataBaseClient *)client;
 
 /**
- Creates an `MSURLSessionTask` with the given requests and client.
- @param request The request to use. Must not be nil.
- @param client The client to make the request. Must not be nil.
- @param skipAuthentication The parameter, indicating whether authentication should be skipped
- */
-- (instancetype)initWithRequest:(NSMutableURLRequest *)request
-                         client:(ODataBaseClient *)client
-             skipAuthentication:(BOOL)skipAuthentication;
-
-/**
  Executes the task.
  @warning The task may send an extra request to reauthenticate the session if the auth token has expired.
  */
