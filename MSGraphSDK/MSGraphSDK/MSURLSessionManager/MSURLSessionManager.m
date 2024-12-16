@@ -169,9 +169,23 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)redirectResponse
  completionHandler:(void (^)(NSURLRequest *))completionHandler
 {
     NSMutableURLRequest *newRequest = nil;
-    if (request){
+    if (request) {
         newRequest = [request mutableCopy];
-        [task.originalRequest.allHTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop){
+        
+        // https://readdle-j.atlassian.net/browse/EXP-13297
+        // fkavun
+        // Needs this check to avoid adding authentication header to the new request
+        // The newRequest in this case is download URL and according to documentation it shouldn't use authentication header
+        // Sometimes using authentication header causes 401 errors
+        // https://learn.microsoft.com/en-us/graph/api/driveitem-get-content?view=graph-rest-1.0&tabs=http#response
+        if (redirectResponse.statusCode == 302 &&
+            [task.originalRequest.URL.absoluteString hasSuffix:@"/content"])
+        {
+            completionHandler(newRequest);
+            return;
+        }
+        
+        [task.originalRequest.allHTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
             [newRequest setValue:value forHTTPHeaderField:key];
         }];
     }
