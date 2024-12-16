@@ -31,6 +31,8 @@
 
 - (MSGraphDriveItemContentRequest *) contentRequest;
 
+- (MSGraphDriveItemContentRequest *) contentRequestWithSkipHeadersInheritance:(BOOL)skipHeadersInheritance;
+
 - (MSGraphDriveItemCreateLinkRequestBuilder *)createLinkWithType:(NSString *)type scope:(NSString *)scope ;
 
 
