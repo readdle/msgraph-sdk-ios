@@ -62,6 +62,21 @@
     return [self contentRequestWithOptions:nil];
 }
 
+- (MSGraphDriveItemContentRequest *) contentRequestWithSkipHeadersInheritance:(BOOL)skipHeadersInheritance {
+    // https://readdle-j.atlassian.net/browse/EXP-13297
+    // fkavun
+    // Needs value skipHeadersInheritance to force disable adding the http headers from "old" reqest to the "new" one during redirection.
+    // The "new" request in this case is download URL and according to documentation it shouldn't use authentication header.
+    // The download URL already has all required headers and we can just use it without "inheritance" of headers
+    // Sometimes using authentication header causes 401 errors
+    // https://learn.microsoft.com/en-us/graph/api/driveitem-get-content?view=graph-rest-1.0&tabs=http#response
+    
+    NSURL *contentURL = [self.requestURL URLByAppendingPathComponent:@"content"];
+    return [[MSGraphDriveItemContentRequest alloc] initWithDownloadURL:contentURL
+                                                                client:self.client
+                                                skipHeadersInheritance:skipHeadersInheritance];
+}
+
 - (MSGraphDriveItemCreateLinkRequestBuilder *)createLinkWithType:(NSString *)type scope:(NSString *)scope 
 {
     NSURL *actionURL = [self.requestURL URLByAppendingPathComponent:@"microsoft.graph.createLink"];

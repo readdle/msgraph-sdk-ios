@@ -41,6 +41,19 @@ typedef void (^MSDataCompletionHandler)(NSData *data, NSURLResponse *response, N
 - (NSURLSessionDownloadTask *) downloadTaskWithRequest:(NSURLRequest *)request
                                               progress:(NSProgress * __autoreleasing *)progress
                                      completionHandler:(MSRawDownloadCompletionHandler)completionHandler;
+
+/**
+ Creates an NSURLSessionDataTask ready to be resumed.
+ @param  request The request that should be sent.
+ @param  progress A reference to an NSProgress object that will be updated when the download completes. It may be nil.
+ @param  completionHandler The completion handler to be called on completion. It may be nil.
+ @param  skipHeadersInheritance The parameter, indicating whether http headers inheirtance should be skipped during redirect
+ @return The NSURLSessionDownloadTask ready to be resumed.
+ */
+- (NSURLSessionDownloadTask *) downloadTaskWithRequest:(NSURLRequest *)request
+                                              progress:(NSProgress * __autoreleasing *)progress
+                                skipHeadersInheritance:(BOOL)skipHeadersInheritance
+                                     completionHandler:(MSRawDownloadCompletionHandler)completionHandler;
 /**
  Creates an NSURLSessionUploadTask ready to be resumed.
  @param  request The request that should be sent.
