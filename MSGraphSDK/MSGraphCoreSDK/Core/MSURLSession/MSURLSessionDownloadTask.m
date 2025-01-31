@@ -9,6 +9,7 @@
 @interface MSURLSessionDownloadTask()
 
 @property (strong) MSDownloadCompletionHandler completionHandler;
+@property (nonatomic, assign) BOOL skipHeadersInheritance;
 
 @end
 
@@ -23,16 +24,19 @@
      initWithRequest:request 
      client:client
      skipAuthentication:NO
+     skipHeadersInheritance:NO
      completionHandler:completionHandler];
 }
 
 - (instancetype)initWithRequest:(NSMutableURLRequest *)request
                          client:(ODataBaseClient *)client
              skipAuthentication:(BOOL)skipAuthentication
+         skipHeadersInheritance:(BOOL)skipHeadersInheritance
              completionHandler:(MSDownloadCompletionHandler)completionHandler
 {
     self = [super initWithRequest:request client:client skipAuthentication:skipAuthentication];
     if (self){
+        _skipHeadersInheritance = skipHeadersInheritance;
         _completionHandler = completionHandler;
     }
     return self;
@@ -49,7 +53,10 @@
 {
     [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Creating download task with request : %@", request];
     NSProgress *progress = [self createProgress];
-    return [self.client.httpProvider downloadTaskWithRequest:request progress:&progress completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error){
+    return [self.client.httpProvider downloadTaskWithRequest:request
+                                                    progress:&progress
+                                      skipHeadersInheritance:self.skipHeadersInheritance
+                                           completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
         self->_state = MSURLSessionTaskStateTaskCompleted;
         NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
         [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Received download response with http status code %ld", statusCode];

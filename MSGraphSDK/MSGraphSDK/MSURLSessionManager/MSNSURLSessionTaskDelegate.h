@@ -9,6 +9,8 @@ typedef void(^MSURLSessionTaskCompletion)(id responseObject, NSURLResponse *resp
  */
 @interface MSURLSessionTaskDelegate : NSObject
 
+@property (nonatomic, assign, readonly) BOOL skipHeadersInheritance;
+
 /**
  Creates an instance of an MSURLSessionTaskDelegate
  @param  progress an object reference to a progress
@@ -16,6 +18,16 @@ typedef void(^MSURLSessionTaskCompletion)(id responseObject, NSURLResponse *resp
  */
 - (instancetype)initWithProgressRef:(NSProgress * __autoreleasing *)progress
                         completion:(MSURLSessionTaskCompletion)completion;
+
+/**
+ Creates an instance of an MSURLSessionTaskDelegate
+ @param  progress an object reference to a progress
+ @param  skipHeadersInheritance The parameter, indicating whether http headers inheirtance during redirect should be skipped
+ @param  completion a completion handler to be called when the task completes
+ */
+- (instancetype)initWithProgressRef:(NSProgress * __autoreleasing *)progress
+             skipHeadersInheritance:(BOOL)skipHeadersInheritance
+                         completion:(MSURLSessionTaskCompletion)completion;
 
 /**
  Updates the progress object with the given bytes
