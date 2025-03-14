@@ -49,6 +49,10 @@
             resolvedResponse = [NSJSONSerialization dictionaryWithResponse:response responseData:data error:&resolvedError];
         }
         else {
+            resolvedError = error;
+        }
+
+        if (resolvedError) {
             // In some cases, we want to have access to HTTP response headers.
             // For example, when handling throttling https://readdle-j.atlassian.net/browse/EXP-12495
             //
@@ -74,14 +78,11 @@
                 retryAfter = [httpResponse valueForHTTPHeaderField:@"Retry-After"];
             }
 
-            if (nil == retryAfter) {
-                resolvedError = error;
-            }
-            else {
-                NSMutableDictionary *userInfo = error.userInfo ? [error.userInfo mutableCopy] : [NSMutableDictionary new];
+            if (retryAfter) {
+                NSMutableDictionary *userInfo = resolvedError.userInfo ? [resolvedError.userInfo mutableCopy] : [NSMutableDictionary new];
                 userInfo[@"Retry-After"] = retryAfter;
 
-                resolvedError = [NSError errorWithDomain:error.domain code:error.code userInfo:userInfo];
+                resolvedError = [NSError errorWithDomain:resolvedError.domain code:resolvedError.code userInfo:userInfo];
             }
         }
 
