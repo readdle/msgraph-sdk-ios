@@ -23,11 +23,13 @@
  @param request The mutableURL request. Must not be nil.
  @param client The client that will send the request. Must not be nil.
  @param skipAuthentication The parameter, indicating whether authentication should be skipped
+ @param  skipHeadersInheritance The parameter, indicating whether http headers inheirtance during redirect should be skipped
  @param completionHandler The completion handler to call when the task has completed.
  */
 - (instancetype)initWithRequest:(NSMutableURLRequest *)request
                          client:(ODataBaseClient *)client
              skipAuthentication:(BOOL)skipAuthentication
-             completionHandler:(MSDownloadCompletionHandler)completionHandler;
+         skipHeadersInheritance:(BOOL)skipHeadersInheritance
+              completionHandler:(MSDownloadCompletionHandler)completionHandler;
 
 @end

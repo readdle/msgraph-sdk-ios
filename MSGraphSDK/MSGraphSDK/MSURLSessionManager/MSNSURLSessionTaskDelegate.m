@@ -17,7 +17,16 @@
 @implementation  MSURLSessionTaskDelegate
 
 - (instancetype)initWithProgressRef:(NSProgress * __autoreleasing *)progress
-                        completion:(MSURLSessionTaskCompletion)completion
+                         completion:(MSURLSessionTaskCompletion)completion
+{
+    return [self initWithProgressRef:progress
+              skipHeadersInheritance:NO
+                          completion:completion];
+}
+
+- (instancetype)initWithProgressRef:(NSProgress * __autoreleasing *)progress
+             skipHeadersInheritance:(BOOL)skipHeadersInheritance
+                         completion:(MSURLSessionTaskCompletion)completion
 {
     self = [super init];
     if (self){
@@ -34,11 +43,11 @@
             _progress = nil;
         }
         _mutableData = nil;
+        _skipHeadersInheritance = skipHeadersInheritance;
         _completion = completion;
     }
     return self;
 }
-
 
 - (void)updateProgressWithBytesSent:(int64_t)sentBytes expectedBytes:(int64_t)expectedByes
 {

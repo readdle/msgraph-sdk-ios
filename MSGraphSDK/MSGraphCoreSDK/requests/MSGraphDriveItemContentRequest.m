@@ -17,6 +17,7 @@
 @interface MSGraphDriveItemContentRequest ()
 
 @property (nonatomic, assign) BOOL skipAuthentication;
+@property (nonatomic, assign) BOOL skipHeadersInheritance;
 
 @end
 
@@ -34,6 +35,20 @@
     return self;
 }
 
+- (instancetype)initWithDownloadURL:(NSURL *)url
+                             client:(ODataBaseClient *)client
+             skipHeadersInheritance:(BOOL)skipHeadersInheritance
+{
+    self = [super initWithURL:url client:client];
+    
+    if (nil != self) {
+        _skipAuthentication = NO;
+        _skipHeadersInheritance = skipHeadersInheritance;
+    }
+    
+    return self;
+}
+
 - (NSMutableURLRequest *) download
 {
     return [self requestWithMethod:@"GET"
@@ -46,6 +61,7 @@
     MSURLSessionDownloadTask *task = [[MSURLSessionDownloadTask alloc] initWithRequest:[self download]
                                                                                 client:self.client
                                                                     skipAuthentication:self.skipAuthentication
+                                                                skipHeadersInheritance:self.skipHeadersInheritance
                                                                      completionHandler:completionHandler];
     [task execute];
     return task;
