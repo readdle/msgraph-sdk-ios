@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01DDC1E62D836AD300B862F5 /* NSURLRequest+VerboseDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 01DDC1E52D836AD300B862F5 /* NSURLRequest+VerboseDebug.h */; };
+		01DDC1E82D836AF700B862F5 /* NSURLRequest+VerboseDebug.m in Headers */ = {isa = PBXBuildFile; fileRef = 01DDC1E72D836AF700B862F5 /* NSURLRequest+VerboseDebug.m */; };
+		01DDC1EA2D83760000B862F5 /* NSURLResponse+VerboseDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 01DDC1E92D83760000B862F5 /* NSURLResponse+VerboseDebug.h */; };
+		01DDC1EC2D83760500B862F5 /* NSURLResponse+VerboseDebug.m in Headers */ = {isa = PBXBuildFile; fileRef = 01DDC1EB2D83760500B862F5 /* NSURLResponse+VerboseDebug.m */; };
 		0E0CFD9D1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */; };
 		0E0CFD9F1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */; };
 		0E0CFDA11D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */; };
@@ -901,6 +905,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01DDC1E52D836AD300B862F5 /* NSURLRequest+VerboseDebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+VerboseDebug.h"; sourceTree = "<group>"; };
+		01DDC1E72D836AF700B862F5 /* NSURLRequest+VerboseDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+VerboseDebug.m"; sourceTree = "<group>"; };
+		01DDC1E92D83760000B862F5 /* NSURLResponse+VerboseDebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURLResponse+VerboseDebug.h"; sourceTree = "<group>"; };
+		01DDC1EB2D83760500B862F5 /* NSURLResponse+VerboseDebug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLResponse+VerboseDebug.m"; sourceTree = "<group>"; };
 		0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphProfilePhotoStreamRequestTests.m; sourceTree = "<group>"; };
 		0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserReferenceRequestBuilderTests.m; sourceTree = "<group>"; };
 		0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserReferenceRequestTest.m; sourceTree = "<group>"; };
@@ -2039,6 +2047,10 @@
 				7C4C199C1CAAF77B00FBDFFD /* MSURLSessionTask.m */,
 				7C4C199D1CAAF77B00FBDFFD /* MSURLSessionUploadTask.h */,
 				7C4C199E1CAAF77B00FBDFFD /* MSURLSessionUploadTask.m */,
+				01DDC1E52D836AD300B862F5 /* NSURLRequest+VerboseDebug.h */,
+				01DDC1E72D836AF700B862F5 /* NSURLRequest+VerboseDebug.m */,
+				01DDC1E92D83760000B862F5 /* NSURLResponse+VerboseDebug.h */,
+				01DDC1EB2D83760500B862F5 /* NSURLResponse+VerboseDebug.m */,
 			);
 			path = MSURLSession;
 			sourceTree = "<group>";
@@ -3042,6 +3054,7 @@
 				7C6F5C3C1CB33B8B00EDF1C9 /* MSGraphUserOwnedObjectsCollectionReferencesRequest.h in Headers */,
 				7C6F577B1CB33B8100EDF1C9 /* MSGraphDevice.h in Headers */,
 				7C70EB5F1C877856008A0C07 /* MSTopOptions.h in Headers */,
+				01DDC1EC2D83760500B862F5 /* NSURLResponse+VerboseDebug.m in Headers */,
 				7C6F5B0D1CB33B8B00EDF1C9 /* MSGraphFileAttachmentRequestBuilder.h in Headers */,
 				7C6F5BC81CB33B8B00EDF1C9 /* MSGraphPermissionRequest.h in Headers */,
 				7C6F5A371CB33B8B00EDF1C9 /* MSGraphCalendarCalendarViewCollectionRequest.h in Headers */,
@@ -3173,6 +3186,7 @@
 				7C6F57651CB33B8100EDF1C9 /* MSGraphBodyType.h in Headers */,
 				7C6F5C381CB33B8B00EDF1C9 /* MSGraphUserOwnedDevicesCollectionWithReferencesRequest.h in Headers */,
 				7C6F57BB1CB33B8100EDF1C9 /* MSGraphModels.h in Headers */,
+				01DDC1E82D836AF700B862F5 /* NSURLRequest+VerboseDebug.m in Headers */,
 				7C6F579F1CB33B8100EDF1C9 /* MSGraphGroup.h in Headers */,
 				7C6F5C3E1CB33B8B00EDF1C9 /* MSGraphUserOwnedObjectsCollectionReferencesRequestBuilder.h in Headers */,
 				7C6F5C1C1CB33B8B00EDF1C9 /* MSGraphUserDirectReportsCollectionWithReferencesRequest.h in Headers */,
@@ -3348,6 +3362,8 @@
 				7C6F57EC1CB33B8100EDF1C9 /* MSGraphServicePlanInfo.h in Headers */,
 				7C6F5BA31CB33B8B00EDF1C9 /* MSGraphMessageCreateReplyRequest.h in Headers */,
 				7C6F5C0A1CB33B8B00EDF1C9 /* MSGraphUserContactFoldersCollectionRequestBuilder.h in Headers */,
+				01DDC1E62D836AD300B862F5 /* NSURLRequest+VerboseDebug.h in Headers */,
+				01DDC1EA2D83760000B862F5 /* NSURLResponse+VerboseDebug.h in Headers */,
 				7C6F57A71CB33B8100EDF1C9 /* MSGraphImage.h in Headers */,
 				7C6F5BA51CB33B8B00EDF1C9 /* MSGraphMessageCreateReplyRequestBuilder.h in Headers */,
 				7C6F57CC1CB33B8100EDF1C9 /* MSGraphPost.h in Headers */,

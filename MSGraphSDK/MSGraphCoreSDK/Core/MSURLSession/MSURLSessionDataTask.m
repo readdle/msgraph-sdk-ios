@@ -5,6 +5,8 @@
 #import "ODataBaseClient.h"
 #import "NSJSONSerialization+ResponseHelper.h"
 #import "MSConstants.h"
+#import "NSURLRequest+VerboseDebug.h"
+#import "NSURLResponse+VerboseDebug.h"
 
 @interface MSURLSessionDataTask()
 
@@ -45,11 +47,21 @@
         self->_state = MSURLSessionTaskStateTaskCompleted;
        NSError *resolvedError = nil;
        NSDictionary *resolvedResponse = nil;
-        if (!error && response){
+        if (!error && response) {
             resolvedResponse = [NSJSONSerialization dictionaryWithResponse:response responseData:data error:&resolvedError];
         }
         else {
             resolvedError = error;
+        }
+
+        if (resolvedError) {
+            [self.client.logger logWithLevel:MSLogLevelLogError message:@"Data task request failed."];
+            [self.client.logger logWithLevel:MSLogLevelLogError
+                                     message:[NSString stringWithFormat:@"Request:\n\n%@\n----",
+                                              request.verboseDebugDescription]];
+            [self.client.logger logWithLevel:MSLogLevelLogError
+                                     message:[NSString stringWithFormat:@"Response:\n\n%@\n----",
+                                              [response verboseDebugDescriptionWithData:data]]];
         }
 
         if (self.completionHandler){
