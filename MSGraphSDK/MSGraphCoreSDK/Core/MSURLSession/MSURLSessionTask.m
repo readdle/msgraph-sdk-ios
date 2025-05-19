@@ -82,9 +82,6 @@
         }];
     }
     else {
-        NSString *const warning = @"Attempted to start MSURLSessionTask without a throttling coordinator.";
-        NSAssert(NO, warning);
-        [self.client.logger logWithLevel:MSLogLevelLogWarn message:warning];
         [self->_innerTask resume];
     }
 }
