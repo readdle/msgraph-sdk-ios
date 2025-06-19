@@ -37,13 +37,27 @@
     return dataTask;
 }
 
-- (NSURLSessionDownloadTask *) downloadTaskWithRequest:(NSURLRequest *)request progress:(NSProgress * __autoreleasing *)progress completionHandler:(MSRawDownloadCompletionHandler)completionHandler
+- (NSURLSessionDownloadTask *) downloadTaskWithRequest:(NSURLRequest *)request
+                                              progress:(NSProgress * __autoreleasing *)progress
+                                     completionHandler:(MSRawDownloadCompletionHandler)completionHandler
+{
+    return [self downloadTaskWithRequest:request
+                                progress:progress
+                  skipHeadersInheritance:NO
+                       completionHandler:completionHandler];
+}
+
+- (NSURLSessionDownloadTask *) downloadTaskWithRequest:(NSURLRequest *)request
+                                              progress:(NSProgress * __autoreleasing *)progress
+                                skipHeadersInheritance:(BOOL)skipHeadersInheritance
+                                     completionHandler:(MSRawDownloadCompletionHandler)completionHandler
 {
     NSURLSessionDownloadTask *downloadTask = nil;
     @synchronized(self.urlSession){
         downloadTask = [self.urlSession downloadTaskWithRequest:request];
     }
-    [self addDelegateForTask:downloadTask withProgress:progress completion:completionHandler];
+    
+    [self addDelegateForTask:downloadTask withProgress:progress skipHeadersInheritance:skipHeadersInheritance completion:completionHandler];
     
     return downloadTask;
 }
@@ -81,9 +95,21 @@
               withProgress:(NSProgress * __autoreleasing *)progress
                 completion:(MSURLSessionTaskCompletion)completion
 {
+    [self addDelegateForTask:task
+                withProgress:progress
+      skipHeadersInheritance:NO
+                  completion:completion];
+}
+
+- (void)addDelegateForTask:(NSURLSessionTask *)task
+              withProgress:(NSProgress * __autoreleasing *)progress
+    skipHeadersInheritance:(BOOL)skipHeadersInheritance
+                completion:(MSURLSessionTaskCompletion)completion
+{
     MSURLSessionTaskDelegate *delegate = [[MSURLSessionTaskDelegate alloc]
-                                           initWithProgressRef:progress
-                                           completion:completion];
+                                          initWithProgressRef:progress
+                                          skipHeadersInheritance:skipHeadersInheritance
+                                          completion:completion];
     @synchronized(self.taskDelegates){
         self.taskDelegates[@(task.taskIdentifier)] = delegate;
     }
@@ -169,9 +195,22 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)redirectResponse
  completionHandler:(void (^)(NSURLRequest *))completionHandler
 {
     NSMutableURLRequest *newRequest = nil;
-    if (request){
+    if (request) {
         newRequest = [request mutableCopy];
-        [task.originalRequest.allHTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop){
+        
+        // https://readdle-j.atlassian.net/browse/EXP-13297
+        // fkavun
+        // Needs this check to avoid adding authentication header to the new request
+        // The newRequest in this case is download URL and according to documentation it shouldn't use authentication header
+        // Sometimes using authentication header causes 401 errors
+        // https://learn.microsoft.com/en-us/graph/api/driveitem-get-content?view=graph-rest-1.0&tabs=http#response
+        MSURLSessionTaskDelegate *delegate = [self getDelegateForTask:task];
+        if (delegate.skipHeadersInheritance) {
+            completionHandler(newRequest);
+            return;
+        }
+        
+        [task.originalRequest.allHTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
             [newRequest setValue:value forHTTPHeaderField:key];
         }];
     }
