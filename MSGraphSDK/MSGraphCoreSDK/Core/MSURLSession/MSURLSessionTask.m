@@ -71,7 +71,19 @@
     self->_innerTask = [self taskWithRequest:request];
     [self.client.logger logWithLevel:MSLogLevelLogInfo message:@"Created NSURLSessionTask"];
     [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Task Id : %ld", self->_innerTask.taskIdentifier];
-    [self->_innerTask resume];
+
+    if (self.client.throttlingCoordinator) {
+        NSURLSessionTask *__weak weakInnerTask = self->_innerTask;
+        [self.client.throttlingCoordinator performThrottled:^{
+            // the task may have been cancelled by now, but `resume` should do nothing in that case.
+            // adding an `if (weakInnerTask.state == NSURLSessionTaskStateSuspended)` check here would
+            // only introduce a potential race condition.
+            [weakInnerTask resume];
+        }];
+    }
+    else {
+        [self->_innerTask resume];
+    }
 }
 
 - (void)cancel
