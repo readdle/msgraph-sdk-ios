@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01954A202DCCBD9B00D42FC9 /* PMSThrottlingCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 01515CF62DCCB4F5000BAC53 /* PMSThrottlingCoordinator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E0CFD9D1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */; };
 		0E0CFD9F1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */; };
 		0E0CFDA11D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */; };
@@ -901,6 +902,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01515CF62DCCB4F5000BAC53 /* PMSThrottlingCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMSThrottlingCoordinator.h; sourceTree = "<group>"; };
 		0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphProfilePhotoStreamRequestTests.m; sourceTree = "<group>"; };
 		0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserReferenceRequestBuilderTests.m; sourceTree = "<group>"; };
 		0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserReferenceRequestTest.m; sourceTree = "<group>"; };
@@ -2051,6 +2053,7 @@
 				7C70E83D1C8776E5008A0C07 /* MSLoggerProtocol.h */,
 				7C12E5B41CA3469400328A79 /* MSGraphSDKVersion.h */,
 				7C12E5B51CA3469400328A79 /* MSGraphSDKVersion.m */,
+				01515CF62DCCB4F5000BAC53 /* PMSThrottlingCoordinator.h */,
 			);
 			path = Common;
 			sourceTree = SOURCE_ROOT;
@@ -2958,6 +2961,7 @@
 				7C6F5B751CB33B8B00EDF1C9 /* MSGraphGroupThreadsCollectionRequestBuilder.h in Headers */,
 				7C6F579B1CB33B8100EDF1C9 /* MSGraphFreeBusyStatus.h in Headers */,
 				7C6F5AAD1CB33B8B00EDF1C9 /* MSGraphDriveItemChildrenCollectionRequest.h in Headers */,
+				01954A202DCCBD9B00D42FC9 /* PMSThrottlingCoordinator.h in Headers */,
 				7C6F5AE51CB33B8B00EDF1C9 /* MSGraphEntityRequestBuilder.h in Headers */,
 				7C6F57971CB33B8100EDF1C9 /* MSGraphFileSystemInfo.h in Headers */,
 				7C6F5B171CB33B8B00EDF1C9 /* MSGraphGraphServiceDirectoryRolesCollectionRequest.h in Headers */,
