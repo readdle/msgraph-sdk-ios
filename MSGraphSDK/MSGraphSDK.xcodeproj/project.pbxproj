@@ -4136,7 +4136,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Microsoft.MSGraph.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = MSGraphSDK;
@@ -4162,7 +4161,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Microsoft.MSGraph.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = MSGraphSDK;
