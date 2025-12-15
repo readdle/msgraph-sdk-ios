@@ -62,6 +62,8 @@
                                               [self.class verboseDebugDescriptionForResponse:response withData:data]]];
         }
 
+        [self.client.throttlingCoordinator updateThrottlingFromResponse:response];
+
         if (self.completionHandler){
             self.completionHandler(resolvedResponse, resolvedError);
         }

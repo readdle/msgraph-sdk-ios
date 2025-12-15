@@ -3,6 +3,7 @@
 #import "MSHttpProvider.h"
 #import "MSAuthenticationProvider.h"
 #import "MSLoggerProtocol.h"
+#import "PMSThrottlingCoordinator.h"
 
 @interface ODataBaseClient : NSObject
 
@@ -10,6 +11,8 @@
 @property NSURL *baseURL;
 
 @property (strong) id<MSHttpProvider> httpProvider;
+
+@property (strong) id<PMSThrottlingCoordinator> throttlingCoordinator;
 
 @property (strong) id<PMSLogger> logger;
 
