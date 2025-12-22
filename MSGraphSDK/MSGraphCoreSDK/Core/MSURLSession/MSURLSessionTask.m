@@ -59,7 +59,7 @@
             }
             else{
                 self->_state = MSURLSessionTaskStateTaskAuthFailed;
-                [self.client.logger logWithLevel:MSLogLevelLogError message:@"Authentication Failed with error :%@", error];
+                [self.client.logger logWithLevel:MSLogLevelLogError format:@"Authentication Failed with error :%@", error];
                 [self authenticationFailedWithError:error];
             }
         }
@@ -70,7 +70,7 @@
     self->_state = MSURLSessionTaskStateTaskExecuting;
     self->_innerTask = [self taskWithRequest:request];
     [self.client.logger logWithLevel:MSLogLevelLogInfo message:@"Created NSURLSessionTask"];
-    [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Task Id : %ld", self->_innerTask.taskIdentifier];
+    [self.client.logger logWithLevel:MSLogLevelLogVerbose format:@"Task Id : %lu", (unsigned long)self->_innerTask.taskIdentifier];
 
     if (self.client.throttlingCoordinator) {
         NSURLSessionTask *__weak weakInnerTask = self->_innerTask;
@@ -90,7 +90,7 @@
 {
     [self.client.logger logWithLevel:MSLogLevelLogInfo message:@"Canceled task"];
     if (_innerTask){
-        [self.client.logger logWithLevel:MSLogLevelLogDebug message:@"inner task : %l", [_innerTask taskIdentifier]];
+        [self.client.logger logWithLevel:MSLogLevelLogDebug format:@"inner task : %lu", (unsigned long)[_innerTask taskIdentifier]];
         [_innerTask cancel];
     }
     _state = MSURLSessionTaskStateTaskCanceled;
