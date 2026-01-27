@@ -3,6 +3,7 @@
 #import "NSError+MSGraphSDK.h"
 #import "MSConstants.h"
 #import "MSError.h"
+#import "ReaddleLib/ReaddleLib.h"
 
 @implementation NSError (MSGraphSDK)
 
@@ -17,6 +18,20 @@
         return self.userInfo[MSErrorKey];
     }
     return nil;
+}
+
+- (BOOL)isThrottlingError {
+    return self.isClientError && self.code == 429;
+}
+
+- (NSNumber *)retryAfterSeconds {
+    NSNumber *const retryAfterSeconds = [self.userInfo rdNumberForKey:@"Retry-After"];
+    if (retryAfterSeconds.integerValue > 0) {
+        return retryAfterSeconds;
+    }
+    else {
+        return nil;
+    }
 }
 
 @end
