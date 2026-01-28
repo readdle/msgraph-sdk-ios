@@ -19,4 +19,20 @@
     return nil;
 }
 
+- (BOOL)isThrottlingError {
+    return self.isClientError && self.code == 429;
+}
+
+- (NSNumber *)retryAfterSeconds {
+    NSNumber *const retryAfterSeconds = self.userInfo[@"Retry-After"];
+    if ([retryAfterSeconds isKindOfClass:NSNumber.class] &&
+        retryAfterSeconds.integerValue > 0)
+    {
+        return retryAfterSeconds;
+    }
+    else {
+        return nil;
+    }
+}
+
 @end
