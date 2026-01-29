@@ -35,7 +35,7 @@
 
 - (BOOL)isThrottlingError;
 
-- (NSNumber *)retryAfterSeconds;
+- (NSInteger)retryAfterSeconds;
 
 @end
 
