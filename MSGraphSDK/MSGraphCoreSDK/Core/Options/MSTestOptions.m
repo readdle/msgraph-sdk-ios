@@ -7,6 +7,8 @@
 
 + (instancetype)throttle
 {
+    // There is undocumented feature that allows adding `test429=true` parameter to receive throttling error
+    // 429 is throttling error code
     return [[MSTestOptions alloc] initWithKey:@"test429" value:@"true"];
 }
 
