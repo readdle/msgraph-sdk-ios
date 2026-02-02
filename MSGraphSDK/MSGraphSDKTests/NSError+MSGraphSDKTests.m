@@ -70,8 +70,8 @@
 - (void)testRetryAfterDelay {
     NSError *const error = [NSError errorWithDomain:MSErrorDomain
                                                code:429
-                                           userInfo:@{ @"Retry-After": @23 }];
-    XCTAssertEqual(error.retryAfterDelay, @23);
+                                           userInfo:@{ @"Retry-After": @"23" }];
+    XCTAssertEqual(error.retryAfterSeconds, 23);
 }
 
 @end

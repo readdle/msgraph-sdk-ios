@@ -23,15 +23,13 @@
     return self.isClientError && self.code == 429;
 }
 
-- (NSNumber *)retryAfterSeconds {
-    NSNumber *const retryAfterSeconds = self.userInfo[@"Retry-After"];
-    if ([retryAfterSeconds isKindOfClass:NSNumber.class] &&
-        retryAfterSeconds.integerValue > 0)
-    {
-        return retryAfterSeconds;
+- (NSInteger)retryAfterSeconds {
+    NSString *const retryAfterSeconds = self.userInfo[@"Retry-After"];
+    if ([retryAfterSeconds isKindOfClass:NSString.class]) {
+        return retryAfterSeconds.integerValue;
     }
     else {
-        return nil;
+        return 0;
     }
 }
 
