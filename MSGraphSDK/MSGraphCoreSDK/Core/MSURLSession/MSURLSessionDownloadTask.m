@@ -69,6 +69,9 @@
             }
             location = nil;
         }
+
+        [self.client.throttlingCoordinator updateThrottlingFromResponse:response];
+
         if (self.completionHandler){
             self.completionHandler(location, response, error);
         }

@@ -77,6 +77,9 @@
             [self.client.logger logWithLevel:MSLogLevelLogDebug message:@"Error from response : %@", response];
         }
     }
+
+    [self.client.throttlingCoordinator updateThrottlingFromResponse:response];
+
     if (self.completionHandler){
         self.completionHandler(responseDictionary, error);
     }
