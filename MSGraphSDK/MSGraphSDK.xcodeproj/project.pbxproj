@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		01954A202DCCBD9B00D42FC9 /* PMSThrottlingCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 01515CF62DCCB4F5000BAC53 /* PMSThrottlingCoordinator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D6CE6A92F2BA77900C8DAF2 /* MSTestOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CE6A82F2BA77900C8DAF2 /* MSTestOptions.m */; };
+		0D6CE6AB2F2BA77B00C8DAF2 /* MSTestOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D6CE6AA2F2BA77B00C8DAF2 /* MSTestOptions.h */; };
 		0E0CFD9D1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */; };
 		0E0CFD9F1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */; };
 		0E0CFDA11D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */; };
@@ -903,6 +905,8 @@
 
 /* Begin PBXFileReference section */
 		01515CF62DCCB4F5000BAC53 /* PMSThrottlingCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMSThrottlingCoordinator.h; sourceTree = "<group>"; };
+		0D6CE6A82F2BA77900C8DAF2 /* MSTestOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSTestOptions.m; sourceTree = "<group>"; };
+		0D6CE6AA2F2BA77B00C8DAF2 /* MSTestOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSTestOptions.h; sourceTree = "<group>"; };
 		0E0CFD9C1D081FCD009F9F84 /* MSGraphProfilePhotoStreamRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphProfilePhotoStreamRequestTests.m; sourceTree = "<group>"; };
 		0E0CFD9E1D0820A3009F9F84 /* MSGraphUserReferenceRequestBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserReferenceRequestBuilderTests.m; sourceTree = "<group>"; };
 		0E0CFDA01D0820C5009F9F84 /* MSGraphUserReferenceRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGraphUserReferenceRequestTest.m; sourceTree = "<group>"; };
@@ -2165,6 +2169,8 @@
 				7C70E8961C877855008A0C07 /* MSSelectOptions.m */,
 				7C70E8971C877855008A0C07 /* MSTopOptions.h */,
 				7C70E8981C877855008A0C07 /* MSTopOptions.m */,
+				0D6CE6AA2F2BA77B00C8DAF2 /* MSTestOptions.h */,
+				0D6CE6A82F2BA77900C8DAF2 /* MSTestOptions.m */,
 			);
 			path = Options;
 			sourceTree = "<group>";
@@ -3106,6 +3112,7 @@
 				7C6F57D41CB33B8100EDF1C9 /* MSGraphRecipient.h in Headers */,
 				7C6F5B411CB33B8B00EDF1C9 /* MSGraphGroupConversationsCollectionRequestBuilder.h in Headers */,
 				7C6F5BD61CB33B8B00EDF1C9 /* MSGraphPostReplyRequestBuilder.h in Headers */,
+				0D6CE6AB2F2BA77B00C8DAF2 /* MSTestOptions.h in Headers */,
 				7C4C19A51CAAF77B00FBDFFD /* MSURLSessionProgressTask.h in Headers */,
 				7C6F5C3A1CB33B8B00EDF1C9 /* MSGraphUserOwnedDevicesCollectionWithReferencesRequestBuilder.h in Headers */,
 				7C6F5B3F1CB33B8B00EDF1C9 /* MSGraphGroupConversationsCollectionRequest.h in Headers */,
@@ -3590,6 +3597,7 @@
 				7C70EB501C877856008A0C07 /* MSIfMatch.m in Sources */,
 				7C6F5A7A1CB33B8B00EDF1C9 /* MSGraphDeviceRegisteredUsersCollectionReferencesRequest.m in Sources */,
 				7C6F5B6A1CB33B8B00EDF1C9 /* MSGraphGroupRequestBuilder.m in Sources */,
+				0D6CE6A92F2BA77900C8DAF2 /* MSTestOptions.m in Sources */,
 				7C6F5AB01CB33B8B00EDF1C9 /* MSGraphDriveItemChildrenCollectionRequestBuilder.m in Sources */,
 				7C6F5AB21CB33B8B00EDF1C9 /* MSGraphDriveItemContentRequest.m in Sources */,
 				7C6F579E1CB33B8100EDF1C9 /* MSGraphGeoCoordinates.m in Sources */,
