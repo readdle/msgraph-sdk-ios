@@ -72,9 +72,9 @@
         responseDictionary = [NSJSONSerialization dictionaryWithResponse:response responseData:data error:&error];
     }
     if (error){
-        [self.client.logger logWithLevel:MSLogLevelLogError message:@"Error from download response %@", error];
+        [self.client.logger logWithLevel:MSLogLevelLogError format:@"Error from download response %@", error];
         if (response){
-            [self.client.logger logWithLevel:MSLogLevelLogDebug message:@"Error from response : %@", response];
+            [self.client.logger logWithLevel:MSLogLevelLogDebug format:@"Error from response : %@", response];
         }
     }
 
