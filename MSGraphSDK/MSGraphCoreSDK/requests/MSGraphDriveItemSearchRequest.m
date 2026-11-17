@@ -43,8 +43,10 @@
 
 - (NSMutableURLRequest *)mutableRequest
 {
-    [self.options addObject:[[MSFunctionParameters alloc] initWithKey:@"q"
-                                                                value:[MSObject getNSJsonSerializationCompatibleValue:_q]]];
+    if (nil != _q) {
+        [self.options addObject:[[MSFunctionParameters alloc] initWithKey:@"q"
+                                                                    value:[MSObject getNSJsonSerializationCompatibleValue:_q]]];
+    }
 
     return [self requestWithMethod:@"GET" body:nil headers:nil];
 }
