@@ -69,14 +69,14 @@
     NSParameterAssert(url);
     NSParameterAssert(client);
     
-    [client.logger logWithLevel:MSLogLevelLogDebug message:@" MSRequest init with URL : %@ options : %@", url, options];
+    [client.logger logWithLevel:MSLogLevelLogDebug format:@" MSRequest init with URL : %@ options : %@", url, options];
     self = [super init];
     if (self){
         // It may be best to make this an options object so it is type safe
         if (options){
             [options enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop){
                 if (![obj isKindOfClass:[MSRequestOptions class]]){
-                    [client.logger logWithLevel:MSLogLevelLogError message:@" Option : %@ are not MSRequestOptions", obj];
+                    [client.logger logWithLevel:MSLogLevelLogError format:@" Option : %@ are not MSRequestOptions", obj];
                     NSAssert([obj isKindOfClass:[MSRequestOptions class]], @"Options must be of type MSRequestOptions");
                 }
             }];
@@ -97,13 +97,13 @@
 {
     NSParameterAssert(method);
     
-    [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@" Creating Request with method : %@ body : %@ headers : %@", method, body, headers];
-    
+    [self.client.logger logWithLevel:MSLogLevelLogVerbose format:@" Creating Request with method : %@ body : %@ headers : %@", method, body, headers];
+
     MSRequestOptionsBuilder *optionsBuilder = [MSRequestOptionsBuilder optionsWithArray:self.options];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",[self.requestURL absoluteString], optionsBuilder.functionParams, optionsBuilder.queryOptions]];
    
-    [self.client.logger logWithLevel:MSLogLevelLogDebug message:@"Request url : %@", url];
-    
+    [self.client.logger logWithLevel:MSLogLevelLogDebug format:@"Request url : %@", url];
+
     // Apple tries to be smart but they are using the wrong eTag when making requests...
     // so we must disable the caching policy
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
@@ -134,8 +134,8 @@
 {
     NSParameterAssert(request);
     
-    [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Creating Data task with request : %@", request];
-    
+    [self.client.logger logWithLevel:MSLogLevelLogVerbose format:@"Creating Data task with request : %@", request];
+
     return [self taskWithRequest:request completion:^(NSDictionary *rawResponse, NSError *error){
         if (!error){
             if (completionHandler && castBlock){
@@ -144,8 +144,8 @@
             }
         }
         else {
-            [self.client.logger logWithLevel:MSLogLevelLogError message:@"Error from data task : %@", error];
-            [self.client.logger logWithLevel:MSLogLevelLogError message:@"Caused by request %@", request];
+            [self.client.logger logWithLevel:MSLogLevelLogError format:@"Error from data task : %@", error];
+            [self.client.logger logWithLevel:MSLogLevelLogError format:@"Caused by request %@", request];
             if(completionHandler){
                 completionHandler(nil, error);
             }
@@ -190,7 +190,7 @@
                            odobjectWithDictionary:(MSObjectWithDictionary)castBlock
                                 completionHandler:(MSObjectCompletionHandler)completionHandler
 {
-    [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Creating upload task with requests : %@", request];
+    [self.client.logger logWithLevel:MSLogLevelLogVerbose format:@"Creating upload task with requests : %@", request];
     return [[MSURLSessionUploadTask alloc] initWithRequest:request
                                                   fromFile:fileURL
                                                     client:self.client
@@ -207,7 +207,7 @@
                            odobjectWithDictionary:(MSObjectWithDictionary)castBlock
                                 completionHandler:(MSObjectCompletionHandler)completionHandler
 {
-     [self.client.logger logWithLevel:MSLogLevelLogVerbose message:@"Creating upload task with requests : %@", request];
+     [self.client.logger logWithLevel:MSLogLevelLogVerbose format:@"Creating upload task with requests : %@", request];
     return [[MSURLSessionUploadTask alloc] initWithRequest:request
                                                     data:data
                                                     client:self.client

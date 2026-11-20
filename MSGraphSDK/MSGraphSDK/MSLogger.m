@@ -20,39 +20,51 @@
     _logLevel = logLevel;
 }
 
-- (void)logWithLevel:(MSLogLevel)level message:(NSString *)messageFormat, ...
+- (void)logWithLevel:(MSLogLevel)level format:(NSString *)format, ...
 {
-    if (level <= self.logLevel){
-        va_list args;
-        va_start(args, messageFormat);
-        NSString *logLevel = nil;
-        switch (level) {
-            case MSLogLevelLogError:
-                logLevel = @"ERROR :";
-                break;
-            case MSLogLevelLogWarn:
-                logLevel = @"WARNING :";
-                break;
-            case MSLogLevelLogInfo:
-                logLevel = @"INFO :";
-                break;
-            case MSLogLevelLogDebug:
-                logLevel = @"DEBUG : ";
-                break;
-            case MSLogLevelLogVerbose:
-                logLevel = @"VERBOSE :";
-                break;
-            default:
-                break;
-        }
-        NSString *message = nil;
-        if (messageFormat){
-            NSString *stringFormat = [NSString stringWithFormat:@"Graph SDK %@ %@", logLevel, messageFormat];
-           message = [[NSString alloc] initWithFormat:stringFormat arguments:args];
-        }
-        [self writeMessage:message];
-        va_end(args);
+    if (level > self.logLevel
+        || format == nil)
+    {
+        return;
     }
+
+    va_list args;
+    va_start(args, format);
+
+    [self logWithLevel:level message:[[NSString alloc] initWithFormat:format arguments:args]];
+
+    va_end(args);
+}
+
+- (void)logWithLevel:(MSLogLevel)level message:(NSString *)message
+{
+    if (level > self.logLevel) {
+        return;
+    }
+
+    NSString *logLevel = nil;
+
+    switch (level) {
+        case MSLogLevelLogError:
+            logLevel = @"ERROR :";
+            break;
+        case MSLogLevelLogWarn:
+            logLevel = @"WARNING :";
+            break;
+        case MSLogLevelLogInfo:
+            logLevel = @"INFO :";
+            break;
+        case MSLogLevelLogDebug:
+            logLevel = @"DEBUG : ";
+            break;
+        case MSLogLevelLogVerbose:
+            logLevel = @"VERBOSE :";
+            break;
+        default:
+            break;
+    }
+    
+    [self writeMessage:[NSString stringWithFormat:@"Graph SDK %@ %@", logLevel, message]];
 }
 
 - (void)writeMessage:(NSString *)message

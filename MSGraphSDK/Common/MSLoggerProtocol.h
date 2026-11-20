@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, MSLogLevel){
  @param messageFormat A string or format string and objects for the format string.
  @warning You should only log messages if the logLevel of the logger is set to that level or below.
  */
-- (void)logWithLevel:(MSLogLevel)level message:(NSString *)messageFormat, ...;
+- (void)logWithLevel:(MSLogLevel)level format:(NSString *)format, ... NS_FORMAT_FUNCTION(2, 3);
+- (void)logWithLevel:(MSLogLevel)level message:(NSString *)message;
 
 @end
