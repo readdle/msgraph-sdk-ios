@@ -33,5 +33,9 @@
  */
 - (MSError *)clientError;
 
+- (BOOL)isThrottlingError;
+
+- (NSInteger)retryAfterSeconds;
+
 @end
 

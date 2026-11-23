@@ -58,4 +58,20 @@
     MSError *clientError = [testError clientError];
     XCTAssertNil(clientError);
 }
+
+- (void)testIsThrottlingError {
+    NSError *error = [NSError errorWithDomain:MSErrorDomain code:429 userInfo:@{}];
+    XCTAssertTrue(error.isThrottlingError);
+
+    error = [NSError errorWithDomain:MSErrorDomain code:401 userInfo:@{}];
+    XCTAssertFalse(error.isThrottlingError);
+}
+
+- (void)testRetryAfterDelay {
+    NSError *const error = [NSError errorWithDomain:MSErrorDomain
+                                               code:429
+                                           userInfo:@{ @"Retry-After": @"23" }];
+    XCTAssertEqual(error.retryAfterSeconds, 23);
+}
+
 @end

@@ -24,7 +24,7 @@
                                    else{
                                        // There was a failure in parsing the item
                                        [self.client.logger logWithLevel:MSLogLevelLogError message:@"Failed to parse collection"];
-                                       [self.client.logger logWithLevel:MSLogLevelLogDebug message:@"Object failed  to parse : %@", obj];
+                                       [self.client.logger logWithLevel:MSLogLevelLogDebug format:@"Object failed  to parse : %@", obj];
                                        *stop = YES;
                                    }
                                }];
@@ -35,13 +35,13 @@
                                                                            additionalData:rawResponse];
                                }
                                else{
-                                   [self.client.logger logWithLevel:MSLogLevelLogDebug message:@"Failed to parse collection objects expected %ld there were %ld", [rawResponse[MSCollectionValueKey] count], [odObjects count]];
+                                   [self.client.logger logWithLevel:MSLogLevelLogDebug format:@"Failed to parse collection objects expected %lu there were %lu", (unsigned long)[rawResponse[MSCollectionValueKey] count], (unsigned long)[odObjects count]];
                                }
                                
                            }
                            else{
                                [self.client.logger logWithLevel:MSLogLevelLogError message:@"Collection contains no value property"];
-                               [self.client.logger logWithLevel:MSLogLevelLogDebug message:@"Response was : %@", rawResponse];
+                               [self.client.logger logWithLevel:MSLogLevelLogDebug format:@"Response was : %@", rawResponse];
                            }
                             return parsedCollection;
                        }
