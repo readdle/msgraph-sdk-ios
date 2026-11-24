@@ -90,8 +90,15 @@
     XCTAssertEqualObjects(request.q, nil);
     MSURLSessionDataTask *task = [request executeWithCompletion:^(MSCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error) {
     }];
-    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/drive/root/microsoft.graph.search(q=null)",self.graphUrl]];
+    NSURL *expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/drive/root/microsoft.graph.search",self.graphUrl]];
     [self checkRequest:task Method:@"GET" URL:expectedURL];
+}
+- (void)testMSGraphDriveItemSearchRequestFromNextLinkKeepsNextLinkURL{
+    NSURL *nextLink = [NSURL URLWithString:[NSString stringWithFormat:@"%@/me/drive/root/microsoft.graph.search(q='test')?$skiptoken=ABC123",self.graphUrl]];
+    MSGraphDriveItemSearchRequest *request = [[MSGraphDriveItemSearchRequest alloc] initWithURL:nextLink options:nil client:_client];
+    MSURLSessionDataTask *task = [request executeWithCompletion:^(MSCollection *response, MSGraphDriveItemSearchRequest *nextRequest, NSError *error) {
+    }];
+    [self checkRequest:task Method:@"GET" URL:nextLink];
 }
 - (void)testMSGraphDriveItemSearchRequestWith401Response{
     NSHTTPURLResponse *Response401 = [[NSHTTPURLResponse alloc] initWithURL:self.testBaseURL statusCode:MSClientErrorCodeUnauthorized HTTPVersion:@"foo" headerFields:nil];
